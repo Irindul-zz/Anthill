@@ -27,7 +27,7 @@ public class Ant  {
 
     }
 
-    public void dropPheromone(Pheromone p){
+    public void dropPheromone(){
 
     }
 

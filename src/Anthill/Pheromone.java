@@ -7,7 +7,7 @@ public class Pheromone {
 
     private int lifeTime;
 
-    public void launchPheromone(){
+    public void actualize(){
 
     }
 

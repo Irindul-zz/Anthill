@@ -14,4 +14,8 @@ public class FoodSupply {
     public int getQuantity(){
         return quantity;
     }
+
+    public void removeFood() {
+    	
+    }
 }
