@@ -1,12 +1,11 @@
 package Anthill;
 
-import Element.Element;
-import Mapping.Position;
+import Element.WalkableElement;
 
 /**
  * Created by Irindul on 25/12/2016.
  */
-public class Ant  {
+public class Ant extends WalkableElement {
 
     private boolean hasFood;
     private int direction;

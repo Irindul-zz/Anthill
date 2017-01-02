@@ -5,11 +5,17 @@ import Mapping.Position;
 /**
  * Created by Irindul on 25/12/2016.
  */
-public interface AbstractElement {
+public class AbstractElement {
 
-    Position pos = null;
+    protected Position pos = null;
 
-    boolean isWalkable = false;
+    public Position getPos(){
+        return pos;
+    }
+
+    public boolean isWalkable(){
+        return Boolean.parseBoolean(null);
+    }
 
 
 }

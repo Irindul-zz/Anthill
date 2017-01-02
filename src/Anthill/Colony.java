@@ -1,6 +1,7 @@
 package Anthill;
 
 import Element.FoodSupply;
+import Element.NonWalkableElement;
 import Element.Obstacle;
 
 /**
