@@ -1,6 +1,7 @@
 package Anthill;
 
 import Element.WalkableElement;
+import Mapping.Direction;
 
 /**
  * Created by Irindul on 25/12/2016.
@@ -8,7 +9,7 @@ import Element.WalkableElement;
 public class Ant extends WalkableElement {
 
     private boolean hasFood;
-    private int direction;
+    private Direction direction;
 
     public void walk(){
 
