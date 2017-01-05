@@ -41,4 +41,8 @@ public class FoodSupplyCol {
         return 0;
     }
 
+    public void remove(){
+
+    }
+
 }
