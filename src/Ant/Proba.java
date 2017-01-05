@@ -35,15 +35,16 @@ public class Proba {
         }
     }
 
-    public void setProba(Direction d, int prob){
+    public void setProba(Direction d, double prob){
         int i = d.ordinal();
 
         setProba(i, prob);
 
     }
 
-    public void setProba(int i, int prob){
+    public void setProba(int i, double prob){
         probas[i] = prob;
+
     }
 
     public void reset(){
