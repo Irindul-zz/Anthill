@@ -11,7 +11,7 @@ public class Ant extends WalkableElement {
     private boolean hasFood;
     private Direction direction;
 
-    public void walk(){
+    public void walk(Direction d){
 
     }
 
