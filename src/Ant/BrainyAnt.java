@@ -14,6 +14,7 @@ public class BrainyAnt extends Ant implements Brain {
     public BrainyAnt(Direction direction) {
         super(direction);
         proba = new Proba();
+        mind = new Mind();
         initializeProba();
     }
 
@@ -25,6 +26,7 @@ public class BrainyAnt extends Ant implements Brain {
     public BrainyAnt() {
         super();
         proba = new Proba();
+        mind = new Mind();
     }
 
     @Override

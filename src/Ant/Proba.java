@@ -62,7 +62,6 @@ public class Proba {
 
         double rd = min + (max - min) * random.nextDouble();
         rd %= 100;
-        rd += 1; // rd is between 1 and 100
         int i;
         for (i = 0; i < 8; i++) {
             if( rd <= cumFreq[i])
