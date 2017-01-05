@@ -6,12 +6,14 @@ package Mapping;
 public enum Direction {
 
     NORTH,
-    SOUTH,
-    WEST,
-    EAST,
     NORTHEAST,
-    NORTHWEST,
+    EAST,
     SOUTHEAST,
-    SOUTHWEST;
+    SOUTH,
+    SOUTHWEST,
+    WEST,
+    NORTHWEST;
+
+
 
 }
