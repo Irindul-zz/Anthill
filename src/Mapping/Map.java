@@ -14,7 +14,7 @@ public class Map {
     private Anthill anthill;
 
     /* Might be some things to add here*/
-
+    /* Don't know what constructors to add*/
     public void generateMap(){
 
     }

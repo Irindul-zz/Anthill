@@ -9,6 +9,10 @@ public class Pheromone extends WalkableElement{
 
     private int lifeTime;
 
+    public Pheromone(int lifeTime) {
+        this.lifeTime = lifeTime;
+    }
+
     public void actualize(){
 
     }

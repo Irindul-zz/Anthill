@@ -7,7 +7,7 @@ import Mapping.Position;
  */
 public class AbstractElement {
 
-    protected Position pos = null;
+    protected Position pos;
 
     public Position getPos(){
         return pos;
