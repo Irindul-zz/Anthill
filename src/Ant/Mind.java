@@ -34,6 +34,6 @@ public class Mind implements Memory {
         Node oldFirst = first;
         first = first.next;
 
-        return oldFirst.dir;
+        return Direction.reverse(oldFirst.dir);
     }
 }
