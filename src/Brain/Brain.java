@@ -9,5 +9,5 @@ public interface Brain {
 
     void detectEnvironement();
     void processProba();
-    Direction executeProba();
+    void executeProba();
 }
