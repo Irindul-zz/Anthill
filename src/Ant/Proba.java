@@ -1,5 +1,7 @@
 package Ant;
 
+import java.util.Random;
+
 /**
  * Created by Irindul on 05/01/2017.
  */
@@ -16,8 +18,9 @@ public class Proba {
     }
 
     public void initialize(){
-        for(int a: probas){
-            a = 0;
+        for (int i = 0; i < 8; i++) {
+            probas[i] = 0;
+            cumFreq[i] = 0;
         }
     }
 
@@ -27,5 +30,21 @@ public class Proba {
         for (int i = 1; i < 8;i++) {
             cumFreq[i] = cumFreq[i-1] + probas[i]*100;
         }
+    }
+
+    public int randomWithProba(){
+
+        Random random = new Random();
+        int rd = random.nextInt();
+        rd %= 100;
+        rd += 1; // rd is between 1 and 100
+        int i;
+        for (i = 0; i < 8; i++) {
+            if( rd <= cumFreq[i])
+                break;
+        }
+
+        return i;
+
     }
 }
