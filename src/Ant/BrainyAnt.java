@@ -9,6 +9,7 @@ import Mapping.Direction;
 public class BrainyAnt extends Ant implements Brain {
 
     Proba proba;
+    Mind mind;
 
     public BrainyAnt(Direction direction) {
         super(direction);
@@ -43,7 +44,8 @@ public class BrainyAnt extends Ant implements Brain {
         int dir = proba.randomWithProba();
 
         Direction direction = Direction.values()[dir];
-
+        if(!this.hadFood)
+            mind.keepTrack(direction); // TODO: 05/01/2017 Change moveTo to bool and if moveTo suceed, then we keep track
         this.moveTo(direction);
     }
 }
