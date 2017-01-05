@@ -8,21 +8,22 @@ import Mapping.Direction;
  */
 public class BrainyAnt extends Ant implements Brain {
 
-    private int[] probas;
+    Proba proba;
 
     public BrainyAnt(Direction direction) {
         super(direction);
-        probas = new int[8];
+        proba = new Proba();
         initializeProba();
     }
 
 
     private void initializeProba(){
-
+        proba.initialize();
     }
 
     public BrainyAnt() {
         super();
+        proba = new Proba();
     }
 
     @Override
@@ -38,6 +39,11 @@ public class BrainyAnt extends Ant implements Brain {
 
     @Override
     public void executeProba() {
+        proba.calulateFrequencies();
+        int dir = proba.randomWithProba();
 
+        Direction direction = Direction.values()[dir];
+
+        this.moveTo(direction);
     }
 }
