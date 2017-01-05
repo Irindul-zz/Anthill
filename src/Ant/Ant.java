@@ -1,4 +1,4 @@
-package Anthill;
+package Ant;
 
 import Element.WalkableElement;
 import Mapping.Direction;
