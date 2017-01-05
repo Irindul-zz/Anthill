@@ -38,12 +38,12 @@ public class Proba {
     public void setProba(Direction d, int prob){
         int i = d.ordinal();
 
-        probas[i] = prob;
+        setProba(i, prob);
 
     }
 
     public void setProba(int i, int prob){
-
+        probas[i] = prob;
     }
 
     public void reset(){
