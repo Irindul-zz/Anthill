@@ -7,19 +7,19 @@ import java.util.Random;
  */
 public class Proba {
 
-    int probas[];
-    int cumFreq[];
+    double probas[];
+    double cumFreq[];
 
     public Proba() {
 
-        probas = new int[8];
-        cumFreq = new int[8];
+        probas = new double[8];
+        cumFreq = new double[8];
 
     }
 
     public void initialize(){
         for (int i = 0; i < 8; i++) {
-            probas[i] = 0;
+            probas[i] = 0.125;
             cumFreq[i] = 0;
         }
     }
