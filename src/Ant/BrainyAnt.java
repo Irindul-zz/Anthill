@@ -37,9 +37,9 @@ public class BrainyAnt extends Ant implements Brain {
     @Override
     public void processProba() {
         initializeProba();
-        this.hasFood = false;
 
         if (hasFood){
+
 
             Direction toGo = mind.rollBack();
             proba.reset();
@@ -83,5 +83,7 @@ public class BrainyAnt extends Ant implements Brain {
         if(!hasFood)
             mind.keepTrack(direction); // TODO: 05/01/2017 Change moveTo to bool and if moveTo suceed, then we keep track
         this.moveTo(direction);
+
+        System.out.println(direction);
     }
 }
