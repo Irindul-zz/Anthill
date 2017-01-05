@@ -9,12 +9,16 @@ import Element.Obstacle;
  */
 public class Colony {
 
-    private Anthill anthill;
-    private FoodSupply[] foodSupplies;
-    private Obstacle[] obstacles;
 
+    public void addFoodSupply(FoodSupply fs){
 
-    public void launchSimulation(){
+    }
+
+    public void addObstacle(Obstacle o){
+
+    }
+
+    public void nextCycle(){
 
     }
 }
