@@ -1,4 +1,4 @@
-package Agent;
+package Brain;
 
 import Mapping.Direction;
 

@@ -1,6 +1,6 @@
 package Ant;
 
-import Agent.Brain;
+import Brain.Brain;
 import Mapping.Direction;
 
 /**
