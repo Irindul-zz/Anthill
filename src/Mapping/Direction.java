@@ -14,7 +14,7 @@ public enum Direction {
     WEST,
     NORTHWEST;
 
-    public Direction reverse(Direction d){
+    public  static  Direction reverse(Direction d){
 
         return Direction.values()[(d.ordinal() + 4) % 8];
 
