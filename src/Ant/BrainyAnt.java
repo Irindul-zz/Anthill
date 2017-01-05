@@ -39,7 +39,7 @@ public class BrainyAnt extends Ant implements Brain {
 
     @Override
     public void executeProba() {
-        proba.calulateFrequencies();
+        proba.computesFrequencies();
         int dir = proba.randomWithProba();
 
         Direction direction = Direction.values()[dir];
