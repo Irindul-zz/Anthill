@@ -35,7 +35,10 @@ public class Proba {
     public int randomWithProba(){
 
         Random random = new Random();
-        int rd = random.nextInt();
+        int min = 0;
+        int max = 100;
+
+        double rd = min + (max - min) * random.nextDouble();
         rd %= 100;
         rd += 1; // rd is between 1 and 100
         int i;
