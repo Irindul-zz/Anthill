@@ -28,6 +28,6 @@ public class BrainyAnt extends Ant implements Brain {
 
     @Override
     public void executeProba() {
-            return Direction.NORTH;
+
     }
 }
