@@ -35,6 +35,7 @@ public class BrainyAnt extends Ant implements Brain {
     @Override
     public void processProba() {
         initializeProba();
+        this.hasFood = false;
 
         if (hasFood){
 
@@ -45,12 +46,24 @@ public class BrainyAnt extends Ant implements Brain {
         } else {
 
             int coefs[] = {0, 5, 10, 20, 50, 20, 10 ,5};
-            int start = Direction.reverse(this.direction).ordinal();
-            int stop = (start + 7) % 8;
-
-            for (int i = start; i != stop; i= (i + 1) % 8){
-                proba.setProba(i, coefs[i]);
+            int sum = 0;
+            for (int coef: coefs) {
+                sum += coef;
             }
+
+            int start = Direction.reverse(this.direction).ordinal();
+            int stop = (start + 7) % 8 ; //We use modulo here because of the cycle of the cardinal points.
+            int i = start;
+            int j = 0;
+            while (i != stop){
+
+                proba.setProba(i, (double) coefs[j]/sum);
+
+                i = (i + 1) % 8;
+                j++;
+            }
+           proba.setProba(i, (double) coefs[j]/sum);
+
 
             //Process proba
         }
