@@ -8,8 +8,8 @@ import Mapping.Direction;
  */
 public class Ant extends WalkableElement {
 
-    private boolean hasFood;
-    private Direction direction;
+    protected boolean hasFood;
+    protected Direction direction;
 
     public Ant(Direction direction) {
         this.direction = direction;
