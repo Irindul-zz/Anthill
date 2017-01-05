@@ -24,11 +24,6 @@ public class FoodSupplyCol {
         return null;
     }
 
-    public FoodSupply get(FoodSupply fs){
-
-        return null;
-    }
-
     public void add(FoodSupply fs, int i){
 
     }
