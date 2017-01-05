@@ -36,6 +36,27 @@ public class BrainyAnt extends Ant implements Brain {
     public void processProba() {
         initializeProba();
 
+        if (hasFood){
+
+            Direction toGo = mind.rollBack();
+            proba.reset();
+            proba.setProba(toGo, 1);
+
+        } else {
+
+            int coefs[] = {0, 5, 10, 20, 50, 20, 10 ,5};
+            int start = Direction.reverse(this.direction).ordinal();
+            int stop = (start + 7) % 8;
+
+            for (int i = start; i != stop; i= (i + 1) % 8){
+                proba.setProba(i, coefs[i]);
+            }
+
+            //Process proba
+        }
+
+
+
     }
 
     @Override
