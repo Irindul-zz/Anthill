@@ -24,7 +24,7 @@ public class Proba {
         }
     }
 
-    public void calulateFrequencies(){
+    public void computesFrequencies(){
 
         cumFreq[0] = probas[0]*100; //Probas will be converted in %
         for (int i = 1; i < 8;i++) {
