@@ -1,5 +1,7 @@
 package Ant;
 
+import Mapping.Direction;
+
 import java.util.Random;
 
 /**
@@ -9,6 +11,7 @@ public class Proba {
 
     double probas[];
     double cumFreq[];
+
 
     public Proba() {
 
@@ -29,6 +32,24 @@ public class Proba {
         cumFreq[0] = probas[0]*100; //Probas will be converted in %
         for (int i = 1; i < 8;i++) {
             cumFreq[i] = cumFreq[i-1] + probas[i]*100;
+        }
+    }
+
+    public void setProba(Direction d, int prob){
+        int i = d.ordinal();
+
+        probas[i] = prob;
+
+    }
+
+    public void setProba(int i, int prob){
+
+    }
+
+    public void reset(){
+        for (int i = 0; i < 8; i++) {
+            probas[i] = 0;
+            cumFreq[i] = 0;
         }
     }
 
