@@ -19,7 +19,7 @@ public class Ant extends WalkableElement {
         this(Direction.NORTH);
     }
 
-    public void walk(Direction d){
+    public void moveTo(Direction d){
 
     }
 
