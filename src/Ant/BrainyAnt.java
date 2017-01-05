@@ -8,8 +8,17 @@ import Mapping.Direction;
  */
 public class BrainyAnt extends Ant implements Brain {
 
+    private int[] probas;
+
     public BrainyAnt(Direction direction) {
         super(direction);
+        probas = new int[8];
+        initializeProba();
+    }
+
+
+    private void initializeProba(){
+
     }
 
     public BrainyAnt() {
@@ -23,6 +32,7 @@ public class BrainyAnt extends Ant implements Brain {
 
     @Override
     public void processProba() {
+        initializeProba();
 
     }
 
