@@ -44,27 +44,10 @@ public class BrainyAnt extends Ant implements Brain {
 
         } else {
 
-            int coefs[] = {0, 5, 10, 20, 50, 20, 10 ,5};
-            int sum = 0;
-            for (int coef: coefs) {
-                sum += coef;
-            }
-
-            int start = Direction.reverse(this.direction).ordinal();
-            int stop = (start + 7) % 8 ; //We use modulo here because of the cycle of the cardinal points.
-            int i = start;
-            int j = 0;
-            while (i != stop){
-
-                proba.setProba(i, (double) coefs[j]/sum);
-
-                i = (i + 1) % 8;
-                j++;
-            }
-           proba.setProba(i, (double) coefs[j]/sum);
+            processWithoutPheromones();
 
 
-            //Process proba
+            //Process proba with pheromones.
         }
 
 
@@ -81,5 +64,27 @@ public class BrainyAnt extends Ant implements Brain {
             mind.keepTrack(direction); // TODO: 05/01/2017 Change moveTo to bool and if moveTo suceed, then we keep track
         this.moveTo(direction); //We move.
 
+    }
+
+
+    private void processWithoutPheromones(){
+        int coefs[] = {0, 5, 10, 20, 50, 20, 10 ,5};
+        int sum = 0;
+        for (int coef: coefs) {
+            sum += coef;
+        }
+
+        int start = Direction.reverse(this.direction).ordinal();
+        int stop = (start + 7) % 8 ; //We use modulo here because of the cycle of the cardinal points.
+        int i = start;
+        int j = 0;
+        while (i != stop){
+
+            proba.setProba(i, (double) coefs[j]/sum); //We set the probas corresponding to the current direction.
+
+            i = (i + 1) % 8;
+            j++;
+        }
+        proba.setProba(i, (double) coefs[j]/sum); //The loop stop one item before so we need to do it one more time.
     }
 }
