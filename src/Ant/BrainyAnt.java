@@ -24,9 +24,7 @@ public class BrainyAnt extends Ant implements Brain {
     }
 
     public BrainyAnt() {
-        super();
-        proba = new Proba();
-        mind = new Mind();
+        this(Direction.NORTH);
     }
 
     @Override
@@ -38,12 +36,11 @@ public class BrainyAnt extends Ant implements Brain {
     public void processProba() {
         initializeProba();
 
-        if (hasFood){
+        if (hasFood){ //If we have food, then we have to go back.
 
 
-            Direction toGo = mind.rollBack();
-            proba.reset();
-            proba.setProba(toGo, 1);
+            Direction toGo = mind.rollBack(); // We get the next direction.
+            proba.makeSure(toGo); // We tweak the probas so that this outcome is certain.
 
         } else {
 
@@ -76,14 +73,13 @@ public class BrainyAnt extends Ant implements Brain {
 
     @Override
     public void executeProba() {
-        proba.computesFrequencies();
+        proba.computesFrequencies(); // We calculate the cumulated frequencies
         int dir = proba.randomWithProba();
 
-        Direction direction = Direction.values()[dir];
-        if(!hasFood)
+        Direction direction = Direction.values()[dir];  //We deduce a direction from the int value.
+        if(!hasFood) //If we do not carry food the we must keep track of the way.
             mind.keepTrack(direction); // TODO: 05/01/2017 Change moveTo to bool and if moveTo suceed, then we keep track
-        this.moveTo(direction);
+        this.moveTo(direction); //We move.
 
-        System.out.println(direction);
     }
 }
