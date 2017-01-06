@@ -22,7 +22,7 @@ public class Proba {
 
     public void initialize(){
         for (int i = 0; i < 8; i++) {
-            probas[i] = 0.125;
+            probas[i] = 0.125; //We initialize every proba at 1/8.
             cumFreq[i] = 0;
         }
     }
@@ -47,6 +47,11 @@ public class Proba {
 
     }
 
+    public void makeSure(Direction d){
+        this.reset();
+        setProba(d, 1);
+    }
+
     public void reset(){
         for (int i = 0; i < 8; i++) {
             probas[i] = 0;
@@ -60,10 +65,10 @@ public class Proba {
         int min = 0;
         int max = 100;
 
-        double rd = min + (max - min) * random.nextDouble();
+        double rd = min + (max - min) * random.nextDouble(); //We have a random number in [min, max[.
         rd %= 100;
         int i;
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < 8; i++) { //We go through every values of cumFreq, and if the random number is inferior to the freq, then it's the outcome.
             if( rd <= cumFreq[i])
                 break;
         }
