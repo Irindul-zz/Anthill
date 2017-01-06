@@ -8,8 +8,8 @@ import Mapping.Direction;
  */
 public class BrainyAnt extends Ant implements Brain {
 
-    Proba proba;
-    Mind mind;
+    protected Proba proba;
+    protected Mind mind;
 
     public BrainyAnt(Direction direction) {
         super(direction);
@@ -66,7 +66,6 @@ public class BrainyAnt extends Ant implements Brain {
 
     }
 
-
     private void processWithoutPheromones(){
         int coefs[] = {0, 5, 10, 20, 50, 20, 10 ,5};
         int sum = 0;
@@ -81,7 +80,6 @@ public class BrainyAnt extends Ant implements Brain {
         while (i != stop){
 
             proba.setProba(i, (double) coefs[j]/sum); //We set the probas corresponding to the current direction.
-
             i = (i + 1) % 8;
             j++;
         }
