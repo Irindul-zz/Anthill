@@ -1,4 +1,4 @@
-package Mapping;
+package main.Mapping;
 
 /**
  * Created by Irindul on 02/01/2017.

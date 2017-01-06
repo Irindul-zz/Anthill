@@ -1,6 +1,6 @@
-package Collections;
+package main.Collections;
 
-import Element.FoodSupply;
+import main.Element.FoodSupply;
 
 import java.util.ArrayList;
 import java.util.List;

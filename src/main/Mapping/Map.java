@@ -1,9 +1,9 @@
-package Mapping;
+package main.Mapping;
 
-import Anthill.Anthill;
-import Collections.FoodSupplyCol;
-import Collections.PheromoneCol;
-import Element.AbstractElement;
+import main.Anthill.Anthill;
+import main.Collections.FoodSupplyCol;
+import main.Collections.PheromoneCol;
+
 /**
  * Created by Irindul on 25/12/2016.
  */

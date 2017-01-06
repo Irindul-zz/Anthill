@@ -1,6 +1,4 @@
-package Brain;
-
-import Mapping.Direction;
+package main.Brain;
 
 /**
  * Created by Irindul on 25/12/2016.

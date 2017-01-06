@@ -1,6 +1,6 @@
-package Collections;
+package main.Collections;
 
-import Anthill.Pheromone;
+import main.Anthill.Pheromone;
 
 import java.util.ArrayList;
 import java.util.List;

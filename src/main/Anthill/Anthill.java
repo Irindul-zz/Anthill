@@ -1,6 +1,6 @@
-package Anthill;
+package main.Anthill;
 
-import Element.WalkableElement;
+import main.Element.WalkableElement;
 
 /**
  * Created by Irindul on 25/12/2016.

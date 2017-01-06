@@ -1,6 +1,6 @@
-package Ant;
+package main.Ant;
 
-import Mapping.Direction;
+import main.Mapping.Direction;
 
 import java.util.Random;
 

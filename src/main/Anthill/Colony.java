@@ -1,8 +1,7 @@
-package Anthill;
+package main.Anthill;
 
-import Element.FoodSupply;
-import Element.NonWalkableElement;
-import Element.Obstacle;
+import main.Element.FoodSupply;
+import main.Element.Obstacle;
 
 /**
  * Created by Irindul on 25/12/2016.

@@ -1,7 +1,7 @@
-package Ant;
+package main.Ant;
 
-import Element.WalkableElement;
-import Mapping.Direction;
+import main.Element.WalkableElement;
+import main.Mapping.Direction;
 
 /**
  * Created by Irindul on 25/12/2016.

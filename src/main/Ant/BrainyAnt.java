@@ -1,7 +1,7 @@
-package Ant;
+package main.Ant;
 
-import Brain.Brain;
-import Mapping.Direction;
+import main.Brain.Brain;
+import main.Mapping.Direction;
 
 /**
  * Created by Irindul on 05/01/2017.

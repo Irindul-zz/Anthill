@@ -1,4 +1,4 @@
-package Element;
+package main.Element;
 
 /**
  * Created by Irindul on 02/01/2017.

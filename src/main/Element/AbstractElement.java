@@ -1,6 +1,6 @@
-package Element;
+package main.Element;
 
-import Mapping.Position;
+import main.Mapping.Position;
 
 /**
  * Created by Irindul on 25/12/2016.
