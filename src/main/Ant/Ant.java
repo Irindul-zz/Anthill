@@ -1,12 +1,11 @@
 package main.Ant;
 
-import main.Element.WalkableElement;
 import main.Mapping.Direction;
 
 /**
  * Created by Irindul on 25/12/2016.
  */
-public class Ant extends WalkableElement {
+public class Ant{
 
     protected boolean hasFood;
     protected Direction direction;
