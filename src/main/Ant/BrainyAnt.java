@@ -1,6 +1,7 @@
 package main.Ant;
 
 import main.Brain.Brain;
+import main.Brain.Memory;
 import main.Mapping.Direction;
 
 /**
@@ -9,7 +10,7 @@ import main.Mapping.Direction;
 public class BrainyAnt extends Ant implements Brain {
 
     protected Proba proba;
-    protected Mind mind;
+    protected Memory mind;
 
     public BrainyAnt(Direction direction) {
         super(direction);
