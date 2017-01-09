@@ -9,8 +9,8 @@ import java.util.Random;
  */
 public class Proba {
 
-    double probas[];
-    double cumFreq[];
+    private double probas[];
+    private double cumFreq[];
 
 
     public Proba() {
@@ -50,6 +50,7 @@ public class Proba {
     public void makeSure(Direction d){
         this.reset();
         setProba(d, 1);
+        computesFrequencies();
     }
 
     public void reset(){
@@ -57,6 +58,14 @@ public class Proba {
             probas[i] = 0;
             cumFreq[i] = 0;
         }
+    }
+
+    public double[] getProbas(){
+        return probas;
+    }
+
+    public double[] getFreq(){
+        return cumFreq;
     }
 
     public int randomWithProba(){
