@@ -85,4 +85,8 @@ public class BrainyAnt extends Ant implements Brain {
         }
         proba.setProba(i, (double) coefs[j]/sum); //The loop stop one item before so we need to do it one more time.
     }
+
+    public Proba getProba(){
+        return proba;
+    }
 }
