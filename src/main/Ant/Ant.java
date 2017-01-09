@@ -24,10 +24,6 @@ public class Ant{
 
     }
 
-    public void detectFood(){
-
-    }
-
     public void takeFood(){
 
     }
@@ -37,10 +33,6 @@ public class Ant{
     }
 
     public void dropPheromone(){
-
-    }
-
-    public void detectPheromone(){
 
     }
 
