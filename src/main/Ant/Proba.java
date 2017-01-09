@@ -50,6 +50,7 @@ public class Proba {
     public void makeSure(Direction d){
         this.reset();
         setProba(d, 1);
+        computesFrequencies();
     }
 
     public void reset(){
