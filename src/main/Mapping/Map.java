@@ -18,4 +18,8 @@ public class Map {
     public void generateMap(){
 
     }
+
+    public int getPheromoneQuantityAt(Position p){
+            return 0;
+    }
 }
