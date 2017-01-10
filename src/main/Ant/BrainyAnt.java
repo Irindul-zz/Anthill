@@ -45,10 +45,8 @@ public class BrainyAnt extends Ant implements Brain {
 
         } else {
 
-            processWithoutPheromones();
+            processPheromones();
 
-
-            //Process proba with pheromones.
         }
 
 
@@ -67,9 +65,10 @@ public class BrainyAnt extends Ant implements Brain {
 
     }
 
-    private void processWithoutPheromones(){
+    protected void processPheromones(){
         int coefs[] = {0, 5, 10, 20, 50, 20, 10 ,5};
         int sum = 0;
+        double phero;
         for (int coef: coefs) {
             sum += coef;
         }
@@ -79,12 +78,13 @@ public class BrainyAnt extends Ant implements Brain {
         int i = start;
         int j = 0;
         while (i != stop){
-
-            proba.setProba(i, (double) coefs[j]/sum); //We set the probas corresponding to the current direction.
+            phero = sensor.getResults(i);
+            proba.setProba(i, (coefs[j] + phero) /sum); //We set the probas corresponding to the current direction.
             i = (i + 1) % 8;
             j++;
         }
-        proba.setProba(i, (double) coefs[j]/sum); //The loop stop one item before so we need to do it one more time.
+        phero = sensor.getResults(i);
+        proba.setProba(i, (coefs[j] + phero) /sum); //The loop stop one item before so we need to do it one more time.
     }
 
     public Proba getProba(){
