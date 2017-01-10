@@ -1,5 +1,6 @@
 package main.Ant;
 
+import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
 
@@ -10,6 +11,7 @@ public interface Sense {
 
     void detectFood(Position pos, Map map);
     void detectPheromones(Position pos, Map map);
+    double getResults(int i);
     //maybe detectObstacles(Position pos, Map map);
 
 }
