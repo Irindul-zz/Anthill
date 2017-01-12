@@ -1,5 +1,6 @@
 package main.Anthill;
 
+import main.Ant.Ant;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Element.FoodSupply;
@@ -31,5 +32,7 @@ public class Colony {
         return 0;
     }
 
-
+    public  Boolean detectFood(){
+        return true;
+    }
 }
