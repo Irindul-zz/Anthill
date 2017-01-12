@@ -23,3 +23,4 @@ public class Map {
             return 0;
     }
 }
+

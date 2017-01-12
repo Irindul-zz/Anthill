@@ -12,12 +12,13 @@ public class BasicSensor implements Sense {
     double[] results;
 
     public BasicSensor() {
-        results = new double[9];
+        results = new double[8];
     }
 
     @Override
-    public void detectFood(Position pos, Map map) {
+    public boolean detectFood(Position pos, Map map) {
 
+        return true;
     }
 
     @Override
