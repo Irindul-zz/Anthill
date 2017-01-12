@@ -9,11 +9,24 @@ import java.util.List;
  */
 public class Anthill{
     List<Ant> ants;
-
+    public Anthill()
+    {
+        this.ants = new List<ants>();
+    }
 
     public List getAnts()
     {
         return this.ants;
+    }
+
+    public void addAnt(Ant a)
+    {
+        this.ants.add(a);
+    }
+
+    public void sendAnts()
+    {
+
     }
 
 }
