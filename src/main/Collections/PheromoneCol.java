@@ -1,6 +1,7 @@
 package main.Collections;
 
 import main.Element.Pheromone;
+import main.Mapping.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,10 @@ public class PheromoneCol {
 
     public int size(){
 
+        return 0;
+    }
+
+    public int getPheromoneQuantityAt(Position p){
         return 0;
     }
 
