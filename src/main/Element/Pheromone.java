@@ -12,16 +12,16 @@ public class Pheromone{
     }
 
     public void actualize(){
-
+        this.lifeTime--;
     }
 
+
+    //GET_SET for lifeTime
     public int getLifeTime() {
         return lifeTime;
     }
-
     public void setLifeTime(int lifeTime) {
         this.lifeTime = lifeTime;
     }
-
 
 }

@@ -1,5 +1,6 @@
 package main.Ant;
 
+import main.Collections.PheromoneCol;
 import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
@@ -22,7 +23,7 @@ public class BasicSensor implements Sense {
     }
 
     @Override
-    public void detectPheromones(Position pos, Map map) {
+    public void detectPheromones(Position pos, PheromoneCol p) {
         int x = pos.getX();
         int y = pos.getY();
 
@@ -35,14 +36,14 @@ public class BasicSensor implements Sense {
         Position west = new Position(x, y-1);
         Position northwest = new Position(x+1, y-1);
 
-        results[Direction.NORTH.ordinal()] = map.getPheromoneQuantityAt(north);
-        results[Direction.NORTHEAST.ordinal()] = map.getPheromoneQuantityAt(northeast);
-        results[Direction.EAST.ordinal()] = map.getPheromoneQuantityAt(east);
-        results[Direction.SOUTHEAST.ordinal()] = map.getPheromoneQuantityAt(southeast);
-        results[Direction.SOUTH.ordinal()] = map.getPheromoneQuantityAt(south);
-        results[Direction.SOUTHWEST.ordinal()] = map.getPheromoneQuantityAt(southwest);
-        results[Direction.WEST.ordinal()] = map.getPheromoneQuantityAt(west);
-        results[Direction.NORTHWEST.ordinal()] = map.getPheromoneQuantityAt(northwest);
+        results[Direction.NORTH.ordinal()] = p.getPheromoneQuantityAt(north);
+        results[Direction.NORTHEAST.ordinal()] = p.getPheromoneQuantityAt(northeast);
+        results[Direction.EAST.ordinal()] = p.getPheromoneQuantityAt(east);
+        results[Direction.SOUTHEAST.ordinal()] = p.getPheromoneQuantityAt(southeast);
+        results[Direction.SOUTH.ordinal()] = p.getPheromoneQuantityAt(south);
+        results[Direction.SOUTHWEST.ordinal()] = p.getPheromoneQuantityAt(southwest);
+        results[Direction.WEST.ordinal()] = p.getPheromoneQuantityAt(west);
+        results[Direction.NORTHWEST.ordinal()] = p.getPheromoneQuantityAt(northwest);
 
 
     }
