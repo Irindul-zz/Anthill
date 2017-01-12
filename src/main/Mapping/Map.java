@@ -10,9 +10,6 @@ import main.Element.Cell;
  */
 public class Map {
 
-    private FoodSupplyCol foodSupplies;
-    private PheromoneCol pheromones;
-    private Anthill anthill;
     private Cell[][] cells;
 
     /* Might be some things to add here*/
@@ -21,7 +18,4 @@ public class Map {
 
     }
 
-    public int getPheromoneQuantityAt(Position p){
-            return 0;
-    }
-}
+
