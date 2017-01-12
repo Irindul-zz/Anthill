@@ -1,6 +1,7 @@
 package main.Ant;
 
 import main.Mapping.Direction;
+import main.Mapping.Map;
 import main.Mapping.Position;
 
 /**
@@ -26,7 +27,7 @@ public class Ant{
 
     }
 
-    public void takeFood(){
+    public void takeFood(Map map){
 
     }
 
