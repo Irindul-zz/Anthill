@@ -30,7 +30,6 @@ public class Colony {
     public int getPheromoneQuantityAt(Position p){
         return 0;
     }
-}
 
 
 }
