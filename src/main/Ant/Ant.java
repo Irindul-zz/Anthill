@@ -1,6 +1,8 @@
 package main.Ant;
 
 import main.Mapping.Direction;
+import main.Mapping.Map;
+import main.Mapping.Position;
 
 /**
  * Created by Irindul on 25/12/2016.
@@ -10,6 +12,7 @@ public class Ant{
     protected boolean hasFood;
     protected Direction direction;
     protected Sense sensor;
+    protected Position position;
 
     public Ant(Direction direction) {
         this.direction = direction;
@@ -24,7 +27,7 @@ public class Ant{
 
     }
 
-    public void takeFood(){
+    public void takeFood(Map map){
 
     }
 
@@ -34,6 +37,10 @@ public class Ant{
 
     public void dropPheromone(){
 
+    }
+
+    public Position getPosition(){
+        return this.position;
     }
 
 }

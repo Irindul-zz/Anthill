@@ -1,15 +1,16 @@
 package main.Anthill;
 
+import main.Ant.Ant;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Element.FoodSupply;
 import main.Mapping.Map;
 import main.Mapping.Position;
-
 /**
  * Created by Irindul on 25/12/2016.
  */
 public class Colony {
+
     private FoodSupplyCol foodSupplies;
     private PheromoneCol pheromones;
     private Anthill anthill;
@@ -31,5 +32,8 @@ public class Colony {
         return 0;
     }
 
+    public boolean detectFood(){
+        return true;
+    }
 
 }
