@@ -24,8 +24,7 @@ public class FoodSupplyCol {
         return null;
     }
 
-    public void add(FoodSupply fs, int i){
-
+    public void add(FoodSupply fs, int xSize, int ySize){
     }
 
     public void add(FoodSupply fs){
@@ -39,5 +38,10 @@ public class FoodSupplyCol {
     public void remove(){
 
     }
+
+    public int getFooddSupplyQuatityAt{
+        return 0;
+    }
+
 
 }
