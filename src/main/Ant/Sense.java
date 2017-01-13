@@ -1,5 +1,6 @@
 package main.Ant;
 
+import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Mapping.Direction;
 import main.Mapping.Map;
@@ -10,7 +11,7 @@ import main.Mapping.Position;
  */
 public interface Sense {
 
-    boolean detectFood(Position pos, Map map);
+    boolean detectFood(Position pos, FoodSupplyCol f);
     void detectPheromones(Position pos, PheromoneCol p);
 
     double getResults(int i);
