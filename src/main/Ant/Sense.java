@@ -11,7 +11,7 @@ import main.Mapping.Position;
 public interface Sense {
 
 
-    void detectFood(Position pos, Map map);
+    boolean detectFood(Position pos, Map map);
     void detectPheromones(Position pos, PheromoneCol p);
     double getResults(int i);
     //maybe detectObstacles(Position pos, Map map);
