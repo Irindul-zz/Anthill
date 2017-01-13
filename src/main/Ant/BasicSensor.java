@@ -1,5 +1,6 @@
 package main.Ant;
 
+import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Mapping.Direction;
 import main.Mapping.Map;
@@ -17,9 +18,11 @@ public class BasicSensor implements Sense {
     }
 
     @Override
-    public void detectFood(Position pos, Map map) {
-
-        return;
+    public boolean detectFood(Position pos, FoodSupplyCol f) {
+        if(f.getFoodSupplyAt(pos).getQuantity>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
