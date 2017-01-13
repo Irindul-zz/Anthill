@@ -7,12 +7,8 @@ import java.util.List;
 /**
  * Created by Irindul on 25/12/2016.
  */
-public class Anthill{
-    List<Ant> ants;
-    public Anthill()
-    {
-        this.ants = new List<ants>();
-    }
+public class Anthill {
+    private List<Ant> ants;
 
     public List getAnts()
     {
@@ -26,7 +22,8 @@ public class Anthill{
 
     public void sendAnts()
     {
-
+        Ant a = new Ant();
+        this.ants.add(a);
     }
 
 }
