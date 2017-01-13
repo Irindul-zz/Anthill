@@ -3,12 +3,8 @@ package main.Ant;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Mapping.Direction;
-import main.Mapping.Map;
 import main.Mapping.Position;
 
-/**
- * Created by Irindul on 09/01/2017.
- */
 public class BasicSensor implements Sense {
 
     double[] results;
@@ -19,7 +15,7 @@ public class BasicSensor implements Sense {
 
     @Override
     public boolean detectFood(Position pos, FoodSupplyCol f) {
-        if(f.getFoodSupplyAt(pos).getQuantity>0){
+        if(f.getFoodSupplyAt(pos).getQuantity()>0){
             return true;
         }
         return false;
