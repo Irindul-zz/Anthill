@@ -39,7 +39,7 @@ public class FoodSupplyCol {
 
     }
 
-    public int getFooddSupplyQuatityAt{
+    public int getFooddSupplyQuatityAt(){
         return 0;
     }
 
