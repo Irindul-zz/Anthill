@@ -17,9 +17,9 @@ public class BasicSensor implements Sense {
     }
 
     @Override
-    public boolean detectFood(Position pos, Map map) {
+    public void detectFood(Position pos, Map map) {
 
-        return true;
+        return;
     }
 
     @Override
