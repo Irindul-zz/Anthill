@@ -28,7 +28,7 @@ public class Ant{
 
     }
 
-    public boolean takeFood(Position pos, FoodSupplyCol f){
+    public void takeFood(Position pos, FoodSupplyCol f){
         f.getFoodSupplyAt(pos).removeFood();
         hasFood=true;
     }
