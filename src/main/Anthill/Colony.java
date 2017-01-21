@@ -45,7 +45,7 @@ public class Colony {
     public void dropPheromone(){
         for(Ant ant : anthill.ants){
             if(ant.getHasFood()){
-                ant.dropPheromone();
+                pheromones.add(ant.dropPheromone());
             }
         }
     }
