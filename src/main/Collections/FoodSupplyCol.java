@@ -46,4 +46,9 @@ public class FoodSupplyCol {
         }
     }
 
+    public int getFooddSupplyQuatityAt(){
+        return 0;
+    }
+
+
 }
