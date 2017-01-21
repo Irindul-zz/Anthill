@@ -32,8 +32,22 @@ public class Colony {
         return 0;
     }
 
-    public boolean detectFood(){
-        return true;
+    public void detectFood(){
+        for(Ant ant : anthill.ants){
+
+            if(ant.getSensor().detectFood(ant.getPosition(),foodSupplies)) {
+                ant.takeFood(ant.getPosition(), foodSupplies);
+            }
+
+        }
+    }
+
+    public void dropPheromone(){
+        for(Ant ant : anthill.ants){
+            if(ant.getHasFood()){
+                ant.dropPheromone();
+            }
+        }
     }
 
 }

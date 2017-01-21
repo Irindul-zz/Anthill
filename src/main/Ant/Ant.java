@@ -1,5 +1,6 @@
 package main.Ant;
 
+import main.Collections.FoodSupplyCol;
 import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
@@ -27,20 +28,34 @@ public class Ant{
 
     }
 
-    public void takeFood(Map map){
-
+    public void takeFood(Position pos, FoodSupplyCol f){
+        f.getFoodSupplyAt(pos).removeFood();
+        hasFood=true;
     }
 
     public void dropFood(){
+        hasFood=false;
 
     }
 
     public void dropPheromone(){
-
+        
     }
 
     public Position getPosition(){
         return this.position;
     }
 
+    public Sense getSensor() {
+        return sensor;
+    }
+
+    public boolean getHasFood() {
+        return hasFood;
+    }
 }
+
+    
+    
+
+    
