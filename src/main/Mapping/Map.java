@@ -18,4 +18,8 @@ public class Map {
 
     }
 
+    public Cell getCell(int i, int j){
+        return cells[i][j];
+    }
+
 }
