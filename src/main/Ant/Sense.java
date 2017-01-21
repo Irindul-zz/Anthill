@@ -13,7 +13,6 @@ public interface Sense {
 
     boolean detectFood(Position pos, FoodSupplyCol f);
     void detectPheromones(Position pos, PheromoneCol p);
-
     double getResults(int i);
     //maybe detectObstacles(Position pos, Map map);
 
