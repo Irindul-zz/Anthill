@@ -1,6 +1,7 @@
 package main.Anthill;
 
 import main.Ant.Ant;
+import main.Ant.BrainyAnt;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Element.FoodSupply;
@@ -45,9 +46,16 @@ public class Colony {
     public void dropPheromone(){
         for(Ant ant : anthill.ants){
             if(ant.getHasFood()){
-                ant.dropPheromone();
+                pheromones.add(ant.dropPheromone());
             }
         }
     }
+
+    public void move(){
+        for(Ant ant : anthill.ants){
+            // move ants
+        }
+    }
+
 
 }

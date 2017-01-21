@@ -26,14 +26,14 @@ public class BasicSensor implements Sense {
         int x = pos.getX();
         int y = pos.getY();
 
-        Position north = new Position(x+1, y);
-        Position northeast = new Position(x+1, y+1);
-        Position east = new Position(x, y+1);
-        Position southeast = new Position(x-1, y+1);
-        Position south = new Position(x-1, y);
-        Position southwest = new Position(x-1, y-1);
-        Position west = new Position(x, y-1);
-        Position northwest = new Position(x+1, y-1);
+        Position north = new Position(x, y-1);
+        Position northeast = new Position(x+1, y-1);
+        Position east = new Position(x+1, y);
+        Position southeast = new Position(x+1, y+1);
+        Position south = new Position(x, y+1);
+        Position southwest = new Position(x-1, y+1);
+        Position west = new Position(x-1, y);
+        Position northwest = new Position(x-1, y-1);
 
         results[Direction.NORTH.ordinal()] = p.getPheromoneQuantityAt(north);
         results[Direction.NORTHEAST.ordinal()] = p.getPheromoneQuantityAt(northeast);
