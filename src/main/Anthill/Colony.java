@@ -35,42 +35,31 @@ public class Colony {
         return 0;
     }
 
-    public void detectFood(){
-        for(Ant ant : anthill.ants){
+    public void detectFood(Ant ant){
 
             if(ant.getSensor().detectFood(ant.getPosition(),foodSupplies)) {
                 ant.takeFood(ant.getPosition(), foodSupplies);
             }
-
-        }
     }
 
-    public void dropPheromone(){
-        for(Ant ant : anthill.ants){
+    public void dropPheromone(Ant ant){
             if(ant.getHasFood()){
                 pheromones.add(ant.dropPheromone());
             }
-        }
     }
 
-    public void move(){
-        for(Ant ant : anthill.ants){
+    public void move(Ant ant){
             ((BrainyAnt)ant).processProba(); //We upcast ant to a BrainyAnt so we are able to call processProba and executeProba.
             ((BrainyAnt)ant).executeProba();
-        }
     }
 
-    public void detectPheromone(){
-        for(Ant ant : anthill.ants){
-
+    public void detectPheromone(Ant ant){
             ant.getSensor().detectPheromones(ant.getPosition(), pheromones);
 
-        }
     }
 
-    public void detectObstacle(){
+    public void detectObstacle(Ant ant){
         Cell[] cells = new Cell[8];
-        for(Ant ant : anthill.ants){
             Position pos = ant.getPosition(); //TODO May be refactored inside EvolvedSensor
             int x = pos.getX();
             int y = pos.getY();
@@ -93,8 +82,6 @@ public class Colony {
             cells[Direction.WEST.ordinal()] = map.getCell(west.getX(), west.getY());
             cells[Direction.NORTHWEST.ordinal()] = map.getCell(northwest.getX(), northwest.getY());
             ant.getSensor().detectObstacles(ant.getPosition(), cells);
-
-        }
     }
 
 
