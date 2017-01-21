@@ -53,7 +53,8 @@ public class Colony {
 
     public void move(){
         for(Ant ant : anthill.ants){
-            // move ants
+            ((BrainyAnt)ant).processProba(); //We upcast ant to a BrainyAnt so we are able to call processProba and executeProba.
+            ((BrainyAnt)ant).executeProba();
         }
     }
 
