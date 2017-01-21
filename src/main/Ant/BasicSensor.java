@@ -2,15 +2,19 @@ package main.Ant;
 
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
+import main.Element.Cell;
 import main.Mapping.Direction;
+import main.Mapping.Map;
 import main.Mapping.Position;
 
 public class BasicSensor implements Sense {
 
-    double[] results;
+    protected double[] results;
+    protected boolean[] obstacles;
 
     public BasicSensor() {
         results = new double[8];
+        obstacles = new boolean[8];
     }
 
     @Override
@@ -50,5 +54,17 @@ public class BasicSensor implements Sense {
     @Override
     public double getResults(int i) {
         return results[i];
+    }
+
+    @Override
+    public void detectObstacles(Position pos, Cell[] cells) {
+        for (boolean b:obstacles) {
+            b = false;
+        }
+    }
+
+    @Override
+    public boolean getObstacle(int i) {
+        return obstacles[i];
     }
 }
