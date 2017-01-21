@@ -69,6 +69,7 @@ public class BrainyAnt extends Ant implements Brain {
         int coefs[] = {0, 5, 10, 20, 50, 20, 10 ,5};
         int sum = 0;
         double phero;
+        boolean obstacle;
         for (int coef: coefs) {
             sum += coef;
         }
@@ -79,12 +80,20 @@ public class BrainyAnt extends Ant implements Brain {
         int j = 0;
         while (i != stop){
             phero = sensor.getResults(i);
-            proba.setProba(i, (coefs[j] + phero) /sum); //We set the probas corresponding to the current direction.
+            obstacle = sensor.getObstacle(i);
+            if(!obstacle)
+                proba.setProba(i, (coefs[j] + phero) /sum); //We set the probas corresponding to the current direction.
+            else
+                proba.setProba(i, 0);
             i = (i + 1) % 8;
             j++;
         }
         phero = sensor.getResults(i);
-        proba.setProba(i, (coefs[j] + phero) /sum); //The loop stop one item before so we need to do it one more time.
+        obstacle = sensor.getObstacle(i);
+        if(!obstacle)
+            proba.setProba(i, (coefs[j] + phero) /sum); //The loop stop one item before so we need to do it one more time.
+        else
+            proba.setProba(i, 0);
     }
 
     public Proba getProba(){
