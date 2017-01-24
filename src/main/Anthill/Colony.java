@@ -23,6 +23,21 @@ public class Colony {
 
     }
 
+    public void run(){
+
+        while (!end()){
+            for (Ant ant: anthill.ants) {
+                detectFood(ant);
+                dropPheromone(ant);
+                detectPheromone(ant);
+                detectObstacle(ant);
+                move(ant);
+            }
+        }
+
+
+    }
+
     public void addObstacle(int x, int y){
 
     }
@@ -84,5 +99,20 @@ public class Colony {
             ant.getSensor().detectObstacles(ant.getPosition(), cells);
     }
 
+    public boolean end(){
+        boolean end = false;
+        for (FoodSupply f: foodSupplies.getSupplies()) {
+            if(f.getQuantity() != 0)
+                end = true;
+        }
 
+        for (Ant ant: anthill.ants) {
+            if(ant.getHasFood())
+            {
+               end = true;
+            }
+        }
+
+        return end;
+    }
 }
