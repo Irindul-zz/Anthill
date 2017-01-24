@@ -2,6 +2,7 @@ package main.Anthill;
 
 import main.Ant.Ant;
 import main.Ant.BrainyAnt;
+import main.Brain.Brain;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Element.Cell;
@@ -72,8 +73,9 @@ public class Colony {
     }
 
     public void move(Ant ant){
-            ((BrainyAnt)ant).processProba(); //We upcast ant to a BrainyAnt so we are able to call processProba and executeProba.
-            ((BrainyAnt)ant).executeProba();
+            Brain brain = ((BrainyAnt) ant).getBrain(); //The upcast allow us to get the brain of the ant
+            brain.processProba(ant); //We can now call the corresponding methods
+            brain.executeProba(ant);
     }
 
     public void detectPheromone(Ant ant){
