@@ -79,6 +79,10 @@ public class Ant{
     public boolean getHasFood() {
         return hasFood;
     }
+
+    public Direction getDirection(){
+        return direction;
+    }
 }
 
     
