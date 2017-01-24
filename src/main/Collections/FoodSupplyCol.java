@@ -34,6 +34,10 @@ public class FoodSupplyCol {
 
     }
 
+    public List<FoodSupply> getSupplies(){
+        return supplies;
+    }
+
     public int size(){
         return supplies.size();
     }
