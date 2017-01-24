@@ -2,6 +2,7 @@ package main.Anthill;
 
 import main.Ant.Ant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,9 @@ import java.util.List;
 public class Anthill{
     List<Ant> ants;
 
+    public Anthill(){
+        ants = new ArrayList<>();
+    }
 
     public List getAnts()
     {

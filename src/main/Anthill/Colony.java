@@ -19,6 +19,14 @@ public class Colony {
     private Anthill anthill;
     private Map map;
 
+
+    public Colony(){
+        foodSupplies = new FoodSupplyCol();
+        pheromones = new PheromoneCol();
+        anthill = new Anthill();
+        Map map = new Map();
+    }
+
     public void addFoodSupply(FoodSupply fs){
 
     }
