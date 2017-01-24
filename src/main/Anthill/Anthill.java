@@ -30,5 +30,4 @@ public class Anthill{
         Ant a = new Ant();
         this.ants.add(a);
     }
-
 }
