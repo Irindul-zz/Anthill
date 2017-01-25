@@ -19,26 +19,28 @@ public class FoodSupplyCol {
     public FoodSupply getFoodSupplyIndex(int i){
         return supplies.get(i);
     }
-    public FoodSupply getFoodSupplyAt(Position position) {
 
-        for(int i =0; i<supplies.size(); i++) {
-            if (supplies.get(i).getPosition().getX()==position.getX() && supplies.get(i).getPosition().getY()==position.getY()) {
-                return supplies.get(i);
-            }
-        }
-        return null;
+
+    public void addFoodSupply(FoodSupply fs){
+        supplies.add(fs);
+    }
+    public void addNewFoodSuuply(Position position, int quantity) {
+        supplies.add(new FoodSupply(position, quantity));
     }
 
-    public void add(FoodSupply fs, Position position){
-
-
-    }
-
-    public int size(){
+    public int getSize(){
         return supplies.size();
     }
 
-    public void remove(Position position){
+    public void removeFoodSupply(FoodSupply fs) {
+        for(int i =0; i<supplies.size(); i++) {
+            if (supplies.get(i).getPosition().getX()==fs.getPosition().getX() && supplies.get(i).getPosition().getY()==fs.getPosition().getY()) {
+                supplies.remove(i);
+            }
+        }
+    }
+
+    public void removeFoodSupplyAt(Position position){
         for(int i =0; i<supplies.size(); i++) {
             if (supplies.get(i).getPosition().getX()==position.getX() && supplies.get(i).getPosition().getY()==position.getY()) {
                 supplies.remove(i);
@@ -46,9 +48,24 @@ public class FoodSupplyCol {
         }
     }
 
-    public int getFooddSupplyQuatityAt(){
+    public int getFooddSupplyQuatityAt(Position position) {
+
+        for (int i = 0; i < supplies.size(); i++) {
+            if (supplies.get(i).getPosition().getX() == position.getX() && supplies.get(i).getPosition().getY() == position.getY()) {
+                return supplies.get(i).getQuantity();
+            }
+        }
         return 0;
     }
 
+        public FoodSupply getFoodSupplyAt(Position position) {
+
+            for(int i =0; i<supplies.size(); i++) {
+                if (supplies.get(i).getPosition().getX()==position.getX() && supplies.get(i).getPosition().getY()==position.getY()) {
+                    return supplies.get(i);
+                }
+            }
+            return null;
+        }
 
 }
