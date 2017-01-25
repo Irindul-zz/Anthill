@@ -2,6 +2,7 @@ package main.View;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import main.Mapping.Map;
@@ -13,9 +14,11 @@ public class MapScene {
 
     public static Map map;
 
+
     public MapScene(Map map){
         this.map = map;
     }
+
     public static Scene getScene(){
         Group root = new Group();
         Scene scene = new Scene(root);
@@ -46,8 +49,26 @@ public class MapScene {
                 }
             }
         }
-
         return scene;
 
     }
+
+    public static Scene getOtherScene(){
+      // root. VBox mainPane = new VBox();
+
+        Group root = new Group();
+        Scene scene = new Scene(root);
+        scene.setFill(Color.RED);
+
+        Rectangle wall = new Rectangle();
+        wall.setHeight(30);
+        wall.setWidth(30);
+        wall.setX(30);
+        wall.setY(30);
+        wall.setFill(Color.BLUE);
+        root.getChildren().add(wall);
+
+        return scene;
+    }
+
 }

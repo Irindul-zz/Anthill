@@ -1,5 +1,6 @@
 package main.Anthill;
 
+import javafx.application.Application;
 import main.Ant.Ant;
 import main.Ant.BrainyAnt;
 import main.Brain.Brain;
@@ -10,6 +11,8 @@ import main.Element.FoodSupply;
 import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
+import main.View.AntDisplay;
+import main.View.ColonyDisplay;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +26,10 @@ public class Colony {
     private PheromoneCol pheromones;
     private Anthill anthill;
     private Map map;
+    //AntDisplay[] antsDisplay;
+    private ColonyDisplay colonyDisplay;
+
+
 
 
     public Colony() throws FileNotFoundException {
@@ -30,6 +37,15 @@ public class Colony {
         pheromones = new PheromoneCol();
         anthill = new Anthill();
         Map map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
+
+        ColonyDisplay.map = map;
+        colonyDisplay = new ColonyDisplay();
+        ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
+
+
+        for (int i =0 ; i < anthill.getAnts().size() ; i++){
+            ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(1,1),i);
+        }
     }
 
     public void addFoodSupply(FoodSupply fs){
@@ -37,14 +53,18 @@ public class Colony {
     }
 
     public void run(){
+        Application.launch(ColonyDisplay.class);
 
         while (!end()){
+            int i = 0;
             for (Ant ant: anthill.ants) {
                 detectFood(ant);
                 dropPheromone(ant);
                 detectPheromone(ant);
                 detectObstacle(ant);
                 move(ant);
+                ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
+                i++;
             }
         }
 
