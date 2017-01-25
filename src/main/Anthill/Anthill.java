@@ -20,4 +20,14 @@ public class Anthill{
         return this.ants;
     }
 
+    public void addAnt(Ant a)
+    {
+        this.ants.add(a);
+    }
+
+    public void sendAnts()
+    {
+        Ant a = new Ant();
+        this.ants.add(a);
+    }
 }
