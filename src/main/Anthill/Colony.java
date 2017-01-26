@@ -1,6 +1,7 @@
 package main.Anthill;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import main.Ant.Ant;
 import main.Ant.BrainyAnt;
 import main.Brain.Brain;
@@ -36,7 +37,9 @@ public class Colony {
         foodSupplies = new FoodSupplyCol();
         pheromones = new PheromoneCol();
         anthill = new Anthill();
-        Map map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
+        anthill.addAnt(new Ant(new Position(1, 1)));
+
+        map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
 
         ColonyDisplay.map = map;
         colonyDisplay = new ColonyDisplay();
@@ -44,7 +47,7 @@ public class Colony {
 
 
         for (int i =0 ; i < anthill.getAnts().size() ; i++){
-            ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(1,1),i);
+            ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.ants.get(i).getPosition().getX(),anthill.ants.get(i).getPosition().getX()),i);
         }
     }
 
@@ -53,10 +56,11 @@ public class Colony {
     }
 
     public void run(){
-        Application.launch(ColonyDisplay.class);
+        //Application.launch(ColonyDisplay.class);
+
 
         while (!end()){
-            int i = 0;
+        int i = 0;
             for (Ant ant: anthill.ants) {
                 detectFood(ant);
                 dropPheromone(ant);
@@ -66,6 +70,7 @@ public class Colony {
                 ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
                 i++;
             }
+       
         }
 
 
@@ -97,8 +102,9 @@ public class Colony {
     }
 
     public void move(Ant ant){
-            Brain brain = ((BrainyAnt) ant).getBrain(); //The upcast allow us to get the brain of the ant
-            brain.processProba(ant); //We can now call the corresponding methods
+           // Brain brain = ((BrainyAnt) ant).getBrain(); //The upcast allow us to get the brain of the ant
+        Brain brain =  ant.getBrain();
+        brain.processProba(ant); //We can now call the corresponding methods
             brain.executeProba(ant);
     }
 
@@ -107,30 +113,83 @@ public class Colony {
 
     }
 
-    public void detectObstacle(Ant ant){
+    public void detectObstacle(Ant ant) {
         Cell[] cells = new Cell[8];
-            Position pos = ant.getPosition(); //TODO May be refactored inside EvolvedSensor
-            int x = pos.getX();
-            int y = pos.getY();
-
-            Position north = new Position(x, y-1);
-            Position northeast = new Position(x+1, y-1);
-            Position east = new Position(x+1, y);
-            Position southeast = new Position(x+1, y+1);
-            Position south = new Position(x, y+1);
-            Position southwest = new Position(x-1, y+1);
-            Position west = new Position(x-1, y);
-            Position northwest = new Position(x-1, y-1);
-
+        Position pos = ant.getPosition(); //TODO May be refactored inside EvolvedSensor
+        int x = pos.getX();
+        int y = pos.getY();
+        // We store every surrounding cells in a Cell array.
+        // the try expression is used to handle the ArrayIndexOutOfBoundsException exception => the cell out of bound is stored as non walkable
+        try {
+            Position north = new Position(x, y - 1);
             cells[Direction.NORTH.ordinal()] = map.getCellXY(north.getX(), north.getY());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cells[Direction.NORTH.ordinal()] = new Cell(false);
+        }
+
+        try {
+            Position northeast = new Position(x + 1, y - 1);
             cells[Direction.NORTHEAST.ordinal()] = map.getCellXY(northeast.getX(), northeast.getY());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cells[Direction.NORTHEAST.ordinal()] = new Cell(false);
+        }
+
+        try {
+            Position east = new Position(x + 1, y);
             cells[Direction.EAST.ordinal()] = map.getCellXY(east.getX(), east.getY());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cells[Direction.EAST.ordinal()] = new Cell(false);
+
+        }
+
+        try {
+            Position southeast = new Position(x + 1, y + 1);
             cells[Direction.SOUTHEAST.ordinal()] = map.getCellXY(southeast.getX(), southeast.getY());
+
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cells[Direction.SOUTHEAST.ordinal()] = new Cell(false);
+
+        }
+
+        try {
+            Position south = new Position(x, y + 1);
             cells[Direction.SOUTH.ordinal()] = map.getCellXY(south.getX(), south.getY());
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cells[Direction.SOUTH.ordinal()] = new Cell(false);
+
+        }
+        try {
+            Position southwest = new Position(x - 1, y + 1);
             cells[Direction.SOUTHWEST.ordinal()] = map.getCellXY(southwest.getX(), southwest.getY());
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cells[Direction.SOUTHWEST.ordinal()] = new Cell(false);
+
+        }
+
+        try {
+            Position west = new Position(x - 1, y);
             cells[Direction.WEST.ordinal()] = map.getCellXY(west.getX(), west.getY());
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cells[Direction.WEST.ordinal()] = new Cell(false);
+
+        }
+
+        try {
+            Position northwest = new Position(x - 1, y - 1);
             cells[Direction.NORTHWEST.ordinal()] = map.getCellXY(northwest.getX(), northwest.getY());
+
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cells[Direction.NORTHWEST.ordinal()] = new Cell(false);
+
+        }
+
             ant.getSensor().detectObstacles(ant.getPosition(), cells);
+
     }
 
     public boolean end(){
