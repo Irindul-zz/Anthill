@@ -20,7 +20,7 @@ public class AntDisplay extends Parent{
         this.position = position;
         ant.setCenterX(position.getX()*30);
         ant.setCenterY(position.getY()*30);
-        ant.setRadius(30);
+        ant.setRadius(2);
         ant.setFill(Color.RED);
 
         this.getChildren().add(ant);
