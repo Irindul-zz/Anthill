@@ -21,7 +21,7 @@ public class ColonyDisplay extends Application{
     public static AntDisplay[] antsDisplay;
     private Colony c;
 
-    Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
+    Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(60), new EventHandler<ActionEvent>() {
 
         @Override
         public void handle(ActionEvent event) {
