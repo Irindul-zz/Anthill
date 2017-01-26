@@ -1,5 +1,6 @@
 package main.Anthill;
 
+import javafx.application.Application;
 import main.Ant.Ant;
 import main.Ant.BrainyAnt;
 import main.Brain.Brain;
@@ -10,6 +11,12 @@ import main.Element.FoodSupply;
 import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
+import main.View.AntDisplay;
+import main.View.ColonyDisplay;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
 /**
  * Created by Irindul on 25/12/2016.
  */
@@ -19,13 +26,26 @@ public class Colony {
     private PheromoneCol pheromones;
     private Anthill anthill;
     private Map map;
+    //AntDisplay[] antsDisplay;
+    private ColonyDisplay colonyDisplay;
 
 
-    public Colony(){
+
+
+    public Colony() throws FileNotFoundException {
         foodSupplies = new FoodSupplyCol();
         pheromones = new PheromoneCol();
         anthill = new Anthill();
-        Map map = new Map();
+        Map map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
+
+        ColonyDisplay.map = map;
+        colonyDisplay = new ColonyDisplay();
+        ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
+
+
+        for (int i =0 ; i < anthill.getAnts().size() ; i++){
+            ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(1,1),i);
+        }
     }
 
     public void addFoodSupply(FoodSupply fs){
@@ -33,14 +53,18 @@ public class Colony {
     }
 
     public void run(){
+        Application.launch(ColonyDisplay.class);
 
         while (!end()){
+            int i = 0;
             for (Ant ant: anthill.ants) {
                 detectFood(ant);
                 dropPheromone(ant);
                 detectPheromone(ant);
                 detectObstacle(ant);
                 move(ant);
+                ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
+                i++;
             }
         }
 
@@ -98,14 +122,14 @@ public class Colony {
             Position west = new Position(x-1, y);
             Position northwest = new Position(x-1, y-1);
 
-            cells[Direction.NORTH.ordinal()] = map.getCell(north.getX(), north.getY());
-            cells[Direction.NORTHEAST.ordinal()] = map.getCell(northeast.getX(), northeast.getY());
-            cells[Direction.EAST.ordinal()] = map.getCell(east.getX(), east.getY());
-            cells[Direction.SOUTHEAST.ordinal()] = map.getCell(southeast.getX(), southeast.getY());
-            cells[Direction.SOUTH.ordinal()] = map.getCell(south.getX(), south.getY());
-            cells[Direction.SOUTHWEST.ordinal()] = map.getCell(southwest.getX(), southwest.getY());
-            cells[Direction.WEST.ordinal()] = map.getCell(west.getX(), west.getY());
-            cells[Direction.NORTHWEST.ordinal()] = map.getCell(northwest.getX(), northwest.getY());
+            cells[Direction.NORTH.ordinal()] = map.getCellXY(north.getX(), north.getY());
+            cells[Direction.NORTHEAST.ordinal()] = map.getCellXY(northeast.getX(), northeast.getY());
+            cells[Direction.EAST.ordinal()] = map.getCellXY(east.getX(), east.getY());
+            cells[Direction.SOUTHEAST.ordinal()] = map.getCellXY(southeast.getX(), southeast.getY());
+            cells[Direction.SOUTH.ordinal()] = map.getCellXY(south.getX(), south.getY());
+            cells[Direction.SOUTHWEST.ordinal()] = map.getCellXY(southwest.getX(), southwest.getY());
+            cells[Direction.WEST.ordinal()] = map.getCellXY(west.getX(), west.getY());
+            cells[Direction.NORTHWEST.ordinal()] = map.getCellXY(northwest.getX(), northwest.getY());
             ant.getSensor().detectObstacles(ant.getPosition(), cells);
     }
 

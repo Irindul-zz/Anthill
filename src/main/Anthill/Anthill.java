@@ -10,12 +10,17 @@ import java.util.List;
  * Created by Irindul on 25/12/2016.
  */
 public class Anthill{
-    List<Ant> ants;
-    private Position pos;
+    private List<Ant> ants;
+    private Position position;
 
-    public Anthill(Position pos) {
+    public Anthill() {
         ants = new ArrayList<>();
-        this.pos = pos;
+        position = new Position(0,0);
+    }
+
+    public Anthill(Position position){
+        ants = new ArrayList<>();
+        this.position=position;
     }
 
     public List getAnts()
@@ -34,15 +39,12 @@ public class Anthill{
         this.ants.add(a);
     }
 
-    public Position getPos()
-    {
-        return this.pos;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPos(Position pos)
-    {
-        this.pos = pos;
+    public void setPosition(Position position) {
+        this.position = position;
     }
-
-
 }
+
