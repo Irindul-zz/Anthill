@@ -18,16 +18,16 @@ public class AntDisplay extends Parent{
         Circle ant = new Circle();
         this.id=id;
         this.position = position;
-        ant.setCenterX(position.getX()*30);
-        ant.setCenterY(position.getY()*30);
-        ant.setRadius(2);
+        ant.setCenterX(position.getX()*15);
+        ant.setCenterY(position.getY()*15);
+        ant.setRadius(10);
         ant.setFill(Color.RED);
 
         this.getChildren().add(ant);
     }
 
     public void setPosition(Position position){
-        this.setTranslateX(position.getX());
-        this.setTranslateY(position.getY());
+        this.setTranslateX(position.getX()*30);
+        this.setTranslateY(position.getY()*30);
     }
 }
