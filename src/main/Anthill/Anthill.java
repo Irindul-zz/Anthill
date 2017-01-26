@@ -1,6 +1,7 @@
 package main.Anthill;
 
 import main.Ant.Ant;
+import main.Mapping.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
  */
 public class Anthill{
     List<Ant> ants;
+    private Position pos;
 
-    public Anthill(){
+    public Anthill(Position pos) {
         ants = new ArrayList<>();
+        this.pos = pos;
     }
 
     public List getAnts()
@@ -30,4 +33,16 @@ public class Anthill{
         Ant a = new Ant();
         this.ants.add(a);
     }
+
+    public Position getPos()
+    {
+        return this.pos;
+    }
+
+    public void setPos(Position pos)
+    {
+        this.pos = pos;
+    }
+
+
 }
