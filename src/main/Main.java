@@ -14,6 +14,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 	// write your code here
         Colony c = new Colony();
+
         c.run();
     }
 }

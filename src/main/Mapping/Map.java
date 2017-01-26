@@ -46,12 +46,9 @@ public class Map {
                         case '#':
                             map[j][i] = new Cell(false); //if is '#' we have a wall, Cell => is Not Walkable
                             break;
-
-
                         default :
                             map[j][i] = new Cell(true); //if is ' ' we have ground, Cell => is Walkable
                             break;
-
                     }
                     j++;
                 }
