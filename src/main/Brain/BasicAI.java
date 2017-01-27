@@ -5,6 +5,7 @@ import main.Ant.Mind;
 import main.Ant.Proba;
 import main.Mapping.Direction;
 import main.Ant.Sense;
+import main.Mapping.Map;
 import main.Mapping.Position;
 
 /**
@@ -88,7 +89,7 @@ public class BasicAI implements Brain {
 
 
     @Override
-    public void executeProba(Ant ant) {
+    public Direction executeProba(Ant ant) {
         proba.computesFrequencies(); // We calculate the cumulated frequencies
         int dir = proba.randomWithProba();
 
@@ -96,42 +97,16 @@ public class BasicAI implements Brain {
         if(!ant.getHasFood()) //If we do not carry food the we must keep track of the way.
             mind.keepTrack(direction);
 
-        Position nextPosition = new Position(1, 1); // Initialise newPosition
-        int x = ant.getPosition().getX();
-        int y = ant.getPosition().getY();
 
-        if (proba.getProbas()[direction.ordinal()] !=0) { //In proba.getProbas are stored the forbidden cells
-            switch (direction){ //If this direction is valid, ie there is no obstacle, we set nextPosition accordingly
-                case NORTH :
-                    nextPosition = new Position(x,y-1);
-                    break;
-                case SOUTH :
-                    nextPosition = new Position(x,y+1);
-                    break;
-                case EAST :
-                    nextPosition = new Position(x+1,y);
-                    break;
-                case WEST :
-                    nextPosition = new Position(x-1,y);
-                    break;
-                case NORTHEAST:
-                    nextPosition = new Position(x+1,y-1);
-                    break;
-                case NORTHWEST:
-                    nextPosition = new Position(x-1,y-1);
-                    break;
-                case SOUTHEAST:
-                    nextPosition = new Position(x+1,y+1);
-                    break;
-                case SOUTHWEST:
-                    nextPosition = new Position(x-1,y+1);
-                    break;
-            }
+        //For a more evolved AI
+      //  if (proba.getProbas()[direction.ordinal()] !=0) { //In proba.getProbas are stored the forbidden cells
 
+/*
         } else { //If there is an obstacle on the cell, the ant stays at the same position
             nextPosition = ant.getPosition();
-        }
+        }*/
 
-        ant.moveTo(nextPosition, direction); //We move.
+        return direction;
+        //ant.moveTo(nextPosition, direction); //We move.
     }
 }

@@ -16,13 +16,13 @@ public class Anthill{
 
     public Anthill() {
         ants = new ArrayList<Ant>();
-        position = new Position(1,1);
+        position = new Position(3,3);
         nbAnts = 10;
     }
 
     public Anthill(int nbAnts) {
         ants = new ArrayList<Ant>();
-        position = new Position(1,1);
+        position = new Position(3,3);
         this.nbAnts = nbAnts;
     }
 

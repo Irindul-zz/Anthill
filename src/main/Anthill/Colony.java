@@ -37,7 +37,7 @@ public class Colony {
         map = new Map();
         // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
         foodSupplies = new FoodSupplyCol();
-        anthill = new Anthill(10);
+        anthill = new Anthill(12);
 
         try {
             reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + "map1.txt");
@@ -52,8 +52,8 @@ public class Colony {
         pheromones = new PheromoneCol();
 
         //Ants only stay in map if they start at (1, 1) Position
-        //anthill.setPosition(new Position(1, 1));
-        //anthill.declareAnts();
+     //   anthill.setPosition(new Position(1, 1));
+      //  anthill.declareAnts();
 
 
         ColonyDisplay.map = map;
@@ -96,7 +96,7 @@ public class Colony {
             //dropPheromone(ant);
             detectPheromone(ant);
             detectObstacle(ant);
-            move(ant);
+            move(ant, map);
             ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
             i++;
         }
@@ -127,11 +127,47 @@ public class Colony {
             }
     }
 
-    public void move(Ant ant){
+    public void move(Ant ant, Map map){
            // Brain brain = ((BrainyAnt) ant).getBrain(); //The upcast allow us to get the brain of the ant
         Brain brain =  ant.getBrain();
         brain.processProba(ant); //We can now call the corresponding methods
-            brain.executeProba(ant);
+        Direction direction = brain.executeProba(ant);
+
+        Position nextPosition =new Position(1, 1);
+        int x = ant.getPosition().getX();
+        int y = ant.getPosition().getY();
+
+        switch (direction){ //If this direction is valid, ie there is no obstacle, we set nextPosition accordingly
+            case NORTH :
+                nextPosition = new Position(x,y-1);
+                break;
+            case SOUTH :
+                nextPosition = new Position(x,y+1);
+                break;
+            case EAST :
+                nextPosition = new Position(x+1,y);
+                break;
+            case WEST :
+                nextPosition = new Position(x-1,y);
+                break;
+            case NORTHEAST:
+                nextPosition = new Position(x+1,y-1);
+                break;
+            case NORTHWEST:
+                nextPosition = new Position(x-1,y-1);
+                break;
+            case SOUTHEAST:
+                nextPosition = new Position(x+1,y+1);
+                break;
+            case SOUTHWEST:
+                nextPosition = new Position(x-1,y+1);
+                break;
+        }
+        if (!map.getCellXY(nextPosition.getX(), nextPosition.getY()).isWalkable()) {
+            nextPosition = ant.getPosition();
+        }
+        ant.moveTo(nextPosition, direction);
+
     }
 
     public void detectPheromone(Ant ant){
