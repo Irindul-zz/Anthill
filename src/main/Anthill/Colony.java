@@ -10,6 +10,8 @@ import main.Collections.PheromoneCol;
 import main.Element.Cell;
 import main.Element.FoodSupply;
 import main.Element.Pheromone;
+import main.Graph.Dijkstra;
+import main.Graph.Graph;
 import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
@@ -61,7 +63,7 @@ public class Colony {
         colonyDisplay = new ColonyDisplay();
         ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
 
-
+        Dijkstra.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to reuse it later
         int i;
         for (i =0 ; i < anthill.getAnts().size() ; i++){
             ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()), i);
