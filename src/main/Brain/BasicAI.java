@@ -94,8 +94,8 @@ public class BasicAI implements Brain {
         int dir = proba.randomWithProba();
 
         Direction direction = Direction.values()[dir];  //We deduce a direction from the int value.
-        if(!ant.getHasFood()) //If we do not carry food the we must keep track of the way.
-            mind.keepTrack(direction);
+        //if(!ant.getHasFood()) //If we do not carry food the we must keep track of the way.
+          //  mind.keepTrack(direction);
 
 
         //For a more evolved AI
@@ -108,5 +108,10 @@ public class BasicAI implements Brain {
 
         return direction;
         //ant.moveTo(nextPosition, direction); //We move.
+    }
+
+
+    public Memory getMind() {
+        return mind;
     }
 }

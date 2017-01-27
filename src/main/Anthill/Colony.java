@@ -1,7 +1,10 @@
 package main.Anthill;
 
 import main.Ant.Ant;
+import main.Ant.BrainyAnt;
+import main.Brain.BasicAI;
 import main.Brain.Brain;
+import main.Brain.Memory;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Element.Cell;
@@ -91,8 +94,8 @@ public class Colony {
     {
         int i = 0;
         for (Ant ant: anthill.ants) {
-            //detectFood(ant);
-            //dropPheromone(ant);
+            detectFood(ant);
+            dropPheromone(ant);
             detectPheromone(ant);
             detectObstacle(ant);
             move(ant, map);
@@ -134,7 +137,8 @@ public class Colony {
         Brain brain =  ant.getBrain();
         brain.processProba(ant); //We can now call the corresponding methods
         Direction direction = brain.executeProba(ant);
-
+        Memory mind = ((BasicAI) ant.getBrain()).getMind();
+        boolean keeptrack = true;
         Position nextPosition =new Position(1, 1);
         int x = ant.getPosition().getX();
         int y = ant.getPosition().getY();
@@ -167,7 +171,13 @@ public class Colony {
         }
         if (!map.getCellXY(nextPosition.getX(), nextPosition.getY()).isWalkable()) {
             nextPosition = ant.getPosition();
+            keeptrack = false;
         }
+        if(ant.getHasFood())
+            keeptrack = false;
+
+        if(keeptrack)
+            mind.keepTrack(direction);
         ant.moveTo(nextPosition, direction);
 
     }
