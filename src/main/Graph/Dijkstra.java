@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Dijkstra {
 
-    private static Graph graph;
+    public static Graph graph;
 
     public Dijkstra() {
         graph = new Graph();
