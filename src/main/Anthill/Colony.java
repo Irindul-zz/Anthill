@@ -6,12 +6,14 @@ import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Element.Cell;
 import main.Element.FoodSupply;
+import main.Element.Pheromone;
 import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
 import main.Mapping.ReadFiles;
 import main.View.AntDisplay;
 import main.View.ColonyDisplay;
+import main.View.FoodSupplyDisplay;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,26 +47,23 @@ public class Colony {
             e.printStackTrace();
         }
         reader.readFile(this.map, this.foodSupplies, this.anthill);
-
-
-
-
         pheromones = new PheromoneCol();
-
         //Ants only stay in map if they start at (1, 1) Position
      //   anthill.setPosition(new Position(1, 1));
       //  anthill.declareAnts();
-
-
         ColonyDisplay.map = map;
         colonyDisplay = new ColonyDisplay();
         ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
+        ColonyDisplay.foodSuppliesDisplay = new FoodSupplyDisplay[foodSupplies.size()];
 
-
-        for (int i =0 ; i < anthill.getAnts().size() ; i++){
+        int i;
+        for (i =0 ; i < anthill.getAnts().size() ; i++){
             ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()), i);
         }
 
+        for (i=0 ;i < foodSupplies.size() ; i++){
+            ColonyDisplay.foodSuppliesDisplay[i] = new FoodSupplyDisplay(new Position(foodSupplies.getFoodSupplyIndex(i).getPosition().getX(),foodSupplies.getFoodSupplyIndex(i).getPosition().getY()),i);
+        }
     }
 
     public void addFoodSupply(FoodSupply fs){
@@ -99,6 +98,9 @@ public class Colony {
             move(ant, map);
             ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
             i++;
+        }
+        for(Pheromone pheromone: pheromones.getPheromones()){
+            ColonyDisplay.pheromonesDisplay.get(i).setPosition(pheromone.getPos());
         }
     }
 

@@ -81,6 +81,10 @@ public class Ant{
     public Direction getDirection(){
         return direction;
     }
+
+    public void setHasFood(boolean hasFood) {
+        this.hasFood = hasFood;
+    }
 }
 
     

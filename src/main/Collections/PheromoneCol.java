@@ -53,4 +53,7 @@ public class PheromoneCol {
         return 0;
     }
 
+    public List<Pheromone> getPheromones() {
+        return pheromones;
+    }
 }

@@ -20,7 +20,11 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Anthill.Colony;
+import main.Element.FoodSupply;
 import main.Mapping.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Thread.sleep;
 
@@ -29,6 +33,8 @@ public class ColonyDisplay extends Application{
 
     public static Map map;
     public static AntDisplay[] antsDisplay;
+    public static FoodSupplyDisplay[] foodSuppliesDisplay;
+    public static List<PheromoneDisplay> pheromonesDisplay;
     private Colony c;
 //TODO : les fourmis sortent de la boite
 
@@ -44,6 +50,7 @@ public class ColonyDisplay extends Application{
     public void start(Stage stage) throws Exception {
         //sleep(10);
         this.c = new Colony();
+        pheromonesDisplay = new ArrayList<>();
         stage.setWidth(750+16);
         stage.setHeight(750+38);
         stage.setTitle("Anthill");
@@ -96,34 +103,42 @@ public class ColonyDisplay extends Application{
 
         MapDisplay mapD = new MapDisplay(map);
         group_sim.getChildren().add(mapD);
+
         for (AntDisplay antD: antsDisplay) {
             group_sim.getChildren().add(antD);
         }
-
+        for(FoodSupplyDisplay foodSupplyD: foodSuppliesDisplay){
+            group_sim.getChildren().add(foodSupplyD);
+        }
+        if(pheromonesDisplay.size()>0) {
+            for (PheromoneDisplay pheromoneD : pheromonesDisplay) {
+                group_sim.getChildren().add(pheromoneD);
+            }
+        }
         HBox hBox_speedSelector = new HBox();
-            hBox_speedSelector.setSpacing(10);
-            hBox_speedSelector.setLayoutY(0);
-            hBox_speedSelector.setPadding(new Insets(0, 20, 10, 20));
-            hBox_speedSelector.setPrefWidth(stage.getWidth()-16);
+        hBox_speedSelector.setSpacing(10);
+        hBox_speedSelector.setLayoutY(0);
+        hBox_speedSelector.setPadding(new Insets(0, 20, 10, 20));
+        hBox_speedSelector.setPrefWidth(stage.getWidth()-16);
 
-            Text text_speedTitle = new Text("Simulation Speed: ");
-                text_speedTitle.setId("text_speedTitle");
-                text_speedTitle.applyCss();
+        Text text_speedTitle = new Text("Simulation Speed: ");
+            text_speedTitle.setId("text_speedTitle");
+            text_speedTitle.applyCss();
 
-            Button button_decreaseSpeed = new Button("-");
-                button_decreaseSpeed.setId("button_decreaseSpeed");
-                button_decreaseSpeed.applyCss();
+        Button button_decreaseSpeed = new Button("-");
+            button_decreaseSpeed.setId("button_decreaseSpeed");
+            button_decreaseSpeed.applyCss();
 
-            colonyTimer.setRate(simulationSpeed);
-            TextField text_speed = new TextField(Integer.toString((int)(simulationSpeed*100)));
-                text_speed.setId("text_speed");
-                text_speed.applyCss();
+        colonyTimer.setRate(simulationSpeed);
+        TextField text_speed = new TextField(Integer.toString((int)(simulationSpeed*100)));
+            text_speed.setId("text_speed");
+            text_speed.applyCss();
 
-            Button button_increaseSpeed = new Button("+");
-                button_increaseSpeed.setId("button_increaseSpeed");
-                button_increaseSpeed.applyCss();
+        Button button_increaseSpeed = new Button("+");
+            button_increaseSpeed.setId("button_increaseSpeed");
+            button_increaseSpeed.applyCss();
 
-            hBox_speedSelector.getChildren().addAll(text_speedTitle, button_decreaseSpeed, text_speed, button_increaseSpeed);
+        hBox_speedSelector.getChildren().addAll(text_speedTitle, button_decreaseSpeed, text_speed, button_increaseSpeed);
         group_sim.getChildren().add(hBox_speedSelector);
 
         //// SETTING LISTENERS FOR SIMULATOR
