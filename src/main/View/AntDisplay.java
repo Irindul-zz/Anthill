@@ -1,7 +1,4 @@
 package main.View;
-
-import com.sun.javafx.geom.Rectangle;
-import com.sun.org.apache.xpath.internal.operations.And;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -20,10 +17,10 @@ public class AntDisplay extends Parent{
         this.id=id;
         this.position = position;
 
-        this.setTranslateX((position.getX()*30)+15);
-        this.setTranslateY((position.getY()*30)+15);
+        this.setTranslateX((position.getX()*30)+10);
+        this.setTranslateY((position.getY()*30)+10);
 
-        ant.setRadius(15);
+        ant.setRadius(10);
         ant.setFill(Color.RED);
         this.getChildren().add(ant);
     }
