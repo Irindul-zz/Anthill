@@ -19,16 +19,18 @@ public class AntDisplay extends Parent{
         Circle ant = new Circle();
         this.id=id;
         this.position = position;
-        ant.setCenterX(position.getX()*15);
-        ant.setCenterY(position.getY()*15);
-        ant.setRadius(10);
+        ant.setCenterX((position.getX()*30)+15);
+        ant.setCenterY((position.getY()*30)+15);
+        ant.setRadius(15);
         ant.setFill(Color.RED);
         this.getChildren().add(ant);
     }
 
     public void setPosition(Position position){
-        this.setTranslateX(position.getX()*30);
-        this.setTranslateY(position.getY()*30);
+        System.out.println("Position de la fourmis "+position.getX()+" "+position.getY());
+
+        this.setTranslateX((position.getX()*30));
+        this.setTranslateY((position.getY()*30));
     }
 
     public Position getPosition() {

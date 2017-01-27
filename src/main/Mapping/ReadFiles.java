@@ -68,6 +68,7 @@ public class ReadFiles {
                                 break;
                             case 'x' :
                                 anthill.setPosition(new Position(j, i));
+                                System.out.println("nouvelle position anthill "+anthill.getPosition().getX()+" "+anthill.getPosition().getY());
                                 anthill.declareAnts();
                                 map.setCellXY(j, i,  new Cell(true));
                                 break;
