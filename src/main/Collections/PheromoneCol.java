@@ -27,7 +27,17 @@ public class PheromoneCol {
     }
 
     public void add(Pheromone p){
-        this.pheromones.add(p);
+        boolean hasPheromone =false;
+       for(Pheromone pheromone: pheromones){
+           if(p.getPos()== pheromone.getPos()){
+               pheromone.setLifeTime(pheromone.getLifeTime()+10); //TODO change 10 when we have decide the lifetime
+               hasPheromone=true;
+               break;
+           }
+       }
+       if(!hasPheromone){
+           pheromones.add(p);
+       }
     }
 
     public void remove(int i){

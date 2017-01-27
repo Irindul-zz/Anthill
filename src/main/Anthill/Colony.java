@@ -14,6 +14,7 @@ import main.Mapping.ReadFiles;
 import main.View.AntDisplay;
 import main.View.ColonyDisplay;
 import main.View.FoodSupplyDisplay;
+import main.View.PheromoneDisplay;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -91,16 +92,13 @@ public class Colony {
     {
         int i = 0;
         for (Ant ant: anthill.ants) {
-            //detectFood(ant);
-            //dropPheromone(ant);
+            detectFood(ant);
+            dropPheromone(ant);
             detectPheromone(ant);
             detectObstacle(ant);
             move(ant, map);
             ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
             i++;
-        }
-        for(Pheromone pheromone: pheromones.getPheromones()){
-            ColonyDisplay.pheromonesDisplay.get(i).setPosition(pheromone.getPos());
         }
     }
 
@@ -126,6 +124,7 @@ public class Colony {
     public void dropPheromone(Ant ant){
             if(ant.getHasFood()){
                 pheromones.add(ant.dropPheromone());
+                ColonyDisplay.pheromonesDisplay.add(new PheromoneDisplay(ant.getPosition(),pheromones.size()+1));
             }
     }
 
