@@ -25,7 +25,7 @@ public class Ant{
         brain = new BasicAI();
         this.direction = direction;
         this.position = position;
-        sensor = new BasicSensor(); //this line must be overwritten for different sensors.
+        sensor = new EvolvedSensor(); //this line must be overwritten for different sensors.
     }
 
     public Ant(Position position) {

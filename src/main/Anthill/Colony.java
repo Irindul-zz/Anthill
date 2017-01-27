@@ -37,15 +37,15 @@ public class Colony {
         foodSupplies = new FoodSupplyCol();
         pheromones = new PheromoneCol();
         anthill = new Anthill();
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
+        anthill.addAnt(new Ant(new Position(10, 10)));
+        anthill.addAnt(new Ant(new Position(10, 10)));
+        anthill.addAnt(new Ant(new Position(10, 10)));
+        anthill.addAnt(new Ant(new Position(10, 10)));
+        anthill.addAnt(new Ant(new Position(10, 10)));
+        anthill.addAnt(new Ant(new Position(10, 10)));
+        anthill.addAnt(new Ant(new Position(10, 10)));
 
-        anthill.addAnt(new Ant(new Position(1, 1)));
+        anthill.addAnt(new Ant(new Position(10, 10)));
 
         map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
 
