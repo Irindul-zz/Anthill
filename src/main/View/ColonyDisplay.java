@@ -128,9 +128,13 @@ public class ColonyDisplay extends Application{
 
         //// SETTING LISTENERS FOR SIMULATOR
         text_speed.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue.matches("[0-9]*"))
+            if(newValue.matches("[0-9]+"))
             {
                 colonyTimer.setRate(Double.parseDouble(newValue)/100);
+            }
+            else if(newValue.isEmpty())
+            {
+                text_speed.setText("");
             }
             else
             {
