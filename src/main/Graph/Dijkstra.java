@@ -41,11 +41,14 @@ public class Dijkstra {
         List<Node> path = new ArrayList<>();
 
         path.add(current);
-        while (current != nodeStart){
+        int i = 0;
+        while (current != nodeStart &&  i < graph.size()){ //TODO change so that if there is no path, no infinite loop
             current = cameFrom.get(current);
             path.add(current);
+            i++;
         }
         //path.add(nodeStart);
+
 
         //TODO convert Node path into direction path => rollBack
 
@@ -56,8 +59,12 @@ public class Dijkstra {
     public static boolean isThereAPath(Position start, Position goal){
         List<Node> path = search(start, goal);
 
-       return path.get(path.size()-1).getPosition().equals(start); //
+       if(path.get(path.size()-1) == null)
+           return false;
+       else if(path.get(path.size()-1).getPosition().equals(start))
+            return true;
+           //The last position of the past must equal the starting point so that there is a path.
 
-
+        return false;
     }
 }

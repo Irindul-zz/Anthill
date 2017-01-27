@@ -148,4 +148,8 @@ public class Graph {
 
         return null;
     }
+
+    public int size(){
+        return nodes.size();
+    }
 }
