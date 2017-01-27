@@ -14,6 +14,10 @@ public class Pheromone{
         this.lifeTime = lifeTime;
     }
 
+    public Pheromone(Position pos) {
+        this.pos = pos;
+    }
+
     public Position getPos() {
         return pos;
     }
