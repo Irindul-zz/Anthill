@@ -45,7 +45,7 @@ public class Dijkstra {
             current = cameFrom.get(current);
             path.add(current);
         }
-        path.add(nodeStart);
+        //path.add(nodeStart);
 
         //TODO convert Node path into direction path => rollBack
 
