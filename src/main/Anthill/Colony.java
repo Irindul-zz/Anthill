@@ -43,7 +43,9 @@ public class Colony {
         map = new Map();
         // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
         foodSupplies = new FoodSupplyCol();
+
         anthill = new Anthill(3);
+
 
         try {
             reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + "map1.txt");
