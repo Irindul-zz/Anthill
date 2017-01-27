@@ -15,7 +15,7 @@ public class Dijkstra {
         graph = new Graph();
     }
 
-    public static void search(Position start, Position goal){
+    public static List<Node> search(Position start, Position goal){
         LinkedList<Node> frontier = new LinkedList<>();
         Node nodeStart = graph.nodeFromPosition(start);
         Node nodeGoal = graph.nodeFromPosition(goal);
@@ -49,6 +49,14 @@ public class Dijkstra {
 
         //TODO convert Node path into direction path => rollBack
 
+        return path;
+
+    }
+
+    public static boolean isThereAPath(Position start, Position goal){
+        List<Node> path = search(start, goal);
+
+       return path.get(path.size()-1).getPosition().equals(start); //
 
 
     }
