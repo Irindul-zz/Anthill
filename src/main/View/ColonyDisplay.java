@@ -12,10 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -33,7 +31,8 @@ public class ColonyDisplay extends Application{
     public static AntDisplay[] antsDisplay;
     private Colony c;
 //TODO : les fourmis sortent de la boite
-    Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(60), new EventHandler<ActionEvent>() {
+
+    Timeline colonyTimer = new Timeline(new KeyFrame(Duration.millis(60), new EventHandler<ActionEvent>() {
 
         @Override
         public void handle(ActionEvent event) {
@@ -54,20 +53,10 @@ public class ColonyDisplay extends Application{
         scene_menu.setFill(Color.AZURE);
         scene_menu.getStylesheets().add("style.css");
 
-        Group group_sim = new Group();
-        Scene scene_sim = new Scene(group_sim);
+        double simulationSpeed = 0.5;
 
-
-
-        MapDisplay mapD = new MapDisplay(map);
-        group_sim.getChildren().add(mapD);
-        for (AntDisplay antD: antsDisplay) {
-            group_sim.getChildren().add(antD);
-        }
-
+        //// SETTING THE MAIN MENU ////
         Text text = new Text("Please choose the intelligens for the ants");
-
-
         Label label_chooseAnts = new Label(text.getText());
             text.setId("menuTitle");
             text.applyCss();
@@ -97,6 +86,78 @@ public class ColonyDisplay extends Application{
             vbButtons.getChildren().addAll(button_basicAnts,button_brainyAnts);
         group_menu.getChildren().add(vbButtons);
 
+
+
+        //// SETTING SIMULATOR
+
+        Group group_sim = new Group();
+        Scene scene_sim = new Scene(group_sim);
+        scene_sim.getStylesheets().add("style.css");
+
+        MapDisplay mapD = new MapDisplay(map);
+        group_sim.getChildren().add(mapD);
+        for (AntDisplay antD: antsDisplay) {
+            group_sim.getChildren().add(antD);
+        }
+
+        HBox hBox_speedSelector = new HBox();
+            hBox_speedSelector.setSpacing(10);
+            hBox_speedSelector.setLayoutY(0);
+            hBox_speedSelector.setPadding(new Insets(0, 20, 10, 20));
+            hBox_speedSelector.setPrefWidth(stage.getWidth()-16);
+
+            Text text_speedTitle = new Text("Simulation Speed: ");
+                text_speedTitle.setId("text_speedTitle");
+                text_speedTitle.applyCss();
+
+            Button button_decreaseSpeed = new Button("-");
+                button_decreaseSpeed.setId("button_decreaseSpeed");
+                button_decreaseSpeed.applyCss();
+
+            colonyTimer.setRate(simulationSpeed);
+            TextField text_speed = new TextField(Integer.toString((int)(simulationSpeed*100)));
+                text_speed.setId("text_speed");
+                text_speed.applyCss();
+
+            Button button_increaseSpeed = new Button("+");
+                button_increaseSpeed.setId("button_increaseSpeed");
+                button_increaseSpeed.applyCss();
+
+            hBox_speedSelector.getChildren().addAll(text_speedTitle, button_decreaseSpeed, text_speed, button_increaseSpeed);
+        group_sim.getChildren().add(hBox_speedSelector);
+
+        //// SETTING LISTENERS FOR SIMULATOR
+        text_speed.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.matches("[0-9]*"))
+            {
+                colonyTimer.setRate(Double.parseDouble(newValue)/100);
+            }
+            else
+            {
+                text_speed.setText(oldValue);
+            }
+        });
+
+        button_decreaseSpeed.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                ///////SET LEVEL OF ANTS
+                text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())-1));
+            }
+        });
+
+        button_increaseSpeed.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                ///////SET LEVEL OF ANTS
+                text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())+1));
+            }
+        });
+
+
+        //ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
+        //ant.setOnKeyPressed(keyEvent -> ant.setPosition(p2));
+
+
+        //// SETTING BUTTON LISTENERS FOR MAIN MENY ////
         button_basicAnts.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 ///////SET LEVEL OF ANTS
@@ -110,13 +171,12 @@ public class ColonyDisplay extends Application{
             }
         });
 
-        //ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
-        //ant.setOnKeyPressed(keyEvent -> ant.setPosition(p2));
 
-        fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-        fiveSecondsWonder.play();
 
-        stage.setScene(scene_menu);
+        colonyTimer.setCycleCount(Timeline.INDEFINITE);
+        colonyTimer.play();
+
+        stage.setScene(scene_sim);
         stage.show();
 
 
