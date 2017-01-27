@@ -23,3 +23,25 @@
 #dark-blue Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
+
+#text_speedTitle {
+    -fx-fill: #FFFFFF;
+}
+
+#button_decreaseSpeed {
+    -fx-background-color: yellow;
+}
+
+#text_speed {
+    -fx-pref-width: 40px;
+}
+
+#button_increaseSpeed {
+    -fx-background-color: yellow;
+}
+
+
+
+#text_speed {
+    -fx-fill: white;
+}
