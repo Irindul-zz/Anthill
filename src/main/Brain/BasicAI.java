@@ -105,7 +105,7 @@ public class BasicAI implements Brain {
         } else { //If there is an obstacle on the cell, the ant stays at the same position
             nextPosition = ant.getPosition();
         }*/
-        System.out.println(dir);
+
         return direction;
         //ant.moveTo(nextPosition, direction); //We move.
     }
