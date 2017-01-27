@@ -53,8 +53,8 @@ public class Colony {
         pheromones = new PheromoneCol();
 
         //Ants only stay in map if they start at (1, 1) Position
-        anthill.setPosition(new Position(1, 1));
-        anthill.declareAnts();
+     //   anthill.setPosition(new Position(1, 1));
+      //  anthill.declareAnts();
 
 
         ColonyDisplay.map = map;
