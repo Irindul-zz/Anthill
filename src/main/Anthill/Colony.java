@@ -100,10 +100,12 @@ public class Colony {
             detectObstacle(ant);
             move(ant, map);
             ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
+            if(ant.getPosition().getX() == anthill.getPosition().getX() && ant.getPosition().getY() == anthill.getPosition().getY())
+                ant.dropFood();
             i++;
         }
         for(Pheromone pheromone: pheromones.getPheromones()){
-            ColonyDisplay.pheromonesDisplay.get(i).setPosition(pheromone.getPos());
+            //ColonyDisplay.pheromonesDisplay.get(i).setPosition(pheromone.getPos());
         }
     }
 
