@@ -1,0 +1,25 @@
+#menuTitle {
+    -fx-font: 28px Tahoma;
+    -fx-font-weight: 900;
+    -fx-fill: darkslategray;
+}
+
+#dark-blue {
+    -fx-background-color: darkslategray;
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 24px;
+    -fx-padding: 10 20 10 20;
+}
+#dark-blue:hover{
+    -fx-background-color:linear-gradient(#191d22,#20262b);
+}
+
+
+#dark-blue Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}
