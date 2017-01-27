@@ -176,7 +176,7 @@ public class ColonyDisplay extends Application{
         colonyTimer.setCycleCount(Timeline.INDEFINITE);
         colonyTimer.play();
 
-        stage.setScene(scene_sim);
+        stage.setScene(scene_menu);
         stage.show();
 
 
