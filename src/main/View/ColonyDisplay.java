@@ -144,15 +144,26 @@ public class ColonyDisplay extends Application{
 
         button_decreaseSpeed.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                ///////SET LEVEL OF ANTS
-                text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())-1));
+                int amountToDecrease = -10;
+                try {
+                    text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())+amountToDecrease));
+                }
+                catch (NumberFormatException e2){
+                    System.out.println("hej");
+                    text_speed.setText(Integer.toString((int)(colonyTimer.getRate()*100+amountToDecrease)));
+                }
             }
         });
 
         button_increaseSpeed.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                ///////SET LEVEL OF ANTS
-                text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())+1));
+                int amountToDecrease = 10;
+                try {
+                    text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText()) + amountToDecrease));
+                } catch (NumberFormatException e2) {
+                    System.out.println("hej");
+                    text_speed.setText(Integer.toString((int) (colonyTimer.getRate() * 100 + amountToDecrease)));
+                }
             }
         });
 
