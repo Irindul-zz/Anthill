@@ -43,7 +43,7 @@ public class Colony {
         map = new Map();
         // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
         foodSupplies = new FoodSupplyCol();
-        anthill = new Anthill(12);
+        anthill = new Anthill(3);
 
         try {
             reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + "map1.txt");
@@ -53,21 +53,22 @@ public class Colony {
         reader.readFile(this.map, this.foodSupplies, this.anthill);
         pheromones = new PheromoneCol();
         //Ants only stay in map if they start at (1, 1) Position
-     //   anthill.setPosition(new Position(1, 1));
-      //  anthill.declareAnts();
+        //anthill.setPosition(new Position(13, 1));
+        //anthill.declareAnts();
         ColonyDisplay.map = map;
         colonyDisplay = new ColonyDisplay();
         ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
-        ColonyDisplay.foodSuppliesDisplay = new FoodSupplyDisplay[foodSupplies.size()];
+
 
         int i;
         for (i =0 ; i < anthill.getAnts().size() ; i++){
             ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()), i);
         }
 
-        for (i=0 ;i < foodSupplies.size() ; i++){
+       /* for (i=0 ;i < foodSupplies.size() ; i++){
             ColonyDisplay.foodSuppliesDisplay[i] = new FoodSupplyDisplay(new Position(foodSupplies.getFoodSupplyIndex(i).getPosition().getX(),foodSupplies.getFoodSupplyIndex(i).getPosition().getY()),i);
         }
+        */
     }
 
     public void addFoodSupply(FoodSupply fs){
@@ -95,6 +96,7 @@ public class Colony {
     {
         int i = 0;
         for (Ant ant: anthill.ants) {
+            pheromones.updatePheromone();
             detectFood(ant);
             dropPheromone(ant);
             detectPheromone(ant);
@@ -104,6 +106,13 @@ public class Colony {
             if(ant.getPosition().getX() == anthill.getPosition().getX() && ant.getPosition().getY() == anthill.getPosition().getY())
                 ant.dropFood();
             i++;
+        }
+
+        for (Pheromone pheromone : pheromones.getPheromones()) {
+            ColonyDisplay.pheromonesDisplay.add(new PheromoneDisplay(pheromone.getPos(),pheromones.size()+1));
+        }
+        for(FoodSupply foodSupply: foodSupplies.getSupplies()){
+            ColonyDisplay.foodSuppliesDisplay.add(new FoodSupplyDisplay(foodSupply.getPosition(), foodSupplies.size()+1)); //TODO remove foodsupply when quantity =0
         }
     }
 
@@ -129,7 +138,7 @@ public class Colony {
     public void dropPheromone(Ant ant){
             if(ant.getHasFood()){
                 pheromones.add(ant.dropPheromone());
-                ColonyDisplay.pheromonesDisplay.add(new PheromoneDisplay(ant.getPosition(),pheromones.size()+1));
+
             }
     }
 
@@ -185,6 +194,7 @@ public class Colony {
 
     public void detectPheromone(Ant ant){
             ant.getSensor().detectPheromones(ant.getPosition(), pheromones);
+
 
     }
 

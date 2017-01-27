@@ -30,6 +30,7 @@ public class FoodSupply{
     }
 
     public void removeFood() {
+
         quantity --;
     	
     }

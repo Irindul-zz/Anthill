@@ -10,8 +10,9 @@ public class Pheromone{
     private int lifeTime;
     private Position pos;
 
-    public Pheromone(int lifeTime) {
+    public Pheromone(Position position, int lifeTime) {
         this.lifeTime = lifeTime;
+        pos = position;
     }
 
     public Pheromone(Position pos) {

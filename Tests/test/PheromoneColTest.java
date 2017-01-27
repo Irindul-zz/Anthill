@@ -2,6 +2,7 @@ package test;
 
 import main.Collections.PheromoneCol;
 import main.Element.Pheromone;
+import main.Mapping.Position;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +30,7 @@ public class PheromoneColTest {
 
     @Test
     public void add() throws Exception {
-        Pheromone p = new Pheromone(10);
+        Pheromone p = new Pheromone(new Position(1, 1), 10);
         pheromoneCol.add(p);
         assertEquals("Object could not be added to the end", p, pheromoneCol.get(pheromoneCol.size()-1));
     }
@@ -39,7 +40,7 @@ public class PheromoneColTest {
         Pheromone p;
         for(int i=0; i<10; i++)
         {
-            p = new Pheromone(10);
+            p = new Pheromone(new Position(1, 1), 10);
             pheromoneCol.add(p, 0);
         }
     }

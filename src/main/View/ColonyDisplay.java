@@ -32,8 +32,9 @@ import static java.lang.Thread.sleep;
 public class ColonyDisplay extends Application{
 
     public static Map map;
+    Group group_sim;
     public static AntDisplay[] antsDisplay;
-    public static FoodSupplyDisplay[] foodSuppliesDisplay;
+    public static List<FoodSupplyDisplay> foodSuppliesDisplay;
     public static List<PheromoneDisplay> pheromonesDisplay;
     private Colony c;
 //TODO : les fourmis sortent de la boite
@@ -42,7 +43,26 @@ public class ColonyDisplay extends Application{
 
         @Override
         public void handle(ActionEvent event) {
+
+            for(PheromoneDisplay pheromoneD: pheromonesDisplay){
+                group_sim.getChildren().remove(pheromoneD);
+            }
+            pheromonesDisplay.clear();
+
+            for(FoodSupplyDisplay foodSupplyD: foodSuppliesDisplay){
+                group_sim.getChildren().remove(foodSupplyD);
+            }
+            foodSuppliesDisplay.clear();
+
+
             c.update();
+            for(PheromoneDisplay pheromoneD: pheromonesDisplay){
+                group_sim.getChildren().add(pheromoneD);
+            }
+            for(FoodSupplyDisplay foodSupplyD: foodSuppliesDisplay){
+                group_sim.getChildren().add(foodSupplyD);
+            }
+
         }
     }));
 
@@ -51,6 +71,7 @@ public class ColonyDisplay extends Application{
         //sleep(10);
         this.c = new Colony();
         pheromonesDisplay = new ArrayList<>();
+        foodSuppliesDisplay = new ArrayList<>();
         stage.setWidth(750+16);
         stage.setHeight(750+38);
         stage.setTitle("Anthill");
@@ -65,10 +86,10 @@ public class ColonyDisplay extends Application{
         //// SETTING THE MAIN MENU ////
         Text text = new Text("Please choose the intelligens for the ants");
         Label label_chooseAnts = new Label(text.getText());
-            text.setId("menuTitle");
-            text.applyCss();
-            text.setLayoutY(40);
-            text.setLayoutX(90);
+        text.setId("menuTitle");
+        text.applyCss();
+        text.setLayoutY(40);
+        text.setLayoutX(90);
         group_menu.getChildren().add(text);
 
         VBox vbButtons = new VBox();
@@ -97,9 +118,10 @@ public class ColonyDisplay extends Application{
 
         //// SETTING SIMULATOR
 
-        Group group_sim = new Group();
+        group_sim = new Group();
         Scene scene_sim = new Scene(group_sim);
         scene_sim.getStylesheets().add("style.css");
+
 
         MapDisplay mapD = new MapDisplay(map);
         group_sim.getChildren().add(mapD);
@@ -107,14 +129,7 @@ public class ColonyDisplay extends Application{
         for (AntDisplay antD: antsDisplay) {
             group_sim.getChildren().add(antD);
         }
-        for(FoodSupplyDisplay foodSupplyD: foodSuppliesDisplay){
-            group_sim.getChildren().add(foodSupplyD);
-        }
-        if(pheromonesDisplay.size()>0) {
-            for (PheromoneDisplay pheromoneD : pheromonesDisplay) {
-                group_sim.getChildren().add(pheromoneD);
-            }
-        }
+
         HBox hBox_speedSelector = new HBox();
         hBox_speedSelector.setSpacing(10);
         hBox_speedSelector.setLayoutY(0);
@@ -164,7 +179,6 @@ public class ColonyDisplay extends Application{
                     text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())+amountToDecrease));
                 }
                 catch (NumberFormatException e2){
-                    System.out.println("hej");
                     text_speed.setText(Integer.toString((int)(colonyTimer.getRate()*100+amountToDecrease)));
                 }
             }
@@ -176,7 +190,6 @@ public class ColonyDisplay extends Application{
                 try {
                     text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText()) + amountToDecrease));
                 } catch (NumberFormatException e2) {
-                    System.out.println("hej");
                     text_speed.setText(Integer.toString((int) (colonyTimer.getRate() * 100 + amountToDecrease)));
                 }
             }

@@ -19,7 +19,7 @@ public class PheromoneDisplay extends Parent {
         pheromone.setWidth(10);
         pheromone.setX((position.getX()*30)+10);
         pheromone.setY((position.getY()*30)+10);
-        pheromone.setFill(Color.RED);
+        pheromone.setFill(Color.PERU);
         this.getChildren().add(pheromone);
     }
 
