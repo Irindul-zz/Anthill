@@ -20,7 +20,7 @@ public class ColonyDisplay extends Application{
     public static Map map;
     public static AntDisplay[] antsDisplay;
     private Colony c;
-
+//TODO : les fourmis sortent de la boite
     Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.millis(60), new EventHandler<ActionEvent>() {
 
         @Override

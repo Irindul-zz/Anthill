@@ -29,7 +29,9 @@ public class FoodSupplyCol {
         return null;
     }
 
-    public void add(FoodSupply fs, Position position){
+    public void add(FoodSupply fs){
+
+        supplies.add(fs);
 
 
     }

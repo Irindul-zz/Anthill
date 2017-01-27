@@ -11,16 +11,31 @@ import java.util.List;
  */
 public class Anthill{
     List<Ant> ants;
+    private int nbAnts;
     private Position position;
 
     public Anthill() {
         ants = new ArrayList<Ant>();
         position = new Position(1,1);
+        nbAnts = 10;
+    }
+
+    public Anthill(int nbAnts) {
+        ants = new ArrayList<Ant>();
+        position = new Position(1,1);
+        this.nbAnts = nbAnts;
     }
 
     public Anthill(Position position){
         ants = new ArrayList<Ant>();
         this.position=position;
+        nbAnts = 10;
+    }
+    public void declareAnts() {
+        ants.clear();
+        for (int i = 0; i <nbAnts; i++) {
+            ants.add(new Ant(this.position));
+        }
     }
 
     public List getAnts()
@@ -47,6 +62,12 @@ public class Anthill{
         this.position = position;
     }
 
+    public int getNbAnts() {
+        return nbAnts;
+    }
 
+    public Ant getAntIndcex(int i) {
+        return ants.get(i);
+    }
 }
 
