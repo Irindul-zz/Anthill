@@ -3,6 +3,7 @@ package main.Graph;
 import main.Mapping.Position;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -17,11 +18,22 @@ public class Dijkstra {
     }
 
     public static void search(Position start, Position goal){
-        Frontier frontier = new Frontier();
+        LinkedList<Node> frontier = new LinkedList<>();
         Node nodeStart = graph.nodeFromPosition(start);
-        frontier.put(nodeStart);
+        Node nodeGoal = graph.nodeFromPosition(goal);
+        frontier.add(nodeStart);
         Set<Edge> cameFrom = new HashSet<>();
 
+        while(! frontier.isEmpty()){
+            Node current = frontier.removeFirst();
+
+            if(current == nodeGoal)
+                break;
+
+            for(Node next: graph.neighbours(current)){
+
+            }
+        }
 
 
 
