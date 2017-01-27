@@ -128,9 +128,13 @@ public class ColonyDisplay extends Application{
 
         //// SETTING LISTENERS FOR SIMULATOR
         text_speed.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue.matches("[0-9]*"))
+            if(newValue.matches("[0-9]+"))
             {
                 colonyTimer.setRate(Double.parseDouble(newValue)/100);
+            }
+            else if(newValue.isEmpty())
+            {
+                text_speed.setText("");
             }
             else
             {
@@ -140,15 +144,26 @@ public class ColonyDisplay extends Application{
 
         button_decreaseSpeed.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                ///////SET LEVEL OF ANTS
-                text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())-1));
+                int amountToDecrease = -10;
+                try {
+                    text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())+amountToDecrease));
+                }
+                catch (NumberFormatException e2){
+                    System.out.println("hej");
+                    text_speed.setText(Integer.toString((int)(colonyTimer.getRate()*100+amountToDecrease)));
+                }
             }
         });
 
         button_increaseSpeed.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                ///////SET LEVEL OF ANTS
-                text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText())+1));
+                int amountToDecrease = 10;
+                try {
+                    text_speed.setText(Integer.toString(Integer.parseInt(text_speed.getText()) + amountToDecrease));
+                } catch (NumberFormatException e2) {
+                    System.out.println("hej");
+                    text_speed.setText(Integer.toString((int) (colonyTimer.getRate() * 100 + amountToDecrease)));
+                }
             }
         });
 
@@ -176,7 +191,7 @@ public class ColonyDisplay extends Application{
         colonyTimer.setCycleCount(Timeline.INDEFINITE);
         colonyTimer.play();
 
-        stage.setScene(scene_sim);
+        stage.setScene(scene_menu);
         stage.show();
 
 
