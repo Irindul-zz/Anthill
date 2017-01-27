@@ -80,7 +80,7 @@ public class BasicAI implements Brain {
         }
         phero = sensor.getResults(i);
         obstacle = sensor.getObstacle(i);
-        if(!obstacle)
+        if(obstacle)
             proba.setProba(i, (coefs[j] + phero) /sum); //The loop stop one item before so we need to do it one more time.
         else
             proba.setProba(i, 0);
