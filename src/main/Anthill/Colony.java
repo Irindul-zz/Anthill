@@ -1,9 +1,6 @@
 package main.Anthill;
 
-import javafx.application.Application;
-import javafx.application.Platform;
 import main.Ant.Ant;
-import main.Ant.BrainyAnt;
 import main.Brain.Brain;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
@@ -12,11 +9,13 @@ import main.Element.FoodSupply;
 import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
+import main.Mapping.ReadFiles;
 import main.View.AntDisplay;
 import main.View.ColonyDisplay;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Created by Irindul on 25/12/2016.
@@ -29,25 +28,33 @@ public class Colony {
     private Map map;
     //AntDisplay[] antsDisplay;
     private ColonyDisplay colonyDisplay;
+    private ReadFiles reader;
 
 
 
 
     public Colony() throws FileNotFoundException {
+        map = new Map();
+        // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
         foodSupplies = new FoodSupplyCol();
+        anthill = new Anthill(10);
+
+        try {
+            reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + "map1.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        reader.readFile(this.map, this.foodSupplies, this.anthill);
+
+
+
+
         pheromones = new PheromoneCol();
-        anthill = new Anthill();
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
-        anthill.addAnt(new Ant(new Position(1, 1)));
 
-        anthill.addAnt(new Ant(new Position(1, 1)));
+        //Ants only stay in map if they start at (1, 1) Position
+        //anthill.setPosition(new Position(1, 1));
+        //anthill.declareAnts();
 
-        map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
 
         ColonyDisplay.map = map;
         colonyDisplay = new ColonyDisplay();
@@ -55,8 +62,9 @@ public class Colony {
 
 
         for (int i =0 ; i < anthill.getAnts().size() ; i++){
-            ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.ants.get(i).getPosition().getX(),anthill.ants.get(i).getPosition().getX()),i);
+            ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()), i);
         }
+
     }
 
     public void addFoodSupply(FoodSupply fs){
@@ -84,8 +92,8 @@ public class Colony {
     {
         int i = 0;
         for (Ant ant: anthill.ants) {
-            detectFood(ant);
-            dropPheromone(ant);
+            //detectFood(ant);
+            //dropPheromone(ant);
             detectPheromone(ant);
             detectObstacle(ant);
             move(ant);
@@ -133,6 +141,7 @@ public class Colony {
 
     public void detectObstacle(Ant ant) {
         Cell[] cells = new Cell[8];
+
         Position pos = ant.getPosition(); //TODO May be refactored inside EvolvedSensor
         int x = pos.getX();
         int y = pos.getY();
