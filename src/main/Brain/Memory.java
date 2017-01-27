@@ -9,5 +9,5 @@ public interface Memory {
 
     void keepTrack(Direction d);
     Direction rollBack();
-
+    public void setKeeptrack(boolean keeptrack);
 }

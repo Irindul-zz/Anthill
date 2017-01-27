@@ -42,7 +42,7 @@ public class Dijkstra {
 
         path.add(current);
         int i = 0;
-        while (current != nodeStart &&  i < graph.size()){ //TODO change so that if there is no path, no infinite loop
+        while (current != nodeStart &&  i < graph.size()){
             current = cameFrom.get(current);
             path.add(current);
             i++;

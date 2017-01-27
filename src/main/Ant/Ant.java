@@ -2,6 +2,7 @@ package main.Ant;
 
 import main.Brain.BasicAI;
 import main.Brain.Brain;
+import main.Brain.Memory;
 import main.Collections.FoodSupplyCol;
 import main.Element.Pheromone;
 import main.Mapping.Direction;
@@ -20,11 +21,13 @@ public class Ant{
     protected Sense sensor;
     protected Position position;
     private Brain brain;
+    Memory mind;
 
     public Ant(Direction direction, Position position) {
         brain = new BasicAI();
         this.direction = direction;
         this.position = position;
+        mind = new Mind();
         sensor = new EvolvedSensor(); //this line must be overwritten for different sensors.
     }
 
@@ -32,18 +35,25 @@ public class Ant{
         direction = Direction.NORTH;
         brain = new BasicAI();
         this.position = position;
+        mind = new Mind();
         sensor = new BasicSensor(); //this line must be overwritten for different sensors.
     }
     public Ant() {
         direction = Direction.NORTH;
         brain = new BasicAI();
         position = new Position(0,0);
+        mind = new Mind();
         sensor = new BasicSensor(); //this line must be overwritten for different sensors.
 
     }
 
     public Brain getBrain() {
         return brain;
+    }
+
+
+    public Memory getMind() {
+        return mind;
     }
 
     public void moveTo(Position position, Direction direction){
