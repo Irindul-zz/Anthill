@@ -11,7 +11,7 @@ public class Mind implements Memory {
 
     //Simple implementation of a Stack with linked-list.
     private Node first = null;
-
+    public boolean keeptrack = false;
 
     //The node is static so that it doesn't take much memory access and assure that it cannot use Mind attributes.
     private static class Node {
@@ -25,9 +25,12 @@ public class Mind implements Memory {
 
     @Override
     public void keepTrack(Direction d) {
-        Node newFirst = new Node(d); //We create a new Node
-        newFirst.next = first; //We tell the new node that the node next to it is first.
-        first = newFirst; //The new first is now the new node created.
+        if(keeptrack){
+            Node newFirst = new Node(d); //We create a new Node
+            newFirst.next = first; //We tell the new node that the node next to it is first.
+            first = newFirst; //The new first is now the new node created.
+        }
+
 
     }
 
@@ -38,5 +41,16 @@ public class Mind implements Memory {
 
         //We return a Direction reversed so that we can go back.
         return Direction.reverse(oldFirst.dir);
+    }
+
+    @Override
+    public void empty(){
+        while(first != null)
+            this.rollBack();
+    }
+
+    @Override
+    public void setKeeptrack(boolean keeptrack){
+        this.keeptrack = keeptrack;
     }
 }

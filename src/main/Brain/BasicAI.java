@@ -14,11 +14,11 @@ import main.Mapping.Position;
 public class BasicAI implements Brain {
 
     protected Proba proba;
-    protected Memory mind;
+
 
     public BasicAI() {
         proba = new Proba();
-        mind = new Mind();
+
     }
 
     @Override
@@ -31,13 +31,13 @@ public class BasicAI implements Brain {
         proba.initialize();
 
         if (ant.getHasFood()){ //If we have food, then we have to go back.
+            ant.getMind().setKeeptrack(false);
 
-
-            Direction toGo = mind.rollBack(); // We get the next direction.
+            Direction toGo = ant.getMind().rollBack(); // We get the next direction.
             proba.makeSure(toGo); // We tweak the probas so that this outcome is certain.
 
         } else {
-
+            ant.getMind().setKeeptrack(true);
             processPheromones(ant);
 
         }
@@ -94,24 +94,12 @@ public class BasicAI implements Brain {
         int dir = proba.randomWithProba();
 
         Direction direction = Direction.values()[dir];  //We deduce a direction from the int value.
-        //if(!ant.getHasFood()) //If we do not carry food the we must keep track of the way.
-          //  mind.keepTrack(direction);
 
 
-        //For a more evolved AI
-      //  if (proba.getProbas()[direction.ordinal()] !=0) { //In proba.getProbas are stored the forbidden cells
 
-/*
-        } else { //If there is an obstacle on the cell, the ant stays at the same position
-            nextPosition = ant.getPosition();
-        }*/
+
 
         return direction;
-        //ant.moveTo(nextPosition, direction); //We move.
-    }
 
-
-    public Memory getMind() {
-        return mind;
     }
 }

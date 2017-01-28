@@ -1,7 +1,6 @@
 package main.Anthill;
 
 import main.Ant.Ant;
-import main.Brain.BasicAI;
 import main.Brain.Brain;
 import main.Brain.Memory;
 import main.Collections.FoodSupplyCol;
@@ -157,8 +156,7 @@ public class Colony {
         Brain brain =  ant.getBrain();
         brain.processProba(ant); //We can now call the corresponding methods
         Direction direction = brain.executeProba(ant);
-        Memory mind = ((BasicAI) ant.getBrain()).getMind();
-        boolean keeptrack = true;
+        Memory mind = ant.getMind();
         Position nextPosition =new Position(1, 1);
         int x = ant.getPosition().getX();
         int y = ant.getPosition().getY();
@@ -191,13 +189,13 @@ public class Colony {
         }
         if (!map.getCellXY(nextPosition.getX(), nextPosition.getY()).isWalkable()) {
             nextPosition = ant.getPosition();
-            keeptrack = false;
+            mind.setKeeptrack(false);
         }
         if(ant.getHasFood())
-            keeptrack = false;
+            mind.setKeeptrack(false);
 
-        if(keeptrack)
-            mind.keepTrack(direction);
+
+        mind.keepTrack(direction);
         ant.moveTo(nextPosition, direction);
 
     }
