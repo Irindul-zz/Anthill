@@ -44,6 +44,14 @@ public class FoodSupplyCol {
         return supplies.size();
     }
 
+    public void remove(Position position){
+        for(int i =0; i<supplies.size(); i++) {
+            if (supplies.get(i).getPosition().getX()==position.getX() && supplies.get(i).getPosition().getY()==position.getY()) {
+                supplies.remove(i);
+            }
+        }
+    }
+
     public void removeFoodSupply(FoodSupply fs) {
         for(int i =0; i<supplies.size(); i++) {
             if (supplies.get(i).getPosition().getX()==fs.getPosition().getX() && supplies.get(i).getPosition().getY()==fs.getPosition().getY()) {
