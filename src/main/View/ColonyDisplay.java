@@ -40,6 +40,7 @@ public class ColonyDisplay extends Application{
     public static int widthRectangle;
     Group group_sim;
     Scene scene_sim;
+    Scene scene_menu;
     Stage stage;
     public static AntDisplay[] antsDisplay;
     public static AnthillDisplay anthillDisplay;
@@ -49,6 +50,7 @@ public class ColonyDisplay extends Application{
     private Button button_basicAnts;
     private Button button_brainyAnts;
     private Colony c;
+    private double simulationSpeed = 0.5;
 //TODO : les fourmis sortent de la boite
 
     Timeline colonyTimer = new Timeline(new KeyFrame(Duration.millis(60), new EventHandler<ActionEvent>() {
@@ -84,22 +86,14 @@ public class ColonyDisplay extends Application{
         //sleep(10);
         this.stage = stage;
 
-
-        this.c = new Colony();
-        heightRectangle = 750/map.getSizeY();
-        widthRectangle =  750/map.getSizeX();
-        pheromonesDisplay = new ArrayList<>();
-        foodSuppliesDisplay = new ArrayList<>();
         stage.setWidth(750+16);
         stage.setHeight(750+38);
         stage.setTitle("Anthill");
 
         Group group_menu = new Group();
-        Scene scene_menu = new Scene(group_menu);
+        scene_menu = new Scene(group_menu);
         scene_menu.setFill(Color.AZURE);
         scene_menu.getStylesheets().add("style.css");
-
-        double simulationSpeed = 0.5;
 
         //// SETTING THE MAIN MENU ////
         Text text = new Text("Please choose the intelligence for the ants");
@@ -107,7 +101,7 @@ public class ColonyDisplay extends Application{
         text.setId("menuTitle");
         text.applyCss();
         text.setLayoutY(40);
-        text.setLayoutX(90);
+        text.setLayoutX(45);
         group_menu.getChildren().add(text);
 
         VBox vbButtons = new VBox();
@@ -175,6 +169,83 @@ public class ColonyDisplay extends Application{
 
 
 
+      //  group_sim.setScaleX(group_sim.getScaleX() *);
+        //group_sim.setScaleY(group_sim.getScaleY() * 0.9);
+
+
+
+        //ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
+        //ant.setOnKeyPressed(keyEvent -> ant.setPosition(p2));
+
+
+        //// SETTING BUTTON LISTENERS FOR MAIN MENY ////
+        button_basicAnts.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                ///////SET LEVEL OF ANTS
+                stage.setScene(scene_sim);
+                startSimulation(0);
+            }
+        });
+
+        button_brainyAnts.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                startSimulation(1);
+            }
+        });
+
+
+        //initializeSimulationDisplay();
+        colonyTimer.setCycleCount(Timeline.INDEFINITE);
+
+        stage.setScene(scene_menu);
+        stage.show();
+
+
+    }
+
+    public void startSimulation(int AILevel)
+    {
+        stage.setScene(scene_sim);
+        colonyTimer.play();
+    }
+
+
+    public void startNewColony(String path) {
+        System.out.println(path);
+        text_mapReader.setVisible(true);
+        text_mapReader.setText("Loading map...");
+        text_mapReader.setId("text_mapReader");
+        text_mapReader.applyCss();
+        button_basicAnts.setDisable(true);
+        button_brainyAnts.setDisable(true);
+
+        try {
+            this.c = new Colony(path);
+        } catch (FileNotFoundException e) {
+            System.out.println("Something went wrong when reading the map");
+        }
+        if(this.c.getMapHalth())
+        {
+            text_mapReader.setVisible(false);
+            button_basicAnts.setDisable(false);
+            button_brainyAnts.setDisable(false);
+
+            initializeSimulationDisplay();
+        }
+        else
+        {
+            text_mapReader.setText("Sorry, but the map is not valid");
+            text_mapReader.setId("text_mapError");
+            text_mapReader.applyCss();
+        }
+    }
+
+    public void initializeSimulationDisplay()
+    {
+        heightRectangle = 750/map.getSizeY();
+        widthRectangle =  750/map.getSizeX();
+        pheromonesDisplay = new ArrayList<>();
+        foodSuppliesDisplay = new ArrayList<>();
         //// SETTING SIMULATOR
 
         group_sim = new Group();
@@ -193,33 +264,45 @@ public class ColonyDisplay extends Application{
 
         HBox hBox_speedSelector = new HBox();
         hBox_speedSelector.setSpacing(10);
-        hBox_speedSelector.setLayoutY(0);
+        hBox_speedSelector.setLayoutY(10);
         hBox_speedSelector.setPadding(new Insets(0, 20, 10, 20));
         hBox_speedSelector.setPrefWidth(stage.getWidth()-16);
 
+        Button button_mainMenu = new Button("Main menu");
+        button_mainMenu.setId("dark-blue");
+        button_mainMenu.applyCss();
+
+
         Text text_speedTitle = new Text("Simulation Speed: ");
-            text_speedTitle.setId("text_speedTitle");
-            text_speedTitle.applyCss();
+        text_speedTitle.setLayoutY(20);
+        text_speedTitle.setId("text_speedTitle");
+        text_speedTitle.applyCss();
 
         Button button_decreaseSpeed = new Button("-");
-            button_decreaseSpeed.setId("button_decreaseSpeed");
-            button_decreaseSpeed.applyCss();
+        button_decreaseSpeed.setId("button_decreaseSpeed");
+        button_decreaseSpeed.applyCss();
 
         colonyTimer.setRate(simulationSpeed);
         TextField text_speed = new TextField(Integer.toString((int)(simulationSpeed*100)));
-            text_speed.setId("text_speed");
-            text_speed.applyCss();
+        text_speed.setId("text_speed");
+        text_speed.applyCss();
 
         Button button_increaseSpeed = new Button("+");
-            button_increaseSpeed.setId("button_increaseSpeed");
-            button_increaseSpeed.applyCss();
+        button_increaseSpeed.setId("button_increaseSpeed");
+        button_increaseSpeed.applyCss();
 
-        hBox_speedSelector.getChildren().addAll(text_speedTitle, button_decreaseSpeed, text_speed, button_increaseSpeed);
+        hBox_speedSelector.getChildren().addAll(button_mainMenu, text_speedTitle, button_decreaseSpeed, text_speed, button_increaseSpeed);
         group_sim.getChildren().add(hBox_speedSelector);
 
-      //  group_sim.setScaleX(group_sim.getScaleX() *);
-        //group_sim.setScaleY(group_sim.getScaleY() * 0.9);
         //// SETTING LISTENERS FOR SIMULATOR
+
+        button_mainMenu.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                colonyTimer.stop();
+                stage.setScene(scene_menu);
+            }
+        });
+
         text_speed.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.matches("[0-9]+"))
             {
@@ -257,70 +340,6 @@ public class ColonyDisplay extends Application{
                 }
             }
         });
-
-
-        //ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
-        //ant.setOnKeyPressed(keyEvent -> ant.setPosition(p2));
-
-
-        //// SETTING BUTTON LISTENERS FOR MAIN MENY ////
-        button_basicAnts.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                ///////SET LEVEL OF ANTS
-                stage.setScene(scene_sim);
-                startSimulation(0);
-            }
-        });
-
-        button_brainyAnts.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                startSimulation(1);
-            }
-        });
-
-
-
-        colonyTimer.setCycleCount(Timeline.INDEFINITE);
-
-        stage.setScene(scene_menu);
-        stage.show();
-
-
-    }
-
-    public void startSimulation(int AILevel)
-    {
-        stage.setScene(scene_sim);
-        colonyTimer.play();
-    }
-
-
-    public void startNewColony(String path) {
-        System.out.println(path);
-        text_mapReader.setVisible(true);
-        text_mapReader.setText("Loading map...");
-        text_mapReader.setId("text_mapReader");
-        text_mapReader.applyCss();
-        button_basicAnts.setDisable(true);
-        button_brainyAnts.setDisable(true);
-
-        try {
-            this.c = new Colony(path);
-        } catch (FileNotFoundException e) {
-            System.out.println("Something went wrong when reading the map");
-        }
-        if(this.c.getMapHalth())
-        {
-            text_mapReader.setVisible(false);
-            button_basicAnts.setDisable(false);
-            button_brainyAnts.setDisable(false);
-        }
-        else
-        {
-            text_mapReader.setText("Sorry, but the map is not valid");
-            text_mapReader.setId("text_mapError");
-            text_mapReader.applyCss();
-        }
     }
 
 }
