@@ -21,7 +21,7 @@ public class AntDisplay extends Parent{
         this.setTranslateY((position.getY()*30)+10);
 
         ant.setRadius(10);
-        ant.setFill(Color.RED);
+        ant.setFill(Color.FIREBRICK);
         this.getChildren().add(ant);
     }
 

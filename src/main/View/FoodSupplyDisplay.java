@@ -20,7 +20,7 @@ public class FoodSupplyDisplay extends Parent{
         foodSupply.setWidth(20);
         foodSupply.setX((position.getX()*30)+5);
         foodSupply.setY((position.getY()*30)+5);
-        foodSupply.setFill(Color.BLUE);
+        foodSupply.setFill(Color.STEELBLUE);
         this.getChildren().add(foodSupply);
     }
 

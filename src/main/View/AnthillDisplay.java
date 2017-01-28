@@ -18,7 +18,7 @@ public class AnthillDisplay extends Parent {
         anthill.setWidth(30);
         anthill.setX((position.getX()*30));
         anthill.setY((position.getY()*30));
-        anthill.setFill(Color.YELLOW);
+        anthill.setFill(Color.DARKOLIVEGREEN);
         this.getChildren().add(anthill);
     }
 }

@@ -24,7 +24,7 @@ public class MapDisplay extends Parent {
                     wall.setX(i * 30);
                     wall.setY(j * 30);
                     // wall.heightProperty().bind(scene.heightProperty());
-                    wall.setFill(Color.GREEN);
+                    wall.setFill(Color.LIMEGREEN);
                     this.getChildren().add(wall);
 
                 } else {
