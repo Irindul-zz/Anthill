@@ -41,7 +41,7 @@ public class EvolvedAI extends BasicAI {
 
     private void dijkstra(Ant ant){
         List<Node> pathNode = Dijkstra.search(ant.getPosition(), ant.getAnhillPosition());
-        Position current = ant.getPosition();
+        Position current;
         Position toCheck;
         int i = pathNode.size()-1;
         ant.getMind().empty();
@@ -56,6 +56,8 @@ public class EvolvedAI extends BasicAI {
 
             i--;
         }
+
+
     }
 
     private Direction deduceDirection(Position start, Position goal){

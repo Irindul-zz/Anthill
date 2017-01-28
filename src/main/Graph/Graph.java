@@ -68,7 +68,7 @@ public class Graph {
                         }
                     }
 
-                    x = i-1;
+                   x = i-1;
                     y = j+1;
                     if(isInRange(map, x, y)){
 

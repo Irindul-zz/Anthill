@@ -34,6 +34,8 @@ public class Dijkstra {
                     cameFrom.put(next, current);
                 }
             }
+
+
         }
 
 
@@ -46,6 +48,11 @@ public class Dijkstra {
             current = cameFrom.get(current);
             path.add(current);
             i++;
+        }
+
+        for (Node n:path) {
+            System.out.println("x : " + n.getPosition().getX() + " y : " + n.getPosition().getY() );
+
         }
         //path.add(nodeStart);
 
