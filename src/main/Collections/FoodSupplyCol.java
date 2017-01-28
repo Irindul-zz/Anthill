@@ -28,6 +28,14 @@ public class FoodSupplyCol {
         supplies.add(new FoodSupply(position, quantity));
     }
 
+    public void removeFoodAt(Position position){
+        getFoodSupplyAt(position).removeFood();
+
+        if(getFoodSupplyAt(position).getQuantity() == 0){
+            remove(position);
+        }
+    }
+
     public List<FoodSupply> getSupplies(){
         return supplies;
     }
