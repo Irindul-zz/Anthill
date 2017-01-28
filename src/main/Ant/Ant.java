@@ -1,5 +1,6 @@
 package main.Ant;
 
+import javafx.geometry.Pos;
 import main.Brain.BasicAI;
 import main.Brain.Brain;
 import main.Brain.Memory;
@@ -20,8 +21,9 @@ public class Ant{
     protected Direction direction;
     protected Sense sensor;
     protected Position position;
-    private Brain brain;
-    Memory mind;
+    protected Brain brain;
+    protected Memory mind;
+    protected Position anhillPosition;
 
     public Ant(Direction direction, Position position) {
         brain = new BasicAI();
@@ -94,6 +96,10 @@ public class Ant{
 
     public void setHasFood(boolean hasFood) {
         this.hasFood = hasFood;
+    }
+
+    public Position getAnhillPosition() {
+        return anhillPosition;
     }
 }
 
