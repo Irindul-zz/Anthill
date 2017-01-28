@@ -45,3 +45,11 @@
 #text_speed {
     -fx-fill: white;
 }
+
+#text_mapReader {
+    -fx-fill: blue;
+}
+
+#text_mapError {
+    -fx-fill: red;
+}
