@@ -264,19 +264,19 @@ public class ColonyDisplay extends Application{
 
         HBox hBox_speedSelector = new HBox();
         hBox_speedSelector.setSpacing(10);
-        hBox_speedSelector.setLayoutY(0);
+        hBox_speedSelector.setLayoutY(10);
         hBox_speedSelector.setPadding(new Insets(0, 20, 10, 20));
         hBox_speedSelector.setPrefWidth(stage.getWidth()-16);
 
         Button button_mainMenu = new Button("Main menu");
-        button_mainMenu.setId("button_mainMenu");
+        button_mainMenu.setId("dark-blue");
         button_mainMenu.applyCss();
 
 
         Text text_speedTitle = new Text("Simulation Speed: ");
+        text_speedTitle.setLayoutY(20);
         text_speedTitle.setId("text_speedTitle");
         text_speedTitle.applyCss();
-        text_speedTitle.setLayoutY(20);
 
         Button button_decreaseSpeed = new Button("-");
         button_decreaseSpeed.setId("button_decreaseSpeed");
