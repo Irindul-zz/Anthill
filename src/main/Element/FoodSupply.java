@@ -30,7 +30,6 @@ public class FoodSupply{
     }
 
     public void removeFood() {
-        System.out.println("nourriture enlevée");
         quantity --;
     	
     }

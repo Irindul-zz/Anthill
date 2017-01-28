@@ -103,7 +103,6 @@ public class Colony {
             if(ant.getPosition().getX() == anthill.getPosition().getX() && ant.getPosition().getY() == anthill.getPosition().getY())
                 ant.dropFood();
             i++;
-            System.out.println(foodSupplies.size());
         }
 
         for (Pheromone pheromone : pheromones.getPheromones()) {
