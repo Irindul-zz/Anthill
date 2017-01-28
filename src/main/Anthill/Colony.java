@@ -2,6 +2,7 @@ package main.Anthill;
 
 import main.Ant.Ant;
 import main.Brain.Brain;
+import main.Brain.EvolvedAI;
 import main.Brain.Memory;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
@@ -90,27 +91,6 @@ public class Colony {
 
     }
 
-   /* public void addFoodSupply(FoodSupply fs){
-
-    }
-*/
-    /*public void run(){
-
-        while (!end()){
-        int i = 0;
-            for (Ant ant: anthill.ants) {
-                detectFood(ant);
-                dropPheromone(ant);
-                detectPheromone(ant);
-                detectObstacle(ant);
-                move(ant);
-                ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
-                i++;
-            }
-       
-        }
-    }*/
-
     public void update()
     {
         if(!end) {
@@ -132,7 +112,7 @@ public class Colony {
                 ColonyDisplay.pheromonesDisplay.add(new PheromoneDisplay(pheromone.getPos(), pheromones.size() + 1));
             }
             for (FoodSupply foodSupply : foodSupplies.getSupplies()) {
-                ColonyDisplay.foodSuppliesDisplay.add(new FoodSupplyDisplay(foodSupply.getPosition(), foodSupplies.size() + 1)); //TODO remove foodsupply when quantity =0
+                ColonyDisplay.foodSuppliesDisplay.add(new FoodSupplyDisplay(foodSupply.getPosition(), foodSupplies.size() + 1));
             }
         }
         if(foodSupplies.size()==0){
@@ -149,17 +129,7 @@ public class Colony {
         }
     }
 
-    public void addObstacle(int x, int y){
 
-    }
-
-    public void nextCycle(){
-
-    }
-
-    public int getPheromoneQuantityAt(Position p){
-        return 0;
-    }
 
     public void detectFood(Ant ant){
 
@@ -312,4 +282,10 @@ public class Colony {
 
 
     public boolean getMapHalth() {return this.mapHealth;}
+
+    public void changeAntBrain(){ // Change the brain of ant to an evolved brain
+        for(Ant ant: anthill.ants){
+            ant.setBrain(new EvolvedAI());
+        }
+    }
 }

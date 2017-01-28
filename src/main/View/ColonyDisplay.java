@@ -24,11 +24,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Anthill.Colony;
 import main.Mapping.Map;
-import main.Mapping.ReadFiles;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,83 +102,75 @@ public class ColonyDisplay extends Application{
         group_menu.getChildren().add(text);
 
         VBox vbButtons = new VBox();
-            vbButtons.setSpacing(80);
-            vbButtons.setLayoutY(text.getLayoutBounds().getHeight()+200);
-            vbButtons.setPadding(new Insets(0, 20, 10, 20));
-            vbButtons.setPrefWidth(stage.getWidth()-16);
-            vbButtons.setAlignment(Pos.CENTER);
+        vbButtons.setSpacing(80);
+        vbButtons.setLayoutY(text.getLayoutBounds().getHeight()+200);
+        vbButtons.setPadding(new Insets(0, 20, 10, 20));
+        vbButtons.setPrefWidth(stage.getWidth()-16);
+        vbButtons.setAlignment(Pos.CENTER);
 
-            this.button_basicAnts = new Button("Basic Ants");
-            this.button_basicAnts.setId("dark-blue");
-            this.button_basicAnts.applyCss();
-            this.button_basicAnts.setMaxWidth(Double.MAX_VALUE);
-            this.button_basicAnts.setPrefHeight(100);
+        this.button_basicAnts = new Button("Basic Ants");
+        this.button_basicAnts.setId("dark-blue");
+        this.button_basicAnts.applyCss();
+        this.button_basicAnts.setMaxWidth(Double.MAX_VALUE);
+        this.button_basicAnts.setPrefHeight(100);
 
-            this.button_brainyAnts = new Button("Brainy Ants");
-            this.button_brainyAnts.setId("dark-blue");
-            this.button_brainyAnts.applyCss();
-            this.button_brainyAnts.setMaxWidth(Double.MAX_VALUE);
-            this.button_brainyAnts.setPrefHeight(100);
+        this.button_brainyAnts = new Button("Brainy Ants");
+        this.button_brainyAnts.setId("dark-blue");
+        this.button_brainyAnts.applyCss();
+        this.button_brainyAnts.setMaxWidth(Double.MAX_VALUE);
+        this.button_brainyAnts.setPrefHeight(100);
 
 
-            this.button_basicAnts.setDisable(true);
-            this.button_brainyAnts.setDisable(true);
+        this.button_basicAnts.setDisable(true);
+        this.button_brainyAnts.setDisable(true);
 
-            this.text_mapReader = new Text("");
-            this.text_mapReader.setId("text_mapReader");
-            this.text_mapReader.applyCss();
+        this.text_mapReader = new Text("");
+        this.text_mapReader.setId("text_mapReader");
+        this.text_mapReader.applyCss();
 
-            File mapFolder = new File("src" + File.separator + "main/map");
-            File[] listOfMaps = mapFolder.listFiles();
-            System.out.println("length: " + mapFolder.getAbsolutePath());
+        File mapFolder = new File("src" + File.separator + "main/map");
+        File[] listOfMaps = mapFolder.listFiles();
+        System.out.println("length: " + mapFolder.getAbsolutePath());
 
-            ObservableList selections = FXCollections.observableArrayList();
-            if(mapFolder.exists())
+        ObservableList selections = FXCollections.observableArrayList();
+        if(mapFolder.exists())
+        {
+            for(int i=0; i<listOfMaps.length; i++)
             {
-                for(int i=0; i<listOfMaps.length; i++)
+                if(listOfMaps[i].isFile())
                 {
-                    if(listOfMaps[i].isFile())
-                    {
-                        selections.add(listOfMaps[i].getName());
-                    }
+                    selections.add(listOfMaps[i].getName());
                 }
             }
-            else
-            {
-                System.out.println("Map folder does not exist");
-            }
-            ChoiceBox cb_mapSelect = new ChoiceBox<String>(selections);
+        }
+        else
+        {
+            System.out.println("Map folder does not exist");
+        }
+        ChoiceBox cb_mapSelect = new ChoiceBox<String>(selections);
 
-            cb_mapSelect.getSelectionModel().selectedIndexProperty()
-                    .addListener(new ChangeListener<Number>() {
-                        public void changed(ObservableValue ov, Number value, Number new_value) {
-                            startNewColony(selections.get(new_value.intValue()).toString());
-                        }
-                    });
-            if(selections.size() > 0)
-            {
-                cb_mapSelect.getSelectionModel().select(0);
-            }
+        cb_mapSelect.getSelectionModel().selectedIndexProperty()
+                .addListener(new ChangeListener<Number>() {
+                    public void changed(ObservableValue ov, Number value, Number new_value) {
+                        startNewColony(selections.get(new_value.intValue()).toString());
+                    }
+                });
+        if(selections.size() > 0)
+        {
+            cb_mapSelect.getSelectionModel().select(0);
+        }
 
 
-            vbButtons.getChildren().addAll(button_basicAnts,button_brainyAnts, cb_mapSelect, this.text_mapReader);
+        vbButtons.getChildren().addAll(button_basicAnts,button_brainyAnts, cb_mapSelect, this.text_mapReader);
         group_menu.getChildren().add(vbButtons);
 
 
 
-      //  group_sim.setScaleX(group_sim.getScaleX() *);
-        //group_sim.setScaleY(group_sim.getScaleY() * 0.9);
-
-
-
-        //ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
-        //ant.setOnKeyPressed(keyEvent -> ant.setPosition(p2));
-
-
-        //// SETTING BUTTON LISTENERS FOR MAIN MENY ////
+        //// SETTING BUTTON LISTENERS FOR MAIN MENU ////
         button_basicAnts.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 ///////SET LEVEL OF ANTS
+
                 stage.setScene(scene_sim);
                 startSimulation(0);
             }
@@ -190,6 +179,7 @@ public class ColonyDisplay extends Application{
         button_brainyAnts.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 startSimulation(1);
+
             }
         });
 
@@ -229,7 +219,6 @@ public class ColonyDisplay extends Application{
             text_mapReader.setVisible(false);
             button_basicAnts.setDisable(false);
             button_brainyAnts.setDisable(false);
-
             initializeSimulationDisplay();
         }
         else
