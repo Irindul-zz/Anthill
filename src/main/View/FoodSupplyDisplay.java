@@ -16,10 +16,14 @@ public class FoodSupplyDisplay extends Parent{
         this.id=id;
         this.position = position;
         Rectangle foodSupply = new Rectangle();
-        foodSupply.setHeight(20);
-        foodSupply.setWidth(20);
-        foodSupply.setX((position.getX()*30)+5);
-        foodSupply.setY((position.getY()*30)+5);
+        foodSupply.setHeight(ColonyDisplay.heightRectangle/1.5);
+        foodSupply.setWidth(ColonyDisplay.widthRectangle/1.5);
+
+        double offsetHeight = (ColonyDisplay.heightRectangle/1.5)/2;
+        double offsetWidth = (ColonyDisplay.widthRectangle/1.5)/2;
+
+        foodSupply.setX((position.getX()*ColonyDisplay.heightRectangle)+offsetHeight);
+        foodSupply.setY((position.getY()*ColonyDisplay.widthRectangle)+offsetWidth);
         foodSupply.setFill(Color.STEELBLUE);
         this.getChildren().add(foodSupply);
     }

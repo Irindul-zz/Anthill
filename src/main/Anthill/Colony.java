@@ -37,6 +37,7 @@ public class Colony {
 
 
     public Colony() throws FileNotFoundException {
+
         end=false;
         map = new Map();
         // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
@@ -65,6 +66,8 @@ public class Colony {
         //anthill.declareAnts();
         ColonyDisplay.map = map;
         colonyDisplay = new ColonyDisplay();
+        ColonyDisplay.heightRectangle = 750/map.getSizeY();
+        ColonyDisplay.widthRectangle =  750/map.getSizeX();
         ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
 
         ColonyDisplay.anthillDisplay = new AnthillDisplay(anthill.getPosition());

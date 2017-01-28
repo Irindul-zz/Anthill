@@ -27,6 +27,8 @@ import java.util.List;
 public class ColonyDisplay extends Application{
 
     public static Map map;
+    public static int heightRectangle;
+    public static int widthRectangle;
     Group group_sim;
     public static AntDisplay[] antsDisplay;
     public static AnthillDisplay anthillDisplay;
@@ -65,7 +67,10 @@ public class ColonyDisplay extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         //sleep(10);
+
         this.c = new Colony();
+        heightRectangle = 750/map.getSizeY();
+        widthRectangle =  750/map.getSizeX();
         pheromonesDisplay = new ArrayList<>();
         foodSuppliesDisplay = new ArrayList<>();
         stage.setWidth(750+16);
@@ -80,7 +85,7 @@ public class ColonyDisplay extends Application{
         double simulationSpeed = 0.5;
 
         //// SETTING THE MAIN MENU ////
-        Text text = new Text("Please choose the intelligens for the ants");
+        Text text = new Text("Please choose the intelligence for the ants");
         Label label_chooseAnts = new Label(text.getText());
         text.setId("menuTitle");
         text.applyCss();
@@ -154,6 +159,8 @@ public class ColonyDisplay extends Application{
         hBox_speedSelector.getChildren().addAll(text_speedTitle, button_decreaseSpeed, text_speed, button_increaseSpeed);
         group_sim.getChildren().add(hBox_speedSelector);
 
+      //  group_sim.setScaleX(group_sim.getScaleX() *);
+        //group_sim.setScaleY(group_sim.getScaleY() * 0.9);
         //// SETTING LISTENERS FOR SIMULATOR
         text_speed.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.matches("[0-9]+"))

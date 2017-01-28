@@ -17,22 +17,23 @@ public class MapDisplay extends Parent {
         for (int i = 0; i < map.getSizeX(); i++) {
             for (int j = 0; j < map.getSizeY(); j++) {
                 if (map.getCellXY(i, j).isWalkable()) {
-
+                  //  int heightRectangle =  750/map.getSizeX();
+                    //int widthRectangle =  750/map.getSizeY();
                     Rectangle wall = new Rectangle();
-                    wall.setHeight(30);
-                    wall.setWidth(30);
-                    wall.setX(i * 30);
-                    wall.setY(j * 30);
+                    wall.setHeight(ColonyDisplay.widthRectangle);
+                    wall.setWidth(ColonyDisplay.heightRectangle);
+                    wall.setX(i * ColonyDisplay.widthRectangle);
+                    wall.setY(j * ColonyDisplay.heightRectangle);
                     // wall.heightProperty().bind(scene.heightProperty());
                     wall.setFill(Color.LIMEGREEN);
                     this.getChildren().add(wall);
 
                 } else {
                     Rectangle ground = new Rectangle();
-                    ground.setHeight(30);
-                    ground.setWidth(30);
-                    ground.setX(i * 30);
-                    ground.setY(j * 30);
+                    ground.setHeight(ColonyDisplay.widthRectangle);
+                    ground.setWidth(ColonyDisplay.heightRectangle);
+                    ground.setX(i *  ColonyDisplay.widthRectangle);
+                    ground.setY(j *ColonyDisplay.heightRectangle);
                     ground.setFill(Color.BLACK);
                     this.getChildren().add(ground);
                 }
