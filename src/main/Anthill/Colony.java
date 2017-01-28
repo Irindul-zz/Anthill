@@ -55,6 +55,9 @@ public class Colony {
             e.printStackTrace();
         }
         reader.readFile(this.map, this.foodSupplies, this.anthill);
+        //checking map
+        System.out.println("map valide : "+map.checkMap(foodSupplies, anthill));
+
         pheromones = new PheromoneCol();
         //Ants only stay in map if they start at (1, 1) Position
         //anthill.setPosition(new Position(13, 1));
