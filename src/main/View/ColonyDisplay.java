@@ -101,7 +101,7 @@ public class ColonyDisplay extends Application{
         text.setId("menuTitle");
         text.applyCss();
         text.setLayoutY(40);
-        text.setLayoutX(90);
+        text.setLayoutX(45);
         group_menu.getChildren().add(text);
 
         VBox vbButtons = new VBox();
