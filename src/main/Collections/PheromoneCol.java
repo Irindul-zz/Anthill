@@ -27,7 +27,18 @@ public class PheromoneCol {
     }
 
     public void add(Pheromone p){
-        this.pheromones.add(p);
+        boolean hasPheromone =false;
+
+        for(Pheromone pheromone: pheromones){
+           if(p.getPos()== pheromone.getPos()){
+               pheromone.setLifeTime(pheromone.getLifeTime()+10); //TODO change 10 when we have decide the lifetime
+               hasPheromone=true;
+               break;
+           }
+       }
+       if(!hasPheromone){
+           pheromones.add(p);
+       }
     }
 
     public void remove(int i){
@@ -53,4 +64,18 @@ public class PheromoneCol {
         return 0;
     }
 
+    public List<Pheromone> getPheromones() {
+        return pheromones;
+    }
+
+    public void updatePheromone(){
+        for(int i=0; i<pheromones.size(); i++){
+            if(pheromones.get(i).getLifeTime()==0){
+                pheromones.remove(i);
+            }
+            else {
+                pheromones.get(i).setLifeTime(pheromones.get(i).getLifeTime()-1);
+            }
+        }
+    }
 }

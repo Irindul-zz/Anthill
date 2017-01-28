@@ -19,11 +19,14 @@ public class BasicSensor implements Sense {
 
     @Override
     public boolean detectFood(Position pos, FoodSupplyCol f) {
-        if(f.getFoodSupplyAt(pos).getQuantity()>0){
-            return true;
+        if (f.size() != 0) {
+            if (f.getFoodSupplyAt(pos) != null) {
+                if (f.getFoodSupplyAt(pos).getQuantity() > 0) return true;
+            }
         }
         return false;
     }
+
 
     @Override
     public void detectPheromones(Position pos, PheromoneCol p) {
@@ -58,9 +61,16 @@ public class BasicSensor implements Sense {
 
     @Override
     public void detectObstacles(Position pos, Cell[] cells) {
-        for (boolean b:obstacles) {
-            b = false;
+        for (int i = 0; i<8; i++) {
+
+            obstacles[i] = true;
         }
+        /*
+        // For a more evolved Sensor
+       for (int i =0; i<8; i++  ) {
+           obstacles[i] = cells[i].isWalkable();
+        }*/
+
     }
 
     @Override

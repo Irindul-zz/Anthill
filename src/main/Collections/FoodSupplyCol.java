@@ -28,7 +28,11 @@ public class FoodSupplyCol {
         supplies.add(new FoodSupply(position, quantity));
     }
 
-    public int getSize(){
+    public List<FoodSupply> getSupplies(){
+        return supplies;
+    }
+
+    public int size(){
         return supplies.size();
     }
 
