@@ -32,16 +32,19 @@ public class Colony {
     private ColonyDisplay colonyDisplay;
     private ReadFiles reader;
 
+    public static boolean end; //Stop the simulation
+
 
 
 
     public Colony() throws FileNotFoundException {
+        end=false;
         map = new Map();
         // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
         foodSupplies = new FoodSupplyCol();
         pheromones = new PheromoneCol();
 
-        anthill = new Anthill(3);
+        anthill = new Anthill(20);
 
         try {
             reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + "map1.txt");
@@ -90,25 +93,30 @@ public class Colony {
 
     public void update()
     {
-        int i = 0;
-        for (Ant ant: anthill.ants) {
-            pheromones.updatePheromone();
-            detectFood(ant);
-            dropPheromone(ant);
-            detectPheromone(ant);
-            detectObstacle(ant);
-            move(ant, map);
-            ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
-            if(ant.getPosition().getX() == anthill.getPosition().getX() && ant.getPosition().getY() == anthill.getPosition().getY())
-                ant.dropFood();
-            i++;
-        }
+        if(!end) {
+            int i = 0;
+            for (Ant ant : anthill.ants) {
+                pheromones.updatePheromone();
+                detectFood(ant);
+                dropPheromone(ant);
+                detectPheromone(ant);
+                detectObstacle(ant);
+                move(ant, map);
+                ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
+                if (ant.getPosition().getX() == anthill.getPosition().getX() && ant.getPosition().getY() == anthill.getPosition().getY())
+                    ant.dropFood();
+                i++;
+            }
 
-        for (Pheromone pheromone : pheromones.getPheromones()) {
-            ColonyDisplay.pheromonesDisplay.add(new PheromoneDisplay(pheromone.getPos(),pheromones.size()+1));
+            for (Pheromone pheromone : pheromones.getPheromones()) {
+                ColonyDisplay.pheromonesDisplay.add(new PheromoneDisplay(pheromone.getPos(), pheromones.size() + 1));
+            }
+            for (FoodSupply foodSupply : foodSupplies.getSupplies()) {
+                ColonyDisplay.foodSuppliesDisplay.add(new FoodSupplyDisplay(foodSupply.getPosition(), foodSupplies.size() + 1)); //TODO remove foodsupply when quantity =0
+            }
         }
-        for(FoodSupply foodSupply: foodSupplies.getSupplies()){
-            ColonyDisplay.foodSuppliesDisplay.add(new FoodSupplyDisplay(foodSupply.getPosition(), foodSupplies.size()+1)); //TODO remove foodsupply when quantity =0
+        if(foodSupplies.size()==0){
+            end=true;
         }
     }
 
