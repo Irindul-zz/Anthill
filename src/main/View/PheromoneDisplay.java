@@ -15,10 +15,14 @@ public class PheromoneDisplay extends Parent {
         this.id=id;
         this.position = position;
         Rectangle pheromone = new Rectangle();
-        pheromone.setHeight(10);
-        pheromone.setWidth(10);
-        pheromone.setX((position.getX()*30)+10);
-        pheromone.setY((position.getY()*30)+10);
+        pheromone.setHeight((ColonyDisplay.heightRectangle)/3);
+        pheromone.setWidth((ColonyDisplay.widthRectangle)/3);
+
+        double offsetHeight = (ColonyDisplay.heightRectangle/3);
+        double offsetWidth = (ColonyDisplay.widthRectangle/3);
+
+        pheromone.setX((position.getX()*(ColonyDisplay.heightRectangle))+offsetHeight);
+        pheromone.setY((position.getY()*(ColonyDisplay.heightRectangle))+offsetWidth);
         pheromone.setFill(Color.INDIANRED);
         this.getChildren().add(pheromone);
     }

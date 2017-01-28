@@ -33,7 +33,7 @@
 }
 
 #text_speed {
-    -fx-pref-width: 40px;
+    -fx-pref-width: 50px;
 }
 
 #button_increaseSpeed {
@@ -44,4 +44,12 @@
 
 #text_speed {
     -fx-fill: white;
+}
+
+#text_mapReader {
+    -fx-fill: blue;
+}
+
+#text_mapError {
+    -fx-fill: red;
 }

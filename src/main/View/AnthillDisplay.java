@@ -14,10 +14,10 @@ public class AnthillDisplay extends Parent {
     public AnthillDisplay(Position position){
         this.position = position;
         Rectangle anthill = new Rectangle();
-        anthill.setHeight(30);
-        anthill.setWidth(30);
-        anthill.setX((position.getX()*30));
-        anthill.setY((position.getY()*30));
+        anthill.setHeight((ColonyDisplay.heightRectangle));
+        anthill.setWidth((ColonyDisplay.widthRectangle));
+        anthill.setX((position.getX()*(ColonyDisplay.heightRectangle)));
+        anthill.setY((position.getY()*(ColonyDisplay.widthRectangle)));
         anthill.setFill(Color.DARKOLIVEGREEN);
         this.getChildren().add(anthill);
     }

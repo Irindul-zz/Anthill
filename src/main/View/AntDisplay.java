@@ -17,17 +17,22 @@ public class AntDisplay extends Parent{
         this.id=id;
         this.position = position;
 
-        this.setTranslateX((position.getX()*30)+10);
-        this.setTranslateY((position.getY()*30)+10);
+        double offsetHeight = ((ColonyDisplay.heightRectangle)/2);
+        double offsetWidth = ((ColonyDisplay.widthRectangle)/2);
 
-        ant.setRadius(10);
+        this.setTranslateX((position.getX()*ColonyDisplay.heightRectangle)+offsetHeight);
+        this.setTranslateY((position.getY()*ColonyDisplay.widthRectangle)+offsetWidth);
+
+        ant.setRadius((ColonyDisplay.heightRectangle)/3);
         ant.setFill(Color.FIREBRICK);
         this.getChildren().add(ant);
     }
 
     public void setPosition(Position position){
-        this.setTranslateX((position.getX()*30)+15);
-        this.setTranslateY((position.getY()*30)+15);
+        double offsetHeight = ((ColonyDisplay.heightRectangle)/2);
+        double offsetWidth = ((ColonyDisplay.widthRectangle)/2);
+        this.setTranslateX((position.getX()*ColonyDisplay.heightRectangle)+offsetHeight);
+        this.setTranslateY((position.getY()*ColonyDisplay.widthRectangle)+offsetWidth);
     }
 
     public Position getPosition() {
