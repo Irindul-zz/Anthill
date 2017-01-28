@@ -136,7 +136,16 @@ public class Colony {
             }
         }
         if(foodSupplies.size()==0){
-            end=true;
+            boolean endAntFood =true;
+            for(Ant ant : anthill.ants){
+                if(ant.getHasFood()){
+                    endAntFood =false;
+                }
+            }
+
+            if(endAntFood){
+                end=true;
+            }
         }
     }
 
@@ -301,22 +310,6 @@ public class Colony {
 
     }
 
-    public boolean end(){
-        boolean end = false;
-        for (FoodSupply f: foodSupplies.getSupplies()) {
-            if(f.getQuantity() != 0)
-                end = true;
-        }
-
-        for (Ant ant: anthill.ants) {
-            if(ant.getHasFood())
-            {
-               end = true;
-            }
-        }
-
-        return end;
-    }
 
     public boolean getMapHalth() {return this.mapHealth;}
 }
