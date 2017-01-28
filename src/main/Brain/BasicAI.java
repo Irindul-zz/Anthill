@@ -58,9 +58,9 @@ public class BasicAI implements Brain {
         }
 
         int start = Direction.reverse(ant.getDirection()).ordinal();
-        int stop = start  ;
+        int stop = (start +7) % 8 ;
         //We use modulo here because of the cycle of the cardinal points.
-        int i = (start+1)%8; // We start 1 after "start", to ignore the cell right behind the ant
+        int i = start; // We start 1 after "start", to ignore the cell right behind the ant
         int j = 0;
 
         while (i != stop){
@@ -86,6 +86,9 @@ public class BasicAI implements Brain {
         else
             proba.setProba(i, 0);
     }
+
+
+
 
 
     @Override
