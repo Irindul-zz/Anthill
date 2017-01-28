@@ -3,6 +3,10 @@ package main.View;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -19,7 +24,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Anthill.Colony;
 import main.Mapping.Map;
+import main.Mapping.ReadFiles;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +43,9 @@ public class ColonyDisplay extends Application{
     public static AnthillDisplay anthillDisplay;
     public static List<FoodSupplyDisplay> foodSuppliesDisplay;
     public static List<PheromoneDisplay> pheromonesDisplay;
+    private Text text_mapReader;
+    private Button button_basicAnts;
+    private Button button_brainyAnts;
     private Colony c;
 //TODO : les fourmis sortent de la boite
 
@@ -69,7 +81,12 @@ public class ColonyDisplay extends Application{
     public void start(Stage stage) throws Exception {
         //sleep(10);
         this.stage = stage;
+
+
         this.c = new Colony();
+
+
+
         pheromonesDisplay = new ArrayList<>();
         foodSuppliesDisplay = new ArrayList<>();
         stage.setWidth(750+16);
@@ -99,19 +116,60 @@ public class ColonyDisplay extends Application{
             vbButtons.setPrefWidth(stage.getWidth()-16);
             vbButtons.setAlignment(Pos.CENTER);
 
-            Button button_basicAnts = new Button("Basic Ants");
-            button_basicAnts.setId("dark-blue");
-            button_basicAnts.applyCss();
-            button_basicAnts.setMaxWidth(Double.MAX_VALUE);
-            button_basicAnts.setPrefHeight(100);
+            this.button_basicAnts = new Button("Basic Ants");
+            this.button_basicAnts.setId("dark-blue");
+            this.button_basicAnts.applyCss();
+            this.button_basicAnts.setMaxWidth(Double.MAX_VALUE);
+            this.button_basicAnts.setPrefHeight(100);
 
-            Button button_brainyAnts = new Button("Brainy Ants");
-            button_brainyAnts.setId("dark-blue");
-            button_brainyAnts.applyCss();
-            button_brainyAnts.setMaxWidth(Double.MAX_VALUE);
-            button_brainyAnts.setPrefHeight(100);
+            this.button_brainyAnts = new Button("Brainy Ants");
+            this.button_brainyAnts.setId("dark-blue");
+            this.button_brainyAnts.applyCss();
+            this.button_brainyAnts.setMaxWidth(Double.MAX_VALUE);
+            this.button_brainyAnts.setPrefHeight(100);
 
-            vbButtons.getChildren().addAll(button_basicAnts,button_brainyAnts);
+
+            this.button_basicAnts.setDisable(true);
+            this.button_brainyAnts.setDisable(true);
+
+            this.text_mapReader = new Text("");
+            this.text_mapReader.setId("text_mapReader");
+            this.text_mapReader.applyCss();
+
+            File mapFolder = new File("src" + File.separator + "main/map");
+            File[] listOfMaps = mapFolder.listFiles();
+            System.out.println("length: " + mapFolder.getAbsolutePath());
+
+            ObservableList selections = FXCollections.observableArrayList();
+            if(mapFolder.exists())
+            {
+                for(int i=0; i<listOfMaps.length; i++)
+                {
+                    if(listOfMaps[i].isFile())
+                    {
+                        selections.add(listOfMaps[i].getName());
+                    }
+                }
+            }
+            else
+            {
+                System.out.println("Map folder does not exist");
+            }
+            ChoiceBox cb_mapSelect = new ChoiceBox<String>(selections);
+
+            cb_mapSelect.getSelectionModel().selectedIndexProperty()
+                    .addListener(new ChangeListener<Number>() {
+                        public void changed(ObservableValue ov, Number value, Number new_value) {
+                            startNewColony(selections.get(new_value.intValue()).toString());
+                        }
+                    });
+            if(selections.size() > 0)
+            {
+                cb_mapSelect.getSelectionModel().select(0);
+            }
+
+
+            vbButtons.getChildren().addAll(button_basicAnts,button_brainyAnts, cb_mapSelect, this.text_mapReader);
         group_menu.getChildren().add(vbButtons);
 
 
@@ -231,6 +289,35 @@ public class ColonyDisplay extends Application{
     {
         stage.setScene(scene_sim);
         colonyTimer.play();
+    }
+
+
+    public void startNewColony(String path) {
+        System.out.println(path);
+        text_mapReader.setVisible(true);
+        text_mapReader.setText("Loading map...");
+        text_mapReader.setId("text_mapReader");
+        text_mapReader.applyCss();
+        button_basicAnts.setDisable(true);
+        button_brainyAnts.setDisable(true);
+
+        try {
+            this.c = new Colony(path);
+        } catch (FileNotFoundException e) {
+            System.out.println("Something went wrong when reading the map");
+        }
+        if(this.c.getMapHalth())
+        {
+            text_mapReader.setVisible(false);
+            button_basicAnts.setDisable(false);
+            button_brainyAnts.setDisable(false);
+        }
+        else
+        {
+            text_mapReader.setText("Sorry, but the map is not valid");
+            text_mapReader.setId("text_mapError");
+            text_mapReader.applyCss();
+        }
     }
 
 }

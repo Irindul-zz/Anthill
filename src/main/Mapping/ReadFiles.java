@@ -19,7 +19,7 @@ public class ReadFiles {
         fileMap = new File(fileName);
     }
 
-        public void readFile(Map map, FoodSupplyCol foodSupplies, Anthill anthill) throws FileNotFoundException {
+        public boolean readFile(Map map, FoodSupplyCol foodSupplies, Anthill anthill) throws FileNotFoundException {
 
 
 
@@ -80,12 +80,21 @@ public class ReadFiles {
                     }
                 }
             }
-            catch(IOException e){
-                System.out.println ("Erreur lors de la lecture : " + e.getMessage());
+            catch(IOException|NumberFormatException e){
 
+                if(e.getClass().getName() == "java.lang.NumberFormatException")
+                {
+                    System.out.println("The map file does not only contain integers: " + e.getMessage());
+                }
+                else
+                {
+                    System.out.println ("Erreur lors de la lecture : " + e.getMessage());
+                }
+
+                return false;
             }
 
-
+            return true;
         }
 
 

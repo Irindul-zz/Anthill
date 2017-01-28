@@ -30,13 +30,21 @@ public class Colony {
     //AntDisplay[] antsDisplay;
     private ColonyDisplay colonyDisplay;
     private ReadFiles reader;
+    private boolean mapHealth;
 
     public static boolean end; //Stop the simulation
 
 
 
-
     public Colony() throws FileNotFoundException {
+        initialize("map1.txt");
+    }
+
+    public Colony(String mapName) throws FileNotFoundException {
+        initialize(mapName);
+    }
+
+    public void initialize(String mapName) throws FileNotFoundException {
         end=false;
         map = new Map();
         // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
@@ -46,18 +54,23 @@ public class Colony {
         anthill = new Anthill(20);
 
         try {
-            reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + "map1.txt");
+            reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + mapName);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        reader.readFile(this.map, this.foodSupplies, this.anthill);
+        if(!reader.readFile(this.map, this.foodSupplies, this.anthill))
+        {
+            System.out.println("Something went wrong when reading the map file");
+            return;
+        }
         pheromones = new PheromoneCol();
         Dijkstra.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to re initialize it later
 
 
         //checking map
+        this.mapHealth = true;
         if (!map.checkMap(foodSupplies, anthill)) {
-            // Interdire le lancement de la simulation 
+            this.mapHealth = false;
         }
 
         //Ants only stay in map if they start at (1, 1) Position
@@ -302,4 +315,6 @@ public class Colony {
 
         return end;
     }
+
+    public boolean getMapHalth() {return this.mapHealth;}
 }
