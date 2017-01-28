@@ -53,14 +53,14 @@ public class Graph {
                         }
                     }
 
-                    x = i+1;
+                    /*x = i+1;
                     y = j+1;
                     if(isInRange(map, x, y)){
 
                         if(map.getCellXY(x, y).isWalkable()){
                             nodes[i][j].link(nodes[x][y], 1);
                         }
-                    }
+                    }*/
 
                     x = i;
                     y = j+1;
@@ -71,14 +71,14 @@ public class Graph {
                         }
                     }
 
-                   x = i-1;
+                    /*x = i-1;
                     y = j+1;
                     if(isInRange(map, x, y)){
 
                         if(map.getCellXY(x, y).isWalkable()){
                             nodes[i][j].link(nodes[x][y], 1);
                         }
-                    }
+                    }*/
 
                     x = i-1;
                     y = j;
@@ -89,14 +89,14 @@ public class Graph {
                         }
                     }
 
-                    x = i-1;
+                    /*x = i-1;
                     y = j-1;
                     if(isInRange(map, x, y)){
 
                         if(map.getCellXY(x, y).isWalkable()){
                             nodes[i][j].link(nodes[x][y], 1);
                         }
-                    }
+                    }*/
 
                     x = i;
                     y = j-1;
@@ -107,14 +107,14 @@ public class Graph {
                         }
                     }
 
-                    x = i+1;
+                    /*x = i+1;
                     y = j-1;
                     if(isInRange(map, x, y)){
 
                         if(map.getCellXY(x, y).isWalkable()){
                             nodes[i][j].link(nodes[x][y], 1);
                         }
-                    }
+                    }*/
                 }
 
             }

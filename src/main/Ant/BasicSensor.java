@@ -4,7 +4,6 @@ import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Element.Cell;
 import main.Mapping.Direction;
-import main.Mapping.Map;
 import main.Mapping.Position;
 
 public class BasicSensor implements Sense {
@@ -65,12 +64,6 @@ public class BasicSensor implements Sense {
 
             obstacles[i] = true;
         }
-        /*
-        // For a more evolved Sensor
-       for (int i =0; i<8; i++  ) {
-           obstacles[i] = cells[i].isWalkable();
-        }*/
-
     }
 
     @Override
