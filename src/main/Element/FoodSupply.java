@@ -10,16 +10,11 @@ public class FoodSupply{
     private int quantity;
     private Position position;
 
-    public FoodSupply(Position position) {
-        this.position = position;
-        quantity = 20;
-    }
-
     public FoodSupply(Position position, int quantity) {
         this.position = position;
         this.quantity = quantity;
     }
-
+    
 
     public int getQuantity(){
         return quantity;
@@ -32,6 +27,14 @@ public class FoodSupply{
     public void removeFood() {
         quantity --;
     	
+    }
+
+    public void removeFood(int quantity) {
+        this.quantity -= quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void setPosition(Position position) {
