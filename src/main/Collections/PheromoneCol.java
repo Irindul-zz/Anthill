@@ -30,8 +30,8 @@ public class PheromoneCol {
         boolean hasPheromone =false;
 
         for(Pheromone pheromone: pheromones){
-           if(p.getPos()== pheromone.getPos()){
-               pheromone.setLifeTime(pheromone.getLifeTime()+10); //TODO change 10 when we have decide the lifetime
+           if(p.getPos().getX()== pheromone.getPos().getX() && p.getPos().getY()== pheromone.getPos().getY()){
+               pheromone.setLifeTime(pheromone.getLifeTime()+200); //TODO change 200 when we have decide the lifetime
                hasPheromone=true;
                break;
            }

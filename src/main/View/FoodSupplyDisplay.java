@@ -18,8 +18,8 @@ public class FoodSupplyDisplay extends Parent{
         Rectangle foodSupply = new Rectangle();
         foodSupply.setHeight(20);
         foodSupply.setWidth(20);
-        foodSupply.setX((position.getX()*30)+20);
-        foodSupply.setY((position.getY()*30)+20);
+        foodSupply.setX((position.getX()*30)+5);
+        foodSupply.setY((position.getY()*30)+5);
         foodSupply.setFill(Color.BLUE);
         this.getChildren().add(foodSupply);
     }

@@ -51,8 +51,8 @@ public class Ant{
         this.position = position;
     }
 
-    public void takeFood(Position pos, FoodSupplyCol f){
-        f.getFoodSupplyAt(pos).removeFood();
+    public void takeFood(Position posistion, FoodSupplyCol f){
+        f.removeFoodAt(position);
         hasFood=true;
     }
 
@@ -62,7 +62,7 @@ public class Ant{
     }
 
     public Pheromone dropPheromone(){
-        Pheromone pheromone = new Pheromone(position, 300); //TODO : add position in paramater when kriss have changed is constructor
+        Pheromone pheromone = new Pheromone(position, 200); //TODO : add position in paramater when kriss have changed is constructor
         return pheromone;
     }
 

@@ -1,7 +1,6 @@
 package main.Anthill;
 
 import main.Ant.Ant;
-import main.Ant.BrainyAnt;
 import main.Brain.BasicAI;
 import main.Brain.Brain;
 import main.Brain.Memory;
@@ -25,9 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/**
- * Created by Irindul on 25/12/2016.
- */
+
 public class Colony {
 
     private FoodSupplyCol foodSupplies;
@@ -45,9 +42,9 @@ public class Colony {
         map = new Map();
         // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
         foodSupplies = new FoodSupplyCol();
+        pheromones = new PheromoneCol();
 
         anthill = new Anthill(3);
-
 
         try {
             reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + "map1.txt");
@@ -55,7 +52,7 @@ public class Colony {
             e.printStackTrace();
         }
         reader.readFile(this.map, this.foodSupplies, this.anthill);
-        pheromones = new PheromoneCol();
+
         //Ants only stay in map if they start at (1, 1) Position
         //anthill.setPosition(new Position(13, 1));
         //anthill.declareAnts();
@@ -69,16 +66,12 @@ public class Colony {
             ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()), i);
         }
 
-       /* for (i=0 ;i < foodSupplies.size() ; i++){
-            ColonyDisplay.foodSuppliesDisplay[i] = new FoodSupplyDisplay(new Position(foodSupplies.getFoodSupplyIndex(i).getPosition().getX(),foodSupplies.getFoodSupplyIndex(i).getPosition().getY()),i);
-        }
-        */
     }
 
-    public void addFoodSupply(FoodSupply fs){
+   /* public void addFoodSupply(FoodSupply fs){
 
     }
-
+*/
     /*public void run(){
 
         while (!end()){
@@ -110,6 +103,7 @@ public class Colony {
             if(ant.getPosition().getX() == anthill.getPosition().getX() && ant.getPosition().getY() == anthill.getPosition().getY())
                 ant.dropFood();
             i++;
+            System.out.println(foodSupplies.size());
         }
 
         for (Pheromone pheromone : pheromones.getPheromones()) {
@@ -134,7 +128,7 @@ public class Colony {
 
     public void detectFood(Ant ant){
 
-            if(ant.getSensor().detectFood(ant.getPosition(),foodSupplies)) {
+            if(ant.getSensor().detectFood(ant.getPosition(),foodSupplies)&& !ant.getHasFood()) {
                 ant.takeFood(ant.getPosition(), foodSupplies);
             }
     }
