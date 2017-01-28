@@ -28,6 +28,8 @@ public class ColonyDisplay extends Application{
 
     public static Map map;
     Group group_sim;
+    Scene scene_sim;
+    Stage stage;
     public static AntDisplay[] antsDisplay;
     public static AnthillDisplay anthillDisplay;
     public static List<FoodSupplyDisplay> foodSuppliesDisplay;
@@ -59,12 +61,14 @@ public class ColonyDisplay extends Application{
                     group_sim.getChildren().add(foodSupplyD);
                 }
             }
+            //System.out.println("testing");
         }
     }));
 
     @Override
     public void start(Stage stage) throws Exception {
         //sleep(10);
+        this.stage = stage;
         this.c = new Colony();
         pheromonesDisplay = new ArrayList<>();
         foodSuppliesDisplay = new ArrayList<>();
@@ -115,7 +119,7 @@ public class ColonyDisplay extends Application{
         //// SETTING SIMULATOR
 
         group_sim = new Group();
-        Scene scene_sim = new Scene(group_sim);
+        scene_sim = new Scene(group_sim);
         scene_sim.getStylesheets().add("style.css");
 
 
@@ -203,23 +207,30 @@ public class ColonyDisplay extends Application{
             @Override public void handle(ActionEvent e) {
                 ///////SET LEVEL OF ANTS
                 stage.setScene(scene_sim);
+                startSimulation(0);
             }
         });
 
         button_brainyAnts.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                stage.setScene(scene_sim);
+                startSimulation(1);
             }
         });
 
 
 
         colonyTimer.setCycleCount(Timeline.INDEFINITE);
-        colonyTimer.play();
 
         stage.setScene(scene_menu);
         stage.show();
 
 
     }
+
+    public void startSimulation(int AILevel)
+    {
+        stage.setScene(scene_sim);
+        colonyTimer.play();
+    }
+
 }
