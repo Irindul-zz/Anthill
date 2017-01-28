@@ -1,5 +1,6 @@
 package main.Element;
 
+import main.Mapping.Direction;
 import main.Mapping.Position;
 
 /**
@@ -9,10 +10,12 @@ public class Pheromone{
 
     private int lifeTime;
     private Position pos;
+    Direction direction;
 
-    public Pheromone(Position position, int lifeTime) {
+    public Pheromone(Position position, int lifeTime, Direction direction) {
         this.lifeTime = lifeTime;
         pos = position;
+        this.direction = direction;
     }
 
     public Pheromone(Position pos) {
@@ -28,6 +31,13 @@ public class Pheromone{
     }
 
 
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
 
     public void actualize(){
         this.lifeTime--;

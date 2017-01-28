@@ -69,7 +69,7 @@ public class Proba {
     }
 
     public int randomWithProba(){
-
+        
         Random random = new Random();
         int min = 0;
         int max = 100;
