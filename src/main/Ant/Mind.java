@@ -43,6 +43,7 @@ public class Mind implements Memory {
         return Direction.reverse(oldFirst.dir);
     }
 
+    @Override
     public void empty(){
         while(first != null)
             this.rollBack();

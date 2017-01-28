@@ -3,6 +3,7 @@ package main.Ant;
 import javafx.geometry.Pos;
 import main.Brain.BasicAI;
 import main.Brain.Brain;
+import main.Brain.EvolvedAI;
 import main.Brain.Memory;
 import main.Collections.FoodSupplyCol;
 import main.Element.Pheromone;
@@ -26,23 +27,24 @@ public class Ant{
     protected Position anhillPosition;
 
     public Ant(Direction direction, Position position) {
-        brain = new BasicAI();
+        brain = new EvolvedAI();
         this.direction = direction;
         this.position = position;
         mind = new Mind();
         sensor = new EvolvedSensor(); //this line must be overwritten for different sensors.
     }
 
-    public Ant(Position position) {
+    public Ant(Position position, Position anthillPosition) {
         direction = Direction.NORTH;
-        brain = new BasicAI();
+        brain = new EvolvedAI();
         this.position = position;
         mind = new Mind();
+        anhillPosition = anthillPosition;
         sensor = new BasicSensor(); //this line must be overwritten for different sensors.
     }
     public Ant() {
         direction = Direction.NORTH;
-        brain = new BasicAI();
+        brain = new EvolvedAI();
         position = new Position(0,0);
         mind = new Mind();
         sensor = new BasicSensor(); //this line must be overwritten for different sensors.

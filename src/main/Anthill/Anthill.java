@@ -34,7 +34,7 @@ public class Anthill{
     public void declareAnts() {
         ants.clear();
         for (int i = 0; i <nbAnts; i++) {
-            ants.add(new Ant(this.position));
+            ants.add(new Ant(this.position, this.position));
         }
     }
 
