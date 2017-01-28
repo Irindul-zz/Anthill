@@ -70,7 +70,6 @@ public class Proba {
 
     public int randomWithProba(){
 
-        System.out.println();
         Random random = new Random();
         int min = 0;
         int max = 100;
