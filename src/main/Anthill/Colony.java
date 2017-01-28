@@ -55,10 +55,15 @@ public class Colony {
             e.printStackTrace();
         }
         reader.readFile(this.map, this.foodSupplies, this.anthill);
-        //checking map
-        System.out.println("map valide : "+map.checkMap(foodSupplies, anthill));
-
         pheromones = new PheromoneCol();
+        Dijkstra.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to re initialize it later
+
+
+        //checking map
+        if (!map.checkMap(foodSupplies, anthill)) {
+            // Interdire le lancement de la simulation 
+        }
+
         //Ants only stay in map if they start at (1, 1) Position
         //anthill.setPosition(new Position(13, 1));
         //anthill.declareAnts();
@@ -66,7 +71,6 @@ public class Colony {
         colonyDisplay = new ColonyDisplay();
         ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
 
-        Dijkstra.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to re initialize it later
         int i;
         for (i =0 ; i < anthill.getAnts().size() ; i++){
             ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()), i);
