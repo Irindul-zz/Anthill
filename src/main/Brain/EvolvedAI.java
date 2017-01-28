@@ -52,7 +52,7 @@ public class EvolvedAI extends BasicAI {
 
             Direction direction = deduceDirection(current, toCheck);
             ant.getMind().setKeeptrack(true);
-            ant.getMind().keepTrack(direction);
+            ant.getMind().keepTrack(Direction.reverse(direction));
 
             i--;
         }
