@@ -39,26 +39,26 @@ public class ColonyDisplay extends Application{
 
         @Override
         public void handle(ActionEvent event) {
+            if(!Colony.end) {
+                for (PheromoneDisplay pheromoneD : pheromonesDisplay) {
+                    group_sim.getChildren().remove(pheromoneD);
+                }
+                pheromonesDisplay.clear();
 
-            for(PheromoneDisplay pheromoneD: pheromonesDisplay){
-                group_sim.getChildren().remove(pheromoneD);
+                for (FoodSupplyDisplay foodSupplyD : foodSuppliesDisplay) {
+                    group_sim.getChildren().remove(foodSupplyD);
+                }
+                foodSuppliesDisplay.clear();
+
+
+                c.update();
+                for (PheromoneDisplay pheromoneD : pheromonesDisplay) {
+                    group_sim.getChildren().add(pheromoneD);
+                }
+                for (FoodSupplyDisplay foodSupplyD : foodSuppliesDisplay) {
+                    group_sim.getChildren().add(foodSupplyD);
+                }
             }
-            pheromonesDisplay.clear();
-
-            for(FoodSupplyDisplay foodSupplyD: foodSuppliesDisplay){
-                group_sim.getChildren().remove(foodSupplyD);
-            }
-            foodSuppliesDisplay.clear();
-
-
-            c.update();
-            for(PheromoneDisplay pheromoneD: pheromonesDisplay){
-                group_sim.getChildren().add(pheromoneD);
-            }
-            for(FoodSupplyDisplay foodSupplyD: foodSuppliesDisplay){
-                group_sim.getChildren().add(foodSupplyD);
-            }
-
         }
     }));
 
