@@ -11,4 +11,5 @@ public interface Memory {
     Direction rollBack();
     void setKeeptrack(boolean keeptrack);
     void empty();
+    boolean getKeeptrack();
 }

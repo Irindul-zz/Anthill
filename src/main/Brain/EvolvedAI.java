@@ -20,9 +20,11 @@ public class EvolvedAI extends BasicAI {
         proba.initialize();
 
         if (ant.getHasFood()){ //If we have food, then we have to go back.
-
-            dijkstra(ant);
+           if(ant.goBack())
+                dijkstra(ant);
             Direction toGo = ant.getMind().rollBack(); // We get the next direction.
+            //System.out.println(toGo);
+
             proba.makeSure(toGo); // We tweak the probas so that this outcome is certain.
 
         } else {
@@ -33,7 +35,7 @@ public class EvolvedAI extends BasicAI {
 
 
         ant.getMind().setKeeptrack(false);
-
+        ant.setGoBack(false);
         //TODO see how I can put Dikstra to computes the frequency here without any outside call
         //TODO Bad way : Dijkstra at every moment I'm goiing back, working but not good.
     }
@@ -43,18 +45,20 @@ public class EvolvedAI extends BasicAI {
         List<Node> pathNode = Dijkstra.search(ant.getPosition(), ant.getAnhillPosition());
         Position current;
         Position toCheck;
-        int i = pathNode.size()-1;
+        int i = 0;
         ant.getMind().empty();
-        while(i >= 1){
+        while(i < pathNode.size()-1){
 
             current = pathNode.get(i).getPosition();
-            toCheck = pathNode.get(i-1).getPosition();
+            toCheck = pathNode.get(i+1).getPosition();
+
 
             Direction direction = deduceDirection(current, toCheck);
-            ant.getMind().setKeeptrack(true);
-            ant.getMind().keepTrack(Direction.reverse(direction));
 
-            i--;
+            ant.getMind().setKeeptrack(true);
+            ant.getMind().keepTrack(direction);
+
+            i++;
         }
 
 

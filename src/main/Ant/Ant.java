@@ -25,6 +25,7 @@ public class Ant{
     protected Brain brain;
     protected Memory mind;
     protected Position anhillPosition;
+    protected boolean goBack;
 
     public Ant(Direction direction, Position position) {
         brain = new EvolvedAI();
@@ -68,6 +69,7 @@ public class Ant{
     public void takeFood(Position posistion, FoodSupplyCol f){
         f.removeFoodAt(position);
         hasFood=true;
+        goBack = true;
     }
 
     public void dropFood(){
@@ -102,6 +104,14 @@ public class Ant{
 
     public Position getAnhillPosition() {
         return anhillPosition;
+    }
+
+    public boolean goBack() {
+        return goBack;
+    }
+
+    public void setGoBack(boolean b){
+        goBack = b;
     }
 }
 

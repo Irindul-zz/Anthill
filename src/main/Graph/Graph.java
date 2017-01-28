@@ -29,7 +29,8 @@ public class Graph {
 
         for (int i = 0;i < map.getSizeX(); i++){
             for (int j = 0; j < map.getSizeY(); j++) {
-                this.add(nodes[i][j]);
+                
+                    
 
                /*
 
@@ -41,6 +42,8 @@ public class Graph {
                 i+1 j-1;
                 i - 1 j+1;*/
                 if(map.getCellXY(i, j).isWalkable()) {
+
+                    this.add(nodes[i][j]);
                     x = i+1;
                     y = j;
                     if(isInRange(map, x, y)){

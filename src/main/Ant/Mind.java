@@ -11,7 +11,7 @@ public class Mind implements Memory {
 
     //Simple implementation of a Stack with linked-list.
     private Node first = null;
-    public boolean keeptrack = false;
+    private boolean keeptrack = false;
 
     //The node is static so that it doesn't take much memory access and assure that it cannot use Mind attributes.
     private static class Node {
@@ -52,5 +52,10 @@ public class Mind implements Memory {
     @Override
     public void setKeeptrack(boolean keeptrack){
         this.keeptrack = keeptrack;
+    }
+
+    @Override
+    public boolean getKeeptrack(){
+        return keeptrack;
     }
 }
