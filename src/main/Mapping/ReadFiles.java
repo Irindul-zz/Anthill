@@ -62,7 +62,7 @@ public class ReadFiles {
                                 map.setCellXY(j, i,  new Cell(false)); //if is '#' we have a wall, Cell => is Not Walkable
                                 break;
                             case 'o':
-                                foodSupplies.add(new FoodSupply(new Position(j, i), foodSupplyQuantities[indexFoosSupplyQty]));
+                                foodSupplies.addFoodSupply(new FoodSupply(new Position(j, i), foodSupplyQuantities[indexFoosSupplyQty]));
                                 indexFoosSupplyQty++;
                                 map.setCellXY(j, i,  new Cell(true));
                                 break;

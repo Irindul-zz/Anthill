@@ -14,12 +14,7 @@ public class FoodSupply{
         this.position = position;
         this.quantity = quantity;
     }
-
-    public FoodSupply(Position position, int quantity) {
-        this.position = position;
-        this.quantity = quantity;
-    }
-
+    
 
     public int getQuantity(){
         return quantity;

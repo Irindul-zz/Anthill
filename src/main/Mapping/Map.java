@@ -1,5 +1,9 @@
 package main.Mapping;
+import main.Anthill.Anthill;
+import main.Collections.FoodSupplyCol;
 import main.Element.Cell;
+import main.Element.FoodSupply;
+import main.Graph.Dijkstra;
 
 import java.io.*;
 import java.util.Scanner;
@@ -59,5 +63,39 @@ public class Map {
 
     public void setSizeY(int sizeY) {
         this.sizeY = sizeY;
+    }
+
+    public Cell getCellPosition(Position position) {
+        return map[position.getX()][position.getY()];
+    }
+
+    public boolean checkMap(FoodSupplyCol foodSupplyCol, Anthill anthill) {
+        boolean MapValid =true;
+        if (checkMapNextCell(new Position(0, 0), 0) == (sizeX*2) + (sizeY-2)*2) {
+            for (FoodSupply foodSupply : foodSupplyCol.getSupplies()) {
+                if (!Dijkstra.isThereAPath(anthill.getPosition(),foodSupply.getPosition())) {
+                    MapValid =false;
+                    break;
+                }
+            }
+        } else {
+            MapValid =false;
+        }
+        return MapValid;
+    }
+
+
+    public int checkMapNextCell(Position position, int count){
+        Position nextPosition = position.nextPositionAroundMap(this);
+
+        if (count != (sizeX*2) + (sizeY-2)*2) {
+            if ( !getCellPosition(nextPosition).isWalkable()) {
+                return checkMapNextCell(nextPosition, count+1);
+            } else {
+                return -1;
+            }
+        } else {
+            return count;
+        }
     }
 }
