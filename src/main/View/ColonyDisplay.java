@@ -10,23 +10,18 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Anthill.Colony;
-import main.Element.FoodSupply;
 import main.Mapping.Map;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Thread.sleep;
 
 
 public class ColonyDisplay extends Application{
@@ -34,6 +29,7 @@ public class ColonyDisplay extends Application{
     public static Map map;
     Group group_sim;
     public static AntDisplay[] antsDisplay;
+    public static AnthillDisplay anthillDisplay;
     public static List<FoodSupplyDisplay> foodSuppliesDisplay;
     public static List<PheromoneDisplay> pheromonesDisplay;
     private Colony c;
@@ -125,6 +121,8 @@ public class ColonyDisplay extends Application{
 
         MapDisplay mapD = new MapDisplay(map);
         group_sim.getChildren().add(mapD);
+
+        group_sim.getChildren().add(anthillDisplay);
 
         for (AntDisplay antD: antsDisplay) {
             group_sim.getChildren().add(antD);

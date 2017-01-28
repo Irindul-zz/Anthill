@@ -15,10 +15,7 @@ import main.Mapping.Direction;
 import main.Mapping.Map;
 import main.Mapping.Position;
 import main.Mapping.ReadFiles;
-import main.View.AntDisplay;
-import main.View.ColonyDisplay;
-import main.View.FoodSupplyDisplay;
-import main.View.PheromoneDisplay;
+import main.View.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -59,6 +56,8 @@ public class Colony {
         ColonyDisplay.map = map;
         colonyDisplay = new ColonyDisplay();
         ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
+
+        ColonyDisplay.anthillDisplay = new AnthillDisplay(anthill.getPosition());
 
         Dijkstra.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to re initialize it later
         int i;
