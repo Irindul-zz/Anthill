@@ -176,7 +176,7 @@ public class Colony {
     }
 
     public void move(Ant ant, Map map){
-           // Brain brain = ((BrainyAnt) ant).getBrain(); //The upcast allow us to get the brain of the ant
+
         Brain brain =  ant.getBrain();
         brain.processProba(ant); //We can now call the corresponding methods
         Direction direction = brain.executeProba(ant);

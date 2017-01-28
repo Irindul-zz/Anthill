@@ -28,24 +28,20 @@ public class Ant{
     protected boolean goBack;
 
     public Ant(Direction direction, Position position) {
-        brain = new EvolvedAI();
+        this();
         this.direction = direction;
         this.position = position;
-        mind = new Mind();
-        sensor = new EvolvedSensor(); //this line must be overwritten for different sensors.
     }
 
     public Ant(Position position, Position anthillPosition) {
-        direction = Direction.NORTH;
-        brain = new EvolvedAI();
+        this();
         this.position = position;
-        mind = new Mind();
         anhillPosition = anthillPosition;
-        sensor = new BasicSensor(); //this line must be overwritten for different sensors.
+
     }
     public Ant() {
         direction = Direction.NORTH;
-        brain = new EvolvedAI();
+        brain = new BasicAI();
         position = new Position(0,0);
         mind = new Mind();
         sensor = new BasicSensor(); //this line must be overwritten for different sensors.
@@ -112,6 +108,15 @@ public class Ant{
 
     public void setGoBack(boolean b){
         goBack = b;
+    }
+
+    public void setBrain(Brain brain) {
+        this.brain = brain;
+        if(brain instanceof BasicAI){
+            this.sensor = new BasicSensor();
+        } else {
+            this.sensor = new EvolvedSensor();
+        }
     }
 }
 
