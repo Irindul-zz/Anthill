@@ -35,10 +35,10 @@ public class ColonyDisplay extends Application{
     public static Map map;
     public static double heightRectangle;
     public static double widthRectangle;
-    Group group_sim;
-    Scene scene_sim;
-    Scene scene_menu;
-    Stage stage;
+    private Group group_sim;
+    private Scene scene_sim;
+    private Scene scene_menu;
+    private Stage stage;
     public static AntDisplay[] antsDisplay;
     public static AnthillDisplay anthillDisplay;
     public static List<FoodSupplyDisplay> foodSuppliesDisplay;
