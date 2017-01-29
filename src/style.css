@@ -53,3 +53,7 @@
 #text_mapError {
     -fx-fill: red;
 }
+
+#text_iterations {
+    -fx-fill: white;
+}

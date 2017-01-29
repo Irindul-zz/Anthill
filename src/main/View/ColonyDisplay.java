@@ -33,8 +33,8 @@ import java.util.List;
 public class ColonyDisplay extends Application{
 
     public static Map map;
-    public static int heightRectangle;
-    public static int widthRectangle;
+    public static double heightRectangle;
+    public static double widthRectangle;
     Group group_sim;
     Scene scene_sim;
     Scene scene_menu;
@@ -46,6 +46,7 @@ public class ColonyDisplay extends Application{
     private Text text_mapReader;
     private Button button_basicAnts;
     private Button button_brainyAnts;
+    private Text text_iterations;
     private Colony c;
     private double simulationSpeed = 0.5;
     private String mapName;
@@ -75,6 +76,7 @@ public class ColonyDisplay extends Application{
                 for (FoodSupplyDisplay foodSupplyD : foodSuppliesDisplay) {
                     group_sim.getChildren().add(foodSupplyD);
                 }
+                text_iterations.setText((int)c.getIterations() + " iterations");
             }
             else
             {
@@ -89,8 +91,10 @@ public class ColonyDisplay extends Application{
         //sleep(10);
         this.stage = stage;
 
-        stage.setWidth(750+16);
-        stage.setHeight(750+38);
+        stage.setWidth(750);
+        stage.setHeight(750);
+
+        stage.setResizable(false);
         stage.setTitle("Anthill");
 
         Group group_menu = new Group();
@@ -230,7 +234,6 @@ public class ColonyDisplay extends Application{
         stage.setScene(scene_menu);
         stage.show();
 
-
     }
 
     public void setMapName(String mapName)
@@ -289,6 +292,9 @@ public class ColonyDisplay extends Application{
         widthRectangle =  750/map.getSizeX();
         pheromonesDisplay = new ArrayList<>();
         foodSuppliesDisplay = new ArrayList<>();
+
+        stage.setWidth(widthRectangle*map.getSizeX()+(scene_menu.getWindow().getWidth() - scene_menu.getWidth()));
+        stage.setHeight(heightRectangle*map.getSizeY()+(scene_menu.getWindow().getHeight() - scene_menu.getHeight()));
         //// SETTING SIMULATOR
 
         group_sim = new Group();
@@ -306,42 +312,57 @@ public class ColonyDisplay extends Application{
         }
 
         HBox hBox_speedSelector = new HBox();
-        hBox_speedSelector.setSpacing(10);
-        hBox_speedSelector.setLayoutY(10);
-        hBox_speedSelector.setPadding(new Insets(0, 20, 10, 20));
-        hBox_speedSelector.setPrefWidth(stage.getWidth()-16);
+            hBox_speedSelector.setAlignment(Pos.CENTER);
+            hBox_speedSelector.setSpacing(10);
+            hBox_speedSelector.setLayoutY(10);
+            hBox_speedSelector.setPadding(new Insets(0, 20, 10, 20));
+            hBox_speedSelector.setPrefWidth(stage.getWidth()-16);
+
+
+            Text text_speedTitle = new Text("Simulation Speed: ");
+            text_speedTitle.setId("text_speedTitle");
+            text_speedTitle.applyCss();
+
+            Button button_decreaseSpeed = new Button("-");
+            button_decreaseSpeed.setId("button_decreaseSpeed");
+            button_decreaseSpeed.applyCss();
+
+            colonyTimer.setRate(simulationSpeed);
+            TextField text_speed = new TextField(Integer.toString((int)(simulationSpeed*100)));
+            text_speed.setId("text_speed");
+            text_speed.applyCss();
+
+            Button button_increaseSpeed = new Button("+");
+            button_increaseSpeed.setId("button_increaseSpeed");
+            button_increaseSpeed.applyCss();
+
+            hBox_speedSelector.getChildren().addAll(text_speedTitle, button_decreaseSpeed, text_speed, button_increaseSpeed);
+        group_sim.getChildren().add(hBox_speedSelector);
+
+        HBox hb_iterations = new HBox();
+            hb_iterations.setAlignment(Pos.CENTER);
+            hb_iterations.setSpacing(10);
+            hb_iterations.setLayoutY(stage.getHeight()-50);
+            hb_iterations.setPadding(new Insets(0, 20, 10, 20));
+            hb_iterations.setPrefWidth(stage.getWidth()-16);
+
+            this.text_iterations = new Text(0 + " iterations");
+            text_iterations.setId("text_iterations");
+            text_iterations.applyCss();
+        hb_iterations.getChildren().add(text_iterations);
+        group_sim.getChildren().add(hb_iterations);
 
         Button button_mainMenu = new Button("Main menu");
         button_mainMenu.setId("dark-blue");
         button_mainMenu.applyCss();
-
-
-        Text text_speedTitle = new Text("Simulation Speed: ");
-        text_speedTitle.setLayoutY(20);
-        text_speedTitle.setId("text_speedTitle");
-        text_speedTitle.applyCss();
-
-        Button button_decreaseSpeed = new Button("-");
-        button_decreaseSpeed.setId("button_decreaseSpeed");
-        button_decreaseSpeed.applyCss();
-
-        colonyTimer.setRate(simulationSpeed);
-        TextField text_speed = new TextField(Integer.toString((int)(simulationSpeed*100)));
-        text_speed.setId("text_speed");
-        text_speed.applyCss();
-
-        Button button_increaseSpeed = new Button("+");
-        button_increaseSpeed.setId("button_increaseSpeed");
-        button_increaseSpeed.applyCss();
-
-        hBox_speedSelector.getChildren().addAll(button_mainMenu, text_speedTitle, button_decreaseSpeed, text_speed, button_increaseSpeed);
-        group_sim.getChildren().add(hBox_speedSelector);
-
+        group_sim.getChildren().add(button_mainMenu);
         //// SETTING LISTENERS FOR SIMULATOR
 
         button_mainMenu.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 colonyTimer.stop();
+                stage.setWidth(750);
+                stage.setHeight(750);
                 stage.setScene(scene_menu);
             }
         });

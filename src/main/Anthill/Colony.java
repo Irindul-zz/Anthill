@@ -31,8 +31,8 @@ public class Colony {
     private Anthill anthill;
     private Map map;
     private ReadFiles reader;
-    private boolean mapHealth; //Attribute about the validity of the map
-    private double iterations = 0; //counter for  iterations number
+    private boolean mapHealth;
+    private long iterations = 0;
 
     public static boolean end; //Stop the simulation
 
