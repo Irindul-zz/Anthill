@@ -32,7 +32,7 @@ public class Colony {
     private ColonyDisplay colonyDisplay;
     private ReadFiles reader;
     private boolean mapHealth;
-    private double iterations = 0;
+    private long iterations = 0;
 
     public static boolean end; //Stop the simulation
 
