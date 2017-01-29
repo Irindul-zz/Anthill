@@ -32,7 +32,6 @@ public class Anthill{
         ants.clear();
         for (int i = 0; i <nbAnts; i++) {
             ants.add(new Ant(this.position, this.position));
-            //ants.get(i).setBrain(new EvolvedAI());
         }
     }
 

@@ -40,7 +40,7 @@ public class Pheromone{
     }
 
     public void actualize(){
-        this.lifeTime -= 5;
+        this.lifeTime -= 5; //Each iteration, a pheromone loses 5 of life time.
     }
 
 
@@ -50,8 +50,8 @@ public class Pheromone{
     }
     public void setLifeTime(int lifeTime) {
         this.lifeTime = lifeTime;
-        if(this.lifeTime  > MAXLIFE)
-            this.lifeTime = MAXLIFE;
+        if(this.lifeTime  > MAXLIFE) //If the new lifetime is greater than the maximum
+            this.lifeTime = MAXLIFE; //We set the maximum
     }
 
 }

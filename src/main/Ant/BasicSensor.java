@@ -10,9 +10,14 @@ import main.Mapping.Position;
 
 public class BasicSensor implements Sense {
 
+    //Contains pheromone quantity on the 8 adjacent cells
     private double[] results;
+
+    //Contains obstacles on the 8 adjacent cells
     protected boolean[] obstacles;
     private Direction direction;
+
+    //Contains foodsupplies on the 8 adjacent cells
     private boolean[] foodsupply;
 
     public BasicSensor() {
@@ -26,12 +31,12 @@ public class BasicSensor implements Sense {
         boolean ret = false;
         if (f.size() != 0) {
             if (f.getFoodSupplyAt(pos) != null) {
-                if (f.getFoodSupplyAt(pos).getQuantity() > 0) ret =  true;
+                if (f.getFoodSupplyAt(pos).getQuantity() > 0) ret =  true; //Return true if there is food on pos.
             }
         }
         int x = pos.getX();
         int y = pos.getY();
-
+        //All 8 directions possibles
         Position north = new Position(x, y-1);
         Position northeast = new Position(x+1, y-1);
         Position east = new Position(x+1, y);
@@ -40,11 +45,13 @@ public class BasicSensor implements Sense {
         Position southwest = new Position(x-1, y+1);
         Position west = new Position(x-1, y);
         Position northwest = new Position(x-1, y-1);
+
+        //By default there is no food supply arround pos
         for (int i = 0; i < 8; i++) {
             foodsupply[i] = false;
         }
 
-        for (FoodSupply fo: f.getSupplies()) {
+        for (FoodSupply fo: f.getSupplies()) { //We check foreach food supply if it's around the position
             if(fo.getPosition().equals(north)){
                 foodsupply[Direction.NORTH.ordinal()] = true;
             }
@@ -80,6 +87,7 @@ public class BasicSensor implements Sense {
         int x = pos.getX();
         int y = pos.getY();
 
+        //The 8 directions possible
         Position north = new Position(x, y-1);
         Position northeast = new Position(x+1, y-1);
         Position east = new Position(x+1, y);
@@ -89,7 +97,9 @@ public class BasicSensor implements Sense {
         Position west = new Position(x-1, y);
         Position northwest = new Position(x-1, y-1);
 
+        //This is a coefficient to make the pheromones count more or less in the proba.
         int coef = 100;
+
         results[Direction.NORTH.ordinal()] = p.getPheromoneQuantityAt(north) * coef;
         results[Direction.NORTHEAST.ordinal()] = p.getPheromoneQuantityAt(northeast) * coef;
         results[Direction.EAST.ordinal()] = p.getPheromoneQuantityAt(east) * coef;
@@ -100,8 +110,8 @@ public class BasicSensor implements Sense {
         results[Direction.NORTHWEST.ordinal()] = p.getPheromoneQuantityAt(northwest) * coef;
 
         Pheromone ph = p.get(pos);
-        if( ph != null) {
-            direction = ph.getDirection();
+        if( ph != null) { //If we are on a pheromone
+            direction = ph.getDirection(); //We set the direction to the one of the pheromone
         }
         else {
             direction = null;

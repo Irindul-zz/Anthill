@@ -18,25 +18,26 @@ public class EvolvedAI extends BasicAI {
         proba.initialize();
 
         if (ant.getHasFood()){ //If we have food, then we have to go back.
-           if(ant.goBack())
-                dijkstra(ant);
+           if(ant.goBack()) //If we are turning around ( i.e we are at the food supply)
+                dijkstra(ant); //We compute the shortest way back
             Direction toGo = ant.getMind().rollBack(); // We get the next direction.
 
             proba.makeSure(toGo); // We tweak the probas so that this outcome is certain.
 
         } else {
 
-            processPheromones(ant);
+            processPheromones(ant); //We need to process the probabilities
 
         }
 
 
-        ant.getMind().setKeeptrack(false);
-        ant.setGoBack(false);
+        ant.getMind().setKeeptrack(false); //We do not keep track for this AI because the way back is computed.
+        ant.setGoBack(false); //We set this to false at each turn so we can see when it changes once.
     }
 
 
     private void dijkstra(Ant ant){
+        //We compute the path
         List<Node> pathNode = Pathfinding.search(ant.getPosition(), ant.getAnhillPosition());
         Position current;
         Position toCheck;
@@ -47,7 +48,7 @@ public class EvolvedAI extends BasicAI {
             current = pathNode.get(i).getPosition();
             toCheck = pathNode.get(i+1).getPosition();
 
-
+            //We deduce a direction to go with two directions
             Direction direction = deduceDirection(current, toCheck);
 
             ant.getMind().setKeeptrack(true);

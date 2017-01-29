@@ -22,10 +22,10 @@ public class FoodSupplyCol {
     }
 
     public void removeFoodAt(Position position){
-        getFoodSupplyAt(position).removeFood();
+        getFoodSupplyAt(position).removeFood(); //We get food at the position
 
-        if(getFoodSupplyAt(position).getQuantity() == 0){
-            remove(position);
+        if(getFoodSupplyAt(position).getQuantity() == 0){ //If there is no more food on this food supply
+            remove(position); //We remove it
         }
     }
 
@@ -38,9 +38,9 @@ public class FoodSupplyCol {
     }
 
     private void remove(Position position){
-        for(int i =0; i<supplies.size(); i++) {
-            if (supplies.get(i).getPosition().getX()==position.getX() && supplies.get(i).getPosition().getY()==position.getY()) {
-                supplies.remove(i);
+        for(int i =0; i<supplies.size(); i++) { //For each food supply
+            if (supplies.get(i).getPosition().equals(position)) { //If we are in the same position
+                supplies.remove(i);  //we remove it from the array
             }
         }
     }
@@ -48,7 +48,7 @@ public class FoodSupplyCol {
 
     public FoodSupply getFoodSupplyAt(Position position) {
         for (FoodSupply supply : supplies) {
-            if (supply.getPosition().getX() == position.getX() && supply.getPosition().getY() == position.getY()) {
+            if (supply.getPosition().equals(position)) {
                 return supply;
             }
         }

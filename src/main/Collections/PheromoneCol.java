@@ -28,15 +28,15 @@ public class PheromoneCol {
     public void add(Position pos, int quantity, Direction d){
         boolean exist = false;
         for (Pheromone p: pheromones) {
-            if(p.getPos().equals(pos)) {
+            if(p.getPos().equals(pos)) { //If there was already a pheromone
                 exist = true;
-                p.setLifeTime(p.getLifeTime() + Pheromone.MAXLIFE/2);
-                p.add(quantity);
+                p.setLifeTime(p.getLifeTime() + Pheromone.MAXLIFE/2); //We increment the lifeTime
+                p.add(quantity); //We add the quantity
             }
         }
 
-        if(!exist){
-            this.add(new Pheromone(pos, Pheromone.MAXLIFE,  d, quantity));
+        if(!exist){ //If there was no pheromone
+            this.add(new Pheromone(pos, Pheromone.MAXLIFE,  d, quantity)); //We create a new one
         }
 
 
@@ -54,7 +54,7 @@ public class PheromoneCol {
                 phero = ph;
             }
         }
-        return phero;
+        return phero; //Null will be checked
     }
 
     public int getPheromoneQuantityAt(Position p){

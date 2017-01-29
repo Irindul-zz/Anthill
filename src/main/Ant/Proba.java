@@ -28,7 +28,7 @@ public class Proba {
 
         cumFreq[0] = probas[0]*100; //Probas will be converted in %
         for (int i = 1; i < 8;i++) {
-            cumFreq[i] = cumFreq[i-1] + probas[i]*100;
+            cumFreq[i] = cumFreq[i-1] + probas[i]*100; //We add the value of the cell before to the value of the current cell (converted in %)
         }
     }
 

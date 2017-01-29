@@ -114,35 +114,39 @@ public class Colony {
             int i = 0;
             pheromones.updatePheromone();
             for (Ant ant : ants) {
-                detectFood(ant);
+                detectFood(ant); //We detect everything around the ant
                 detectPheromone(ant);
-                dropPheromone(ant);
-
                 detectObstacle(ant);
-                move(ant, map);
+
+                dropPheromone(ant); //We drop pheromones if necessary
+                move(ant, map); //We move
+
+                //We display the ants
                 ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
                 if (ant.getPosition().getX() == anthill.getPosition().getX() && ant.getPosition().getY() == anthill.getPosition().getY())
                     ant.dropFood();
                 i++;
             }
-
+            //We display the pheromones
             for (Pheromone pheromone : pheromones.getPheromones()) {
                 ColonyDisplay.pheromonesDisplay.add(new PheromoneDisplay(pheromone.getPos(), pheromones.size() + 1));
             }
+
+            //We display the foodsupplies
             for (FoodSupply foodSupply : foodSupplies.getSupplies()) {
                 ColonyDisplay.foodSuppliesDisplay.add(new FoodSupplyDisplay(foodSupply.getPosition()));
             }
         }
-        if(foodSupplies.size()==0){
+        if(foodSupplies.size()==0){ //If there is no more food
             boolean endAntFood =true;
-            for(Ant ant : ants){
+            for(Ant ant : ants){ //We check that every ant has no food
                 if(ant.getHasFood()){
                     endAntFood =false;
                 }
             }
 
             if(endAntFood){
-                end=true;
+                end=true; //We can stop the simulation
             }
         }
     }
@@ -173,7 +177,7 @@ public class Colony {
         int x = ant.getPosition().getX();
         int y = ant.getPosition().getY();
 
-        switch (direction){ //If this direction is valid, ie there is no obstacle, we set nextPosition accordingly
+        switch (direction){
             case NORTH :
                 nextPosition = new Position(x,y-1);
                 break;
@@ -199,11 +203,11 @@ public class Colony {
                 nextPosition = new Position(x-1,y+1);
                 break;
         }
-        if (!map.getCellXY(nextPosition.getX(), nextPosition.getY()).isWalkable()) {
+        if (!map.getCellXY(nextPosition.getX(), nextPosition.getY()).isWalkable()) { //If this direction is valid, ie there is no obstacle, we set nextPosition accordingly
             nextPosition = ant.getPosition();
             mind.setKeeptrack(false);
         }
-        if(ant.getHasFood())
+        if(ant.getHasFood()) //We keep track only if the ant has no food
             mind.setKeeptrack(false);
 
 
