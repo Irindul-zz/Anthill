@@ -33,8 +33,8 @@ import java.util.List;
 public class ColonyDisplay extends Application{
 
     public static Map map;
-    public static int heightRectangle;
-    public static int widthRectangle;
+    public static double heightRectangle;
+    public static double widthRectangle;
     Group group_sim;
     Scene scene_sim;
     Scene scene_menu;
@@ -90,8 +90,10 @@ public class ColonyDisplay extends Application{
         //sleep(10);
         this.stage = stage;
 
-        stage.setWidth(750+16);
-        stage.setHeight(750+38);
+        stage.setWidth(750);
+        stage.setHeight(750);
+
+        stage.setResizable(false);
         stage.setTitle("Anthill");
 
         Group group_menu = new Group();
@@ -231,7 +233,6 @@ public class ColonyDisplay extends Application{
         stage.setScene(scene_menu);
         stage.show();
 
-
     }
 
     public void setMapName(String mapName)
@@ -290,6 +291,9 @@ public class ColonyDisplay extends Application{
         widthRectangle =  750/map.getSizeX();
         pheromonesDisplay = new ArrayList<>();
         foodSuppliesDisplay = new ArrayList<>();
+
+        stage.setWidth(widthRectangle*map.getSizeX()+(scene_menu.getWindow().getWidth() - scene_menu.getWidth()));
+        stage.setHeight(heightRectangle*map.getSizeY()+(scene_menu.getWindow().getHeight() - scene_menu.getHeight()));
         //// SETTING SIMULATOR
 
         group_sim = new Group();
@@ -356,6 +360,8 @@ public class ColonyDisplay extends Application{
         button_mainMenu.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 colonyTimer.stop();
+                stage.setWidth(750);
+                stage.setHeight(750);
                 stage.setScene(scene_menu);
             }
         });
