@@ -20,6 +20,7 @@ import main.View.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 // ===================================
 // ==== Controller of our project ====
@@ -108,12 +109,12 @@ public class Colony {
     public void update()
     {
         //We check if this is the end of simulation, in this case we stopped them
+        List<Ant> ants = anthill.getAnts();
         if(!end) {
             incIterations(); //We increment the iteration counter
             int i = 0;
             pheromones.updatePheromone();
-            for (Ant ant : anthill.ants) {
-
+            for (Ant ant : ants) {
                 detectFood(ant);
                 dropPheromone(ant);
                 detectPheromone(ant);
@@ -134,7 +135,7 @@ public class Colony {
         }
         if(foodSupplies.size()==0){
             boolean endAntFood =true;
-            for(Ant ant : anthill.ants){
+            for(Ant ant : ants){
                 if(ant.getHasFood()){
                     endAntFood =false;
                 }
@@ -301,7 +302,8 @@ public class Colony {
     public boolean getMapHalth() {return this.mapHealth;}
 
     public void changeAntBrain(){ // Change the brain of ant to an evolved brain
-        for(Ant ant: anthill.ants){
+        List<Ant> ants = anthill.getAnts();
+        for(Ant ant: ants){
             ant.setBrain(new EvolvedAI());
         }
     }
