@@ -19,4 +19,6 @@ public interface Sense {
     boolean getObstacle(int i);
     Direction getPheromoneDir();
 
+    boolean getFoodsuply(int i);
+
 }

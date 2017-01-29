@@ -55,6 +55,7 @@ public class BasicAI implements Brain {
         int sumPhero = 0;
         double phero;
         boolean obstacle;
+        boolean foodsupply;
         Sense sensor = ant.getSensor();
         for (int coef: coefs) {
             sum += coef;
@@ -79,7 +80,12 @@ public class BasicAI implements Brain {
         while (i != stop){
             phero = sensor.getResults(i);
             obstacle = sensor.getObstacle(i);
+            foodsupply = sensor.getFoodsuply(i);
 
+            if(foodsupply){
+                proba.makeSure(Direction.values()[i]);
+                break;
+            }
             if(!obstacle) {
                 proba.setProba(i, (coefs[j] + phero) / (sum + sumPhero)); //We set the probas corresponding to the current direction.
             }
