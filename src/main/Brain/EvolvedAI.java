@@ -35,8 +35,6 @@ public class EvolvedAI extends BasicAI {
 
         ant.getMind().setKeeptrack(false);
         ant.setGoBack(false);
-        //TODO see how I can put Dikstra to computes the frequency here without any outside call
-        //TODO Bad way : Dijkstra at every moment I'm goiing back, working but not good.
     }
 
 

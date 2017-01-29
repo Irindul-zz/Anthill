@@ -111,8 +111,9 @@ public class Colony {
         if(!end) {
             incIterations(); //We increment the iteration counter
             int i = 0;
+            pheromones.updatePheromone();
             for (Ant ant : anthill.ants) {
-                pheromones.updatePheromone();
+
                 detectFood(ant);
                 dropPheromone(ant);
                 detectPheromone(ant);
@@ -156,7 +157,7 @@ public class Colony {
 
     public void dropPheromone(Ant ant){
             if(ant.getHasFood()){
-                pheromones.add(ant.dropPheromone(map.getSizeX()*17));
+                pheromones.add(ant.dropPheromone(map.getSizeX()));
 
             }
     }
