@@ -121,10 +121,6 @@ public class ColonyDisplay extends Application{
             this.button_brainyAnts.setMaxWidth(Double.MAX_VALUE);
             this.button_brainyAnts.setPrefHeight(100);
 
-            this.text_mapReader = new Text("");
-            this.text_mapReader.setId("text_mapReader");
-            this.text_mapReader.applyCss();
-
             File mapFolder = new File("src" + File.separator + "main/map");
             File[] listOfMaps = mapFolder.listFiles();
             System.out.println("length: " + mapFolder.getAbsolutePath());
@@ -194,10 +190,15 @@ public class ColonyDisplay extends Application{
                 {
                     cb_mapSelect.getSelectionModel().select(0);
                 }
-            hb_mapSelect.getChildren().addAll(text_mapSelect, cb_mapSelect);
+
+                this.text_mapReader = new Text("");
+                this.text_mapReader.setId("text_mapReader");
+                this.text_mapReader.applyCss();
+
+        hb_mapSelect.getChildren().addAll(text_mapSelect, cb_mapSelect, this.text_mapReader);
 
 
-        vbButtons.getChildren().addAll(button_basicAnts,button_brainyAnts, hb_antAmount, hb_mapSelect, this.text_mapReader);
+        vbButtons.getChildren().addAll(button_basicAnts,button_brainyAnts, hb_antAmount, hb_mapSelect);
         group_menu.getChildren().add(vbButtons);
 
 

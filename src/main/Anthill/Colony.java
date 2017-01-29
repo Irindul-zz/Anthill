@@ -32,6 +32,7 @@ public class Colony {
     private ColonyDisplay colonyDisplay;
     private ReadFiles reader;
     private boolean mapHealth;
+    private double iterations = 0;
 
     public static boolean end; //Stop the simulation
 
@@ -99,6 +100,7 @@ public class Colony {
     public void update()
     {
         if(!end) {
+            incIterations();
             int i = 0;
             for (Ant ant : anthill.ants) {
                 pheromones.updatePheromone();
@@ -292,5 +294,15 @@ public class Colony {
         for(Ant ant: anthill.ants){
             ant.setBrain(new EvolvedAI());
         }
+    }
+
+    public double getIterations()
+    {
+        return this.iterations;
+    }
+
+    public void incIterations()
+    {
+        this.iterations++;
     }
 }
