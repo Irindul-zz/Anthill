@@ -114,8 +114,6 @@ public class Ant{
         this.brain = brain;
         if(brain instanceof EvolvedAI){
             this.sensor = new EvolvedSensor();
-            System.out.println("Mes couilles");
-
         } else {
             this.sensor = new BasicSensor();
 

@@ -23,7 +23,6 @@ public class EvolvedAI extends BasicAI {
            if(ant.goBack())
                 dijkstra(ant);
             Direction toGo = ant.getMind().rollBack(); // We get the next direction.
-            //System.out.println(toGo);
 
             proba.makeSure(toGo); // We tweak the probas so that this outcome is certain.
 
