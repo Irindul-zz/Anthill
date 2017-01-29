@@ -77,11 +77,20 @@ public class Colony {
 
 
         pheromones = new PheromoneCol();
-        Pathfinding.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to re initialize it later
+
+
+        try {
+            Pathfinding.graph = new Graph(map);//We initialise our graph with the map, as graph is static, no need to re initialize it later
+            this.mapHealth = map.checkMap(foodSupplies, anthill);
+
+        } catch (NullPointerException e) {
+            this.mapHealth = false;
+        }
 
 
         //checking map, If mapHealth = true the map pass the test and it is valid. If it's mapHealt=false, the map is invalid
-        this.mapHealth = map.checkMap(foodSupplies, anthill);
+
+
 
         Pheromone.MAXLIFE = map.getSizeX();
 

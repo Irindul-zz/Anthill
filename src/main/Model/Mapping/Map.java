@@ -70,6 +70,7 @@ public class Map {
 
     public boolean checkMap(FoodSupplyCol foodSupplyCol, Anthill anthill) {
         boolean MapValid =true;
+
         if (checkMapNextCell(new Position(0, 0), 0) == (sizeX*2) + (sizeY-2)*2) {
             for (FoodSupply foodSupply : foodSupplyCol.getSupplies()) {
                 if (!Pathfinding.isThereAPath(anthill.getPosition(),foodSupply.getPosition())) {
@@ -88,6 +89,7 @@ public class Map {
         Position nextPosition = position.nextPositionAroundMap(this);
 
         if (count != (sizeX*2) + (sizeY-2)*2) {
+            System.out.println(position.getX()+ " "+position.getY());
             if ( !getCellPosition(nextPosition).isWalkable()) {
                 return checkMapNextCell(nextPosition, count+1);
             } else {
