@@ -158,7 +158,7 @@ public class ColonyDisplay extends Application{
                 text_antAmountTitle.applyCss();
 
                 TextField text_antAmount = new TextField(Integer.toString(this.antAmount));
-                text_antAmount.setPrefWidth(100);
+                text_antAmount.setPrefWidth(50);
                 text_antAmount.setId("text_antAmount");
                 text_antAmount.applyCss();
 
