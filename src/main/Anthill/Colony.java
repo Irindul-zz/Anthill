@@ -38,21 +38,26 @@ public class Colony {
 
 
     public Colony() throws FileNotFoundException {
-        initialize("map1.txt");
+        initialize("map1.txt", 500);
     }
 
     public Colony(String mapName) throws FileNotFoundException {
-        initialize(mapName);
+        initialize(mapName, 500);
     }
 
-    public void initialize(String mapName) throws FileNotFoundException {
+    public Colony(String mapName, int antAmount) throws FileNotFoundException {
+        initialize(mapName, antAmount);
+    }
+
+
+    public void initialize(String mapName, int antAmount) throws FileNotFoundException {
         end=false;
         map = new Map();
         // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
         foodSupplies = new FoodSupplyCol();
         pheromones = new PheromoneCol();
 
-        anthill = new Anthill(500);
+        anthill = new Anthill(antAmount);
 
         try {
             reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + mapName);
