@@ -10,7 +10,7 @@ public class Pheromone{
 
     private int lifeTime;
     private Position pos;
-    Direction direction;
+    private Direction direction;
 
     public Pheromone(Position position, int lifeTime, Direction direction) {
         this.lifeTime = lifeTime;
