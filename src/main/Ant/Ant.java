@@ -77,7 +77,7 @@ public class Ant{
         if(sensor.getPheromoneDir() == null)
             return quantity;
         else
-            return 5*quantity;
+            return 3*quantity;
         //TODO 2 si phéromone 1 sinon
     }
 

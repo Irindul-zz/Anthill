@@ -53,7 +53,7 @@ public class Pheromone{
     }
 
     public void actualize(){
-        this.lifeTime -= 2;
+        this.lifeTime -= 5;
     }
 
 
