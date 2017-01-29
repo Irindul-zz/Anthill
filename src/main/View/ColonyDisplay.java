@@ -76,6 +76,11 @@ public class ColonyDisplay extends Application{
                     group_sim.getChildren().add(foodSupplyD);
                 }
             }
+            else
+            {
+                System.out.println("Simulation finished after " + c.getIterations() + " iterations");
+                colonyTimer.stop();
+            }
         }
     }));
 
