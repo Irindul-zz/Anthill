@@ -55,8 +55,6 @@ public class BasicSensor implements Sense {
         Pheromone ph = p.get(pos);
         if( ph != null) {
             direction = ph.getDirection();
-            System.out.println("Direction du phéro : " + direction);
-
         }
         else {
             direction = null;

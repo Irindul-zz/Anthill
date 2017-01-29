@@ -125,12 +125,6 @@ public class BasicAI implements Brain {
 
 
         return direction;
-        //System.out.println(direction);
-
-
-
-
-
 
     }
 }
