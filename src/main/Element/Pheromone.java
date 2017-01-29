@@ -11,7 +11,7 @@ public class Pheromone{
     private int lifeTime;
     private Position pos;
     private int quantity;
-    Direction direction;
+    private Direction direction;
     public static int MAXLIFE;
 
     public Pheromone(Position position, int lifeTime, Direction direction, int quantity) {
