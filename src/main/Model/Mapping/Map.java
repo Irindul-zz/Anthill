@@ -89,7 +89,6 @@ public class Map {
         Position nextPosition = position.nextPositionAroundMap(this);
 
         if (count != (sizeX*2) + (sizeY-2)*2) {
-            System.out.println(position.getX()+ " "+position.getY());
             if ( !getCellPosition(nextPosition).isWalkable()) {
                 return checkMapNextCell(nextPosition, count+1);
             } else {
