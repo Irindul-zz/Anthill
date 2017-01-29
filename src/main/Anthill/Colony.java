@@ -145,7 +145,7 @@ public class Colony {
 
     public void dropPheromone(Ant ant){
             if(ant.getHasFood()){
-                pheromones.add(ant.dropPheromone());
+                pheromones.add(ant.dropPheromone(map.getSizeX()*17));
 
             }
     }
