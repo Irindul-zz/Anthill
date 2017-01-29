@@ -76,6 +76,7 @@ public class ColonyDisplay extends Application{
                 for (FoodSupplyDisplay foodSupplyD : foodSuppliesDisplay) {
                     group_sim.getChildren().add(foodSupplyD);
                 }
+                text_iterations.setText((int)c.getIterations() + " iterations");
             }
             else
             {
