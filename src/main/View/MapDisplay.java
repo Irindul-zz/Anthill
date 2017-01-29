@@ -3,7 +3,7 @@ package main.View;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import main.Mapping.Map;
+import main.Model.Mapping.Map;
 
 public class MapDisplay extends Parent {
     public static Map map;

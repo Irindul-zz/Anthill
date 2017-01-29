@@ -2,7 +2,7 @@ package main.View;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import main.Mapping.Position;
+import main.Model.Mapping.Position;
 
 public class AntDisplay extends Parent{
     private Position position;

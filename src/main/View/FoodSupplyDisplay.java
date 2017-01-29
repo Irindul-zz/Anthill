@@ -2,7 +2,7 @@ package main.View;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import main.Mapping.Position;
+import main.Model.Mapping.Position;
 
 public class FoodSupplyDisplay extends Parent{
 

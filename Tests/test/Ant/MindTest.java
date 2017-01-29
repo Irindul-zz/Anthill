@@ -1,7 +1,7 @@
 package test.Ant;
 
-import main.Ant.Mind;
-import main.Mapping.Direction;
+import main.Model.Ant.Mind;
+import main.Model.Mapping.Direction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,8 +1,7 @@
 package test.Ant;
 
-import main.Ant.Proba;
-import main.Mapping.Direction;
-import org.junit.After;
+import main.Model.Ant.Proba;
+import main.Model.Mapping.Direction;
 import org.junit.Before;
 import org.junit.Test;
 
