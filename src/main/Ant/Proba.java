@@ -79,11 +79,11 @@ public class Proba {
 
         int returnValue = 7;
         for (int i = 0; i < 8; i++) { //We go through every values of cumFreq, and if the random number is inferior to the freq, then it's the outcome.
-            if( rd < cumFreq[i]) {
+            if( rd <= cumFreq[i]) {
                 return i;
             }
         }
-         return returnValue;
+         return -1;
 
     }
 }

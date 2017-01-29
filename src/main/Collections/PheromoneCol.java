@@ -31,7 +31,7 @@ public class PheromoneCol {
 
         for(Pheromone pheromone: pheromones){
            if(p.getPos().getX()== pheromone.getPos().getX() && p.getPos().getY()== pheromone.getPos().getY()){
-               pheromone.setLifeTime(pheromone.getLifeTime()+200); //TODO change 200 when we have decide the lifetime
+              // pheromone.setLifeTime(pheromone.getLifeTime()+200); //TODO change 200 when we have decide the lifetime
                hasPheromone=true;
                break;
            }
@@ -60,8 +60,25 @@ public class PheromoneCol {
         }
     }
 
+    public Pheromone get(Position p){
+        Pheromone phero = null;
+        for (Pheromone ph: pheromones) {
+            if(ph.getPos().equals(p)){
+                phero = ph;
+            }
+        }
+        return phero;
+    }
+
     public int getPheromoneQuantityAt(Position p){
-        return 0;
+
+        int sum = 0;
+        for (int i = 0; i < pheromones.size(); i++) {
+            if(pheromones.get(i).getPos().equals(p)){
+                sum += pheromones.get(i).getLifeTime();
+            }
+        }
+        return sum;
     }
 
     public List<Pheromone> getPheromones() {
@@ -74,7 +91,7 @@ public class PheromoneCol {
                 pheromones.remove(i);
             }
             else {
-                pheromones.get(i).setLifeTime(pheromones.get(i).getLifeTime()-1);
+                pheromones.get(i).actualize();
             }
         }
     }

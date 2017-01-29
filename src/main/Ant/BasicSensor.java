@@ -3,6 +3,7 @@ package main.Ant;
 import main.Collections.FoodSupplyCol;
 import main.Collections.PheromoneCol;
 import main.Element.Cell;
+import main.Element.Pheromone;
 import main.Mapping.Direction;
 import main.Mapping.Position;
 
@@ -10,6 +11,7 @@ public class BasicSensor implements Sense {
 
     protected double[] results;
     protected boolean[] obstacles;
+    protected Direction direction;
 
     public BasicSensor() {
         results = new double[8];
@@ -50,6 +52,12 @@ public class BasicSensor implements Sense {
         results[Direction.WEST.ordinal()] = p.getPheromoneQuantityAt(west);
         results[Direction.NORTHWEST.ordinal()] = p.getPheromoneQuantityAt(northwest);
 
+        Pheromone ph = p.get(pos);
+        if( ph != null)
+            direction = ph.getDirection();
+        else
+            direction = null;
+
 
     }
 
@@ -62,12 +70,17 @@ public class BasicSensor implements Sense {
     public void detectObstacles(Position pos, Cell[] cells) {
         for (int i = 0; i<8; i++) {
 
-            obstacles[i] = true;
+            obstacles[i] = false;
         }
     }
 
     @Override
     public boolean getObstacle(int i) {
         return obstacles[i];
+    }
+
+    @Override
+    public Direction getPheromoneDir() {
+        return direction;
     }
 }

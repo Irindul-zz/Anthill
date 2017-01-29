@@ -52,7 +52,7 @@ public class Colony {
         foodSupplies = new FoodSupplyCol();
         pheromones = new PheromoneCol();
 
-        anthill = new Anthill(10);
+        anthill = new Anthill(20);
 
         try {
             reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + mapName);

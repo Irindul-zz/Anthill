@@ -1,6 +1,7 @@
 package main.Anthill;
 
 import main.Ant.Ant;
+import main.Brain.EvolvedAI;
 import main.Mapping.Position;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class Anthill{
         ants.clear();
         for (int i = 0; i <nbAnts; i++) {
             ants.add(new Ant(this.position, this.position));
+            ants.get(i).setBrain(new EvolvedAI());
         }
     }
 

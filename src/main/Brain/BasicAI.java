@@ -50,41 +50,65 @@ public class BasicAI implements Brain {
     protected void processPheromones(Ant ant){
         int coefs[] = {0, 5, 10, 20, 50, 20, 10 ,5};
         int sum = 0;
+        int sumObs = 0;
+        int nbObs = 0;
+        int sumPhero = 0;
         double phero;
         boolean obstacle;
         Sense sensor = ant.getSensor();
         for (int coef: coefs) {
             sum += coef;
         }
+        for (int i = 0; i < 8; i++) {
+            sumPhero += (int)sensor.getResults(i);
+        }
+        System.out.println("Direction de base : " + ant.getDirection());
 
         int start = Direction.reverse(ant.getDirection()).ordinal();
+        proba.setProba(start, 0); //We can't go back.
+
+        start = (start + 1) % 8;
+        System.out.println("Start : " + Direction.values()[start]);
+
         int stop = (start +7) % 8 ;
+        System.out.println("Stop : " + Direction.values()[stop]);
         //We use modulo here because of the cycle of the cardinal points.
-        int i = start; // We start 1 after "start", to ignore the cell right behind the ant
-        int j = 0;
+        int i = start;
+        int j = 1;
 
         while (i != stop){
             phero = sensor.getResults(i);
             obstacle = sensor.getObstacle(i);
 
-            if(obstacle) {
-                proba.setProba(i, (coefs[j] + phero) /sum); //We set the probas corresponding to the current direction.
-
+            if(!obstacle) {
+                proba.setProba(i, (coefs[j] + phero) / (sum + sumPhero)); //We set the probas corresponding to the current direction.
             }
-
             else {
+                sumObs += (coefs[j] + phero) / (sum + sumPhero);
+                nbObs++;
                 proba.setProba(i, 0);
-
             }
             i = (i + 1) % 8;
             j++;
         }
-        phero = sensor.getResults(i);
-        obstacle = sensor.getObstacle(i);
-        if(obstacle)
-            proba.setProba(i, (coefs[j] + phero) /sum); //The loop stop one item before so we need to do it one more time.
-        else
-            proba.setProba(i, 0);
+
+
+        if(nbObs > 0){
+            int nbNonObs = 7 - nbObs;
+            sumObs /= nbNonObs;
+            for (int k = 0; k < 8; k++) {
+                obstacle = sensor.getObstacle(k);
+                if(!obstacle){
+                    proba.setProba(k, proba.getProbas()[k] + sumObs );
+                }
+            }
+        }
+
+        for (double d: proba.getProbas()) {
+            System.out.println("Proba : " + d);
+
+        }
+
     }
 
 
@@ -96,13 +120,20 @@ public class BasicAI implements Brain {
         proba.computesFrequencies(); // We calculate the cumulated frequencies
         int dir = proba.randomWithProba();
 
-        Direction direction = Direction.values()[dir];  //We deduce a direction from the int value.
+
+        if(dir != -1) {
+            Direction direction = Direction.values()[dir];  //We deduce a direction from the int value.
+            return direction;
+        }
+
+        return ant.getDirection();
+
+        //System.out.println(direction);
 
 
 
 
 
-        return direction;
 
     }
 }

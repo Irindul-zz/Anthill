@@ -17,5 +17,6 @@ public interface Sense {
     double getResults(int i);
     void detectObstacles(Position pos, Cell[] cells);
     boolean getObstacle(int i);
+    Direction getPheromoneDir();
 
 }

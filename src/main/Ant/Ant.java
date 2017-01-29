@@ -40,7 +40,7 @@ public class Ant{
 
     }
     public Ant() {
-        direction = Direction.NORTH;
+        direction = Direction.SOUTHWEST;
         brain = new BasicAI();
         position = new Position(0,0);
         mind = new Mind();
@@ -74,7 +74,7 @@ public class Ant{
     }
 
     public Pheromone dropPheromone(){
-        Pheromone pheromone = new Pheromone(position, 500, direction); //TODO : add position in paramater when kriss have changed is constructor
+        Pheromone pheromone = new Pheromone(position, 800, direction); //TODO : add position in paramater when kriss have changed is constructor
         return pheromone;
     }
 
@@ -112,10 +112,13 @@ public class Ant{
 
     public void setBrain(Brain brain) {
         this.brain = brain;
-        if(brain instanceof BasicAI){
-            this.sensor = new BasicSensor();
-        } else {
+        if(brain instanceof EvolvedAI){
             this.sensor = new EvolvedSensor();
+            System.out.println("Mes couilles");
+
+        } else {
+            this.sensor = new BasicSensor();
+
         }
     }
 }
