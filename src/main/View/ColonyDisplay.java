@@ -50,7 +50,7 @@ public class ColonyDisplay extends Application{
     private Colony c;
     private double simulationSpeed = 0.5;
     private String mapName;
-    private int antAmount = 500;
+    private int antAmount = 50;
 //TODO : les fourmis sortent de la boite
 
     Timeline colonyTimer = new Timeline(new KeyFrame(Duration.millis(60), new EventHandler<ActionEvent>() {
@@ -154,13 +154,19 @@ public class ColonyDisplay extends Application{
                 hb_antAmount.setAlignment(Pos.CENTER);
 
                 Text text_antAmountTitle = new Text("Number of ants: ");
-                text_antAmountTitle.setLayoutY(20);
                 text_antAmountTitle.setId("text_antAmountTitle");
                 text_antAmountTitle.applyCss();
 
                 TextField text_antAmount = new TextField(Integer.toString(this.antAmount));
+                text_antAmount.setPrefWidth(100);
                 text_antAmount.setId("text_antAmount");
                 text_antAmount.applyCss();
+
+                Text text_antAmountWarning = new Text("  WARNING: more than 100 ants could cause lag on some PCs");
+                text_antAmountWarning.setVisible(false);
+                text_antAmountWarning.setLayoutY(20);
+                text_antAmountWarning.setId("text_antAmountWarning");
+                text_antAmountWarning.applyCss();
 
                 text_antAmount.textProperty().addListener((observable, oldValue, newValue) -> {
                     if(newValue.matches("[0-9]+"))
@@ -175,8 +181,19 @@ public class ColonyDisplay extends Application{
                     {
                         text_antAmount.setText(oldValue);
                     }
+
+                    if(this.antAmount > 100)
+                    {
+                        text_antAmountWarning.setVisible(true);
+                    }
+                    else
+                    {
+                        text_antAmountWarning.setVisible(false);
+                    }
+
                 });
-            hb_antAmount.getChildren().addAll(text_antAmountTitle, text_antAmount);
+
+            hb_antAmount.getChildren().addAll(text_antAmountTitle, text_antAmount, text_antAmountWarning);
 
             // Map select box
             HBox hb_mapSelect = new HBox();

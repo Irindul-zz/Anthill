@@ -57,3 +57,8 @@
 #text_iterations {
     -fx-fill: white;
 }
+
+#text_antAmountWarning {
+    -fx-font-size: 8px;
+    -fx-fill: red;
+}
