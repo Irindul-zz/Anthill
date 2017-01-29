@@ -1,6 +1,8 @@
 package main.Collections;
 
+import javafx.geometry.Pos;
 import main.Element.Pheromone;
+import main.Mapping.Direction;
 import main.Mapping.Position;
 
 import java.util.ArrayList;
@@ -27,18 +29,24 @@ public class PheromoneCol {
     }
 
     public void add(Pheromone p){
-        boolean hasPheromone =false;
+        pheromones.add(p);
+    }
 
-        for(Pheromone pheromone: pheromones){
-           if(p.getPos().getX()== pheromone.getPos().getX() && p.getPos().getY()== pheromone.getPos().getY()){
-              // pheromone.setLifeTime(pheromone.getLifeTime()+200); //TODO change 200 when we have decide the lifetime
-               hasPheromone=true;
-               break;
-           }
-       }
-       if(!hasPheromone){
-           pheromones.add(p);
-       }
+    public void add(Position pos, int quantity, Direction d){
+        boolean exist = false;
+        for (Pheromone p: pheromones) {
+            if(p.getPos().equals(pos)) {
+                exist = true;
+                p.setLifeTime(p.getLifeTime() + Pheromone.MAXLIFE/2);
+                p.add(quantity);
+            }
+        }
+
+        if(!exist){
+            this.add(new Pheromone(pos, Pheromone.MAXLIFE,  d, quantity));
+        }
+
+
     }
 
     public void remove(int i){
@@ -75,7 +83,7 @@ public class PheromoneCol {
         int sum = 0;
         for (int i = 0; i < pheromones.size(); i++) {
             if(pheromones.get(i).getPos().equals(p)){
-                sum += pheromones.get(i).getLifeTime();
+                sum += pheromones.get(i).getQuantity();
             }
         }
         return sum;

@@ -10,12 +10,15 @@ public class Pheromone{
 
     private int lifeTime;
     private Position pos;
+    private int quantity;
     Direction direction;
+    public static int MAXLIFE;
 
-    public Pheromone(Position position, int lifeTime, Direction direction) {
+    public Pheromone(Position position, int lifeTime, Direction direction, int quantity) {
         this.lifeTime = lifeTime;
         pos = position;
         this.direction = direction;
+        this.quantity = quantity;
     }
 
     public Pheromone(Position pos) {
@@ -30,9 +33,19 @@ public class Pheromone{
         this.pos = pos;
     }
 
-
+    public void add(int quantity){
+        this.quantity += quantity;
+    }
     public Direction getDirection() {
         return direction;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void setDirection(Direction direction) {
@@ -40,7 +53,7 @@ public class Pheromone{
     }
 
     public void actualize(){
-        this.lifeTime--;
+        this.lifeTime -= 2;
     }
 
 
@@ -50,6 +63,8 @@ public class Pheromone{
     }
     public void setLifeTime(int lifeTime) {
         this.lifeTime = lifeTime;
+        if(this.lifeTime  > MAXLIFE)
+            lifeTime = MAXLIFE;
     }
 
 }

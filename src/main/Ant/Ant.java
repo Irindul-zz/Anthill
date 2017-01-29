@@ -73,9 +73,12 @@ public class Ant{
 
     }
 
-    public Pheromone dropPheromone(int life){
-        Pheromone pheromone = new Pheromone(position, life, Direction.reverse(direction)); //TODO : add position in paramater when kriss have changed is constructor
-        return pheromone;
+    public int dropPheromone(int quantity){
+        if(sensor.getPheromoneDir() == null)
+            return quantity;
+        else
+            return 5*quantity;
+        //TODO 2 si phéromone 1 sinon
     }
 
     public Position getPosition(){

@@ -43,14 +43,15 @@ public class BasicSensor implements Sense {
         Position west = new Position(x-1, y);
         Position northwest = new Position(x-1, y-1);
 
-        results[Direction.NORTH.ordinal()] = p.getPheromoneQuantityAt(north);
-        results[Direction.NORTHEAST.ordinal()] = p.getPheromoneQuantityAt(northeast);
-        results[Direction.EAST.ordinal()] = p.getPheromoneQuantityAt(east);
-        results[Direction.SOUTHEAST.ordinal()] = p.getPheromoneQuantityAt(southeast);
-        results[Direction.SOUTH.ordinal()] = p.getPheromoneQuantityAt(south);
-        results[Direction.SOUTHWEST.ordinal()] = p.getPheromoneQuantityAt(southwest);
-        results[Direction.WEST.ordinal()] = p.getPheromoneQuantityAt(west);
-        results[Direction.NORTHWEST.ordinal()] = p.getPheromoneQuantityAt(northwest);
+        int coef = 100;
+        results[Direction.NORTH.ordinal()] = p.getPheromoneQuantityAt(north) * coef;
+        results[Direction.NORTHEAST.ordinal()] = p.getPheromoneQuantityAt(northeast) * coef;
+        results[Direction.EAST.ordinal()] = p.getPheromoneQuantityAt(east) * coef;
+        results[Direction.SOUTHEAST.ordinal()] = p.getPheromoneQuantityAt(southeast) * coef;
+        results[Direction.SOUTH.ordinal()] = p.getPheromoneQuantityAt(south) * coef;
+        results[Direction.SOUTHWEST.ordinal()] = p.getPheromoneQuantityAt(southwest) * coef;
+        results[Direction.WEST.ordinal()] = p.getPheromoneQuantityAt(west) * coef;
+        results[Direction.NORTHWEST.ordinal()] = p.getPheromoneQuantityAt(northwest) * coef;
 
         Pheromone ph = p.get(pos);
         if( ph != null) {

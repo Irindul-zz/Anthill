@@ -85,6 +85,8 @@ public class Colony {
             this.mapHealth = false;
         }
 
+        Pheromone.MAXLIFE = map.getSizeX();
+
         ColonyDisplay.map = map; //We give the map to our display to display it
         ColonyDisplay colonyDisplay = new ColonyDisplay(); //We declare our display
         //We define the reference size of a map rectangle.
@@ -116,8 +118,9 @@ public class Colony {
             pheromones.updatePheromone();
             for (Ant ant : ants) {
                 detectFood(ant);
-                dropPheromone(ant);
                 detectPheromone(ant);
+                dropPheromone(ant);
+
                 detectObstacle(ant);
                 move(ant, map);
                 ColonyDisplay.antsDisplay[i].setPosition(ant.getPosition());
@@ -158,7 +161,7 @@ public class Colony {
 
     public void dropPheromone(Ant ant){
             if(ant.getHasFood()){
-                pheromones.add(ant.dropPheromone(map.getSizeX()));
+                pheromones.add(ant.getPosition(), ant.dropPheromone(1), Direction.reverse(ant.getDirection()));
 
             }
     }
