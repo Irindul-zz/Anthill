@@ -1,16 +1,10 @@
 package main.Brain;
 
 import main.Ant.Ant;
-import main.Ant.Mind;
 import main.Ant.Proba;
-import main.Mapping.Direction;
 import main.Ant.Sense;
-import main.Mapping.Map;
-import main.Mapping.Position;
+import main.Mapping.Direction;
 
-/**
- * Created by Irindul on 24/01/2017.
- */
 public class BasicAI implements Brain {
 
     protected Proba proba;
@@ -18,11 +12,6 @@ public class BasicAI implements Brain {
 
     public BasicAI() {
         proba = new Proba();
-
-    }
-
-    @Override
-    public void detectEnvironement() {
 
     }
 

@@ -1,10 +1,5 @@
 package main.Graph;
 
-import main.Mapping.Position;
-
-/**
- * Created by Irindul on 27/01/2017.
- */
 public class Edge {
 
     private Node current;

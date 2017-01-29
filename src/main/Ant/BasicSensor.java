@@ -10,10 +10,10 @@ import main.Mapping.Position;
 
 public class BasicSensor implements Sense {
 
-    protected double[] results;
+    private double[] results;
     protected boolean[] obstacles;
-    protected Direction direction;
-    protected boolean[] foodsupply;
+    private Direction direction;
+    private boolean[] foodsupply;
 
     public BasicSensor() {
         results = new double[8];

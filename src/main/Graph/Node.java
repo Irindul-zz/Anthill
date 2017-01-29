@@ -5,9 +5,6 @@ import main.Mapping.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Irindul on 27/01/2017.
- */
 public class Node {
     private List<Edge> edges;
     private Position position;

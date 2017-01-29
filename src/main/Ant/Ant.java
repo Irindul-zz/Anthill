@@ -1,31 +1,23 @@
 package main.Ant;
 
-import javafx.geometry.Pos;
 import main.Brain.BasicAI;
 import main.Brain.Brain;
 import main.Brain.EvolvedAI;
 import main.Brain.Memory;
 import main.Collections.FoodSupplyCol;
-import main.Element.Pheromone;
 import main.Mapping.Direction;
-import main.Mapping.Map;
 import main.Mapping.Position;
 
-import static main.Mapping.Direction.*;
-
-/**
- * Created by Irindul on 25/12/2016.
- */
 public class Ant{
 
-    protected boolean hasFood;
-    protected Direction direction;
-    protected Sense sensor;
-    protected Position position;
-    protected Brain brain;
-    protected Memory mind;
-    protected Position anhillPosition;
-    protected boolean goBack;
+    private boolean hasFood;
+    private Direction direction;
+    private Sense sensor;
+    private Position position;
+    private Brain brain;
+    private Memory mind;
+    private Position anthillPosition;
+    private boolean goBack;
 
     public Ant(Direction direction, Position position) {
         this();
@@ -36,7 +28,7 @@ public class Ant{
     public Ant(Position position, Position anthillPosition) {
         this();
         this.position = position;
-        anhillPosition = anthillPosition;
+        this.anthillPosition = anthillPosition;
 
     }
     public Ant() {
@@ -62,7 +54,7 @@ public class Ant{
         this.position = position;
     }
 
-    public void takeFood(Position posistion, FoodSupplyCol f){
+    public void takeFood(Position position, FoodSupplyCol f){
         f.removeFoodAt(position);
         hasFood=true;
         goBack = true;
@@ -74,11 +66,10 @@ public class Ant{
     }
 
     public int dropPheromone(int quantity){
-        if(sensor.getPheromoneDir() == null)
+        if(sensor.getPheromoneDir() == null) //If there is no pheromones at this position we will add a quantity of 1
             return quantity;
         else
-            return 3*quantity;
-        //TODO 2 si phéromone 1 sinon
+            return 3*quantity; // we add three time the quantity otherwise.
     }
 
     public Position getPosition(){
@@ -97,12 +88,9 @@ public class Ant{
         return direction;
     }
 
-    public void setHasFood(boolean hasFood) {
-        this.hasFood = hasFood;
-    }
 
     public Position getAnhillPosition() {
-        return anhillPosition;
+        return anthillPosition;
     }
 
     public boolean goBack() {
@@ -115,7 +103,7 @@ public class Ant{
 
     public void setBrain(Brain brain) {
         this.brain = brain;
-        if(brain instanceof EvolvedAI){
+        if(brain instanceof EvolvedAI){ //We also need to change the Sensor accordingly to the AI.
             this.sensor = new EvolvedSensor();
         } else {
             this.sensor = new BasicSensor();

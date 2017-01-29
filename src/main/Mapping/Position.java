@@ -1,8 +1,5 @@
 package main.Mapping;
 
-/**
- * Created by Irindul on 25/12/2016.
- */
 public class Position {
 
     private int x;

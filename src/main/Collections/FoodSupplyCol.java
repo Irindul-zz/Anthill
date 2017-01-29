@@ -11,21 +11,14 @@ public class FoodSupplyCol {
 
     public FoodSupplyCol() {
 
-        //Note for Maxence : Declare a collection as a List and implement it as an ArrayList is the
-        //proper way to declare ArrayLists.
-        supplies = new ArrayList<FoodSupply>();
+
+        supplies = new ArrayList<>();
     }
 
-    public FoodSupply getFoodSupplyIndex(int i){
-        return supplies.get(i);
-    }
 
 
     public void addFoodSupply(FoodSupply fs){
         supplies.add(fs);
-    }
-    public void addNewFoodSuuply(Position position, int quantity) {
-        supplies.add(new FoodSupply(position, quantity));
     }
 
     public void removeFoodAt(Position position){
@@ -44,7 +37,7 @@ public class FoodSupplyCol {
         return supplies.size();
     }
 
-    public void remove(Position position){
+    private void remove(Position position){
         for(int i =0; i<supplies.size(); i++) {
             if (supplies.get(i).getPosition().getX()==position.getX() && supplies.get(i).getPosition().getY()==position.getY()) {
                 supplies.remove(i);
@@ -52,39 +45,13 @@ public class FoodSupplyCol {
         }
     }
 
-    public void removeFoodSupply(FoodSupply fs) {
-        for(int i =0; i<supplies.size(); i++) {
-            if (supplies.get(i).getPosition().getX()==fs.getPosition().getX() && supplies.get(i).getPosition().getY()==fs.getPosition().getY()) {
-                supplies.remove(i);
+
+    public FoodSupply getFoodSupplyAt(Position position) {
+        for (FoodSupply supply : supplies) {
+            if (supply.getPosition().getX() == position.getX() && supply.getPosition().getY() == position.getY()) {
+                return supply;
             }
         }
-    }
-
-    public void removeFoodSupplyAt(Position position){
-        for(int i =0; i<supplies.size(); i++) {
-            if (supplies.get(i).getPosition().getX()==position.getX() && supplies.get(i).getPosition().getY()==position.getY()) {
-                supplies.remove(i);
-            }
-        }
-    }
-
-    public int getFooddSupplyQuatityAt(Position position) {
-
-        for (int i = 0; i < supplies.size(); i++) {
-            if (supplies.get(i).getPosition().getX() == position.getX() && supplies.get(i).getPosition().getY() == position.getY()) {
-                return supplies.get(i).getQuantity();
-            }
-        }
-        return 0;
-    }
-
-        public FoodSupply getFoodSupplyAt(Position position) {
-
-            for(int i =0; i<supplies.size(); i++) {
-                if (supplies.get(i).getPosition().getX()==position.getX() && supplies.get(i).getPosition().getY()==position.getY()) {
-                    return supplies.get(i);
-                }
-            }
             return null;
         }
 

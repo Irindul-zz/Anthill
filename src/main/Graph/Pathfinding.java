@@ -4,14 +4,11 @@ import main.Mapping.Position;
 
 import java.util.*;
 
-/**
- * Created by Irindul on 27/01/2017.
- */
-public class Dijkstra {
+public class Pathfinding {
 
     public static Graph graph;
 
-    public Dijkstra() {
+    public Pathfinding() {
         graph = new Graph();
     }
 
@@ -28,7 +25,7 @@ public class Dijkstra {
             if(current == nodeGoal)
                 break;
 
-            for(Node next: graph.neighbours(current)){ // TODO: 27/01/2017 change with real Dijkstra
+            for(Node next: graph.neighbours(current)){
                 if( ! cameFrom.containsKey(next)){
                     frontier.add(next);
                     cameFrom.put(next, current);
@@ -49,12 +46,6 @@ public class Dijkstra {
             path.add(current);
             i++;
         }
-
-        
-        //path.add(nodeStart);
-
-
-        //TODO convert Node path into direction path => rollBack
 
         return path;
 

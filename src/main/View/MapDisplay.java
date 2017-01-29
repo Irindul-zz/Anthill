@@ -5,14 +5,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import main.Mapping.Map;
 
-/**
- * Created by Eriwyr on 25/01/2017.
- */
 public class MapDisplay extends Parent {
     public static Map map;
 
     public MapDisplay(Map map) {
-    this.map=map;
+    MapDisplay.map =map;
 
         for (int i = 0; i < map.getSizeX(); i++) {
             for (int j = 0; j < map.getSizeY(); j++) {

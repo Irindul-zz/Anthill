@@ -6,9 +6,7 @@ import main.Mapping.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Irindul on 27/01/2017.
- */
+
 public class Graph {
 
     private List<Node> nodes;
@@ -29,18 +27,7 @@ public class Graph {
 
         for (int i = 0;i < map.getSizeX(); i++){
             for (int j = 0; j < map.getSizeY(); j++) {
-                
-                    
 
-               /*
-
-
-
-
-                i j+1;
-                i j-1:
-                i+1 j-1;
-                i - 1 j+1;*/
                 if(map.getCellXY(i, j).isWalkable()) {
 
                     this.add(nodes[i][j]);
@@ -138,9 +125,7 @@ public class Graph {
     }
 
     private boolean isInRange(Map map, int x, int y){
-        if(x >= 0 && y >= 0 && x < map.getSizeX() && y < map.getSizeY())
-            return true;
-        return false;
+        return x >= 0 && y >= 0 && x < map.getSizeX() && y < map.getSizeY();
     }
 
     public Node nodeFromPosition(Position pos){

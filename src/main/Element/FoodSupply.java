@@ -2,9 +2,7 @@ package main.Element;
 
 import main.Mapping.Position;
 
-/**
- * Created by Irindul on 25/12/2016.
- */
+
 public class FoodSupply{
 
     private int quantity;
@@ -27,14 +25,6 @@ public class FoodSupply{
     public void removeFood() {
         quantity --;
     	
-    }
-
-    public void removeFood(int quantity) {
-        this.quantity -= quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public void setPosition(Position position) {

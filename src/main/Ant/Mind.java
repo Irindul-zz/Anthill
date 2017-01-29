@@ -3,9 +3,7 @@ package main.Ant;
 import main.Brain.Memory;
 import main.Mapping.Direction;
 
-/**
- * Created by Irindul on 05/01/2017.
- */
+
 public class Mind implements Memory {
 
 
@@ -54,8 +52,4 @@ public class Mind implements Memory {
         this.keeptrack = keeptrack;
     }
 
-    @Override
-    public boolean getKeeptrack(){
-        return keeptrack;
-    }
 }

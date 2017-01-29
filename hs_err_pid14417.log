@@ -95,8 +95,8 @@ R15=0x00007f877c0a2000 is a thread
 Stack: [0x00007f876af82000,0x00007f876b083000],  sp=0x00007f876b07ff98,  free space=1015k
 Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
 C  0x00007f877a005060
-j  main.Graph.Dijkstra.search(Lmain/Mapping/Position;Lmain/Mapping/Position;)Ljava/util/List;+79
-j  main.Graph.Dijkstra.isThereAPath(Lmain/Mapping/Position;Lmain/Mapping/Position;)Z+2
+j  main.Graph.Pathfinding.search(Lmain/Mapping/Position;Lmain/Mapping/Position;)Ljava/util/List;+79
+j  main.Graph.Pathfinding.isThereAPath(Lmain/Mapping/Position;Lmain/Mapping/Position;)Z+2
 j  main.Mapping.Map.checkMap(Lmain/Collections/FoodSupplyCol;Lmain/Anthill/Anthill;)Z+76
 j  main.Anthill.Colony.<init>()V+171
 j  main.View.ColonyDisplay.start(Ljavafx/stage/Stage;)V+10

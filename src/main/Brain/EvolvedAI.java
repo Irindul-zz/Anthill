@@ -1,16 +1,14 @@
 package main.Brain;
 
 import main.Ant.Ant;
-import main.Graph.Dijkstra;
+import main.Graph.Pathfinding;
 import main.Graph.Node;
 import main.Mapping.Direction;
 import main.Mapping.Position;
 
 import java.util.List;
 
-/**
- * Created by Irindul on 28/01/2017.
- */
+
 public class EvolvedAI extends BasicAI {
 
     @Override
@@ -39,7 +37,7 @@ public class EvolvedAI extends BasicAI {
 
 
     private void dijkstra(Ant ant){
-        List<Node> pathNode = Dijkstra.search(ant.getPosition(), ant.getAnhillPosition());
+        List<Node> pathNode = Pathfinding.search(ant.getPosition(), ant.getAnhillPosition());
         Position current;
         Position toCheck;
         int i = 0;

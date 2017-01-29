@@ -1,12 +1,9 @@
 package main.Ant;
 
 import main.Mapping.Direction;
-
 import java.util.Random;
 
-/**
- * Created by Irindul on 05/01/2017.
- */
+
 public class Proba {
 
     private double probas[];
@@ -77,7 +74,6 @@ public class Proba {
         double rd = min + (max - min) * random.nextDouble(); //We have a random number in [min, max[.
         rd %= 100;
 
-        int returnValue = 7;
         for (int i = 0; i < 8; i++) { //We go through every values of cumFreq, and if the random number is inferior to the freq, then it's the outcome.
             if( rd <= cumFreq[i]) {
                 return i;

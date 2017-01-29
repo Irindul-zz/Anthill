@@ -4,10 +4,8 @@ import main.Element.Cell;
 import main.Mapping.Direction;
 import main.Mapping.Position;
 
-/**
- * Created by Irindul on 21/01/2017.
- */
-public class EvolvedSensor extends BasicSensor {
+
+class EvolvedSensor extends BasicSensor {
     @Override
     public void detectObstacles(Position pos, Cell[] cells) {
 

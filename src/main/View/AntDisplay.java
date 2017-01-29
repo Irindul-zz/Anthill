@@ -4,17 +4,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import main.Mapping.Position;
 
-/**
- * Created by Eriwyr on 25/01/2017.
- */
 public class AntDisplay extends Parent{
     private Position position;
-    private int id;
 
-    public AntDisplay(Position position, int id){
+    public AntDisplay(Position position){
 
         Circle ant = new Circle();
-        this.id=id;
         this.position = position;
 
         double offsetHeight = ((ColonyDisplay.heightRectangle)/2);

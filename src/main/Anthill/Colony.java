@@ -9,7 +9,7 @@ import main.Collections.PheromoneCol;
 import main.Element.Cell;
 import main.Element.FoodSupply;
 import main.Element.Pheromone;
-import main.Graph.Dijkstra;
+import main.Graph.Pathfinding;
 import main.Graph.Graph;
 import main.Mapping.Direction;
 import main.Mapping.Map;
@@ -52,7 +52,7 @@ public class Colony {
     }
 
 
-    public void initialize(String mapName, int antAmount) throws FileNotFoundException { //The controller initialize all elements for the simulation and in particular displayElements
+    private void initialize(String mapName, int antAmount) throws FileNotFoundException { //The controller initialize all elements for the simulation and in particular displayElements
         end=false; // Boolean for the simulation end. end = true => end of simulation
         map = new Map();
         foodSupplies = new FoodSupplyCol();
@@ -76,19 +76,16 @@ public class Colony {
 
 
         pheromones = new PheromoneCol();
-        Dijkstra.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to re initialize it later
+        Pathfinding.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to re initialize it later
 
 
         //checking map, If mapHealth = true the map pass the test and it is valid. If it's mapHealt=false, the map is invalid
-        this.mapHealth = true;
-        if (!map.checkMap(foodSupplies, anthill)) {
-            this.mapHealth = false;
-        }
+        this.mapHealth = map.checkMap(foodSupplies, anthill);
 
         Pheromone.MAXLIFE = map.getSizeX();
 
         ColonyDisplay.map = map; //We give the map to our display to display it
-        ColonyDisplay colonyDisplay = new ColonyDisplay(); //We declare our display
+
         //We define the reference size of a map rectangle.
         ColonyDisplay.heightRectangle = 750/map.getSizeY();
         ColonyDisplay.widthRectangle =  750/map.getSizeX();
@@ -102,7 +99,7 @@ public class Colony {
         //For each ant, we declare one shape in the display
         int i;
         for (i =0 ; i < anthill.getAnts().size() ; i++){
-            ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()), i);
+            ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()));
         }
 
     }
@@ -133,7 +130,7 @@ public class Colony {
                 ColonyDisplay.pheromonesDisplay.add(new PheromoneDisplay(pheromone.getPos(), pheromones.size() + 1));
             }
             for (FoodSupply foodSupply : foodSupplies.getSupplies()) {
-                ColonyDisplay.foodSuppliesDisplay.add(new FoodSupplyDisplay(foodSupply.getPosition(), foodSupplies.size() + 1));
+                ColonyDisplay.foodSuppliesDisplay.add(new FoodSupplyDisplay(foodSupply.getPosition()));
             }
         }
         if(foodSupplies.size()==0){
@@ -152,21 +149,21 @@ public class Colony {
 
 
 
-    public void detectFood(Ant ant){
+    private void detectFood(Ant ant){
 
             if(ant.getSensor().detectFood(ant.getPosition(),foodSupplies)&& !ant.getHasFood()) {
                 ant.takeFood(ant.getPosition(), foodSupplies);
             }
     }
 
-    public void dropPheromone(Ant ant){
+    private void dropPheromone(Ant ant){
             if(ant.getHasFood()){
                 pheromones.add(ant.getPosition(), ant.dropPheromone(1), Direction.reverse(ant.getDirection()));
 
             }
     }
 
-    public void move(Ant ant, Map map){
+    private void move(Ant ant, Map map){
 
         Brain brain =  ant.getBrain();
         brain.processProba(ant); //We can now call the corresponding methods
@@ -215,16 +212,16 @@ public class Colony {
 
     }
 
-    public void detectPheromone(Ant ant){
+    private void detectPheromone(Ant ant){
             ant.getSensor().detectPheromones(ant.getPosition(), pheromones);
 
 
     }
 
-    public void detectObstacle(Ant ant) {
+    private void detectObstacle(Ant ant) {
         Cell[] cells = new Cell[8];
 
-        Position pos = ant.getPosition(); //TODO May be refactored inside EvolvedSensor
+        Position pos = ant.getPosition();
         int x = pos.getX();
         int y = pos.getY();
         // We store every surrounding cells in a Cell array.
@@ -316,7 +313,7 @@ public class Colony {
         return this.iterations;
     }
 
-    public void incIterations()
+    private void incIterations()
     {
         this.iterations++;
     }

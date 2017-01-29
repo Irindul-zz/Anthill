@@ -15,7 +15,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -29,16 +28,15 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ColonyDisplay extends Application{
 
     public static Map map;
     public static double heightRectangle;
     public static double widthRectangle;
-    Group group_sim;
-    Scene scene_sim;
-    Scene scene_menu;
-    Stage stage;
+    private Group group_sim;
+    private Scene scene_sim;
+    private Scene scene_menu;
+    private Stage stage;
     public static AntDisplay[] antsDisplay;
     public static AnthillDisplay anthillDisplay;
     public static List<FoodSupplyDisplay> foodSuppliesDisplay;
@@ -48,12 +46,10 @@ public class ColonyDisplay extends Application{
     private Button button_brainyAnts;
     private Text text_iterations;
     private Colony c;
-    private double simulationSpeed = 0.5;
     private String mapName;
     private int antAmount = 500;
-//TODO : les fourmis sortent de la boite
 
-    Timeline colonyTimer = new Timeline(new KeyFrame(Duration.millis(60), new EventHandler<ActionEvent>() {
+    private Timeline colonyTimer = new Timeline(new KeyFrame(Duration.millis(60), new EventHandler<ActionEvent>() {
 
         @Override
         public void handle(ActionEvent event) {
@@ -104,7 +100,6 @@ public class ColonyDisplay extends Application{
 
         //// SETTING THE MAIN MENU ////
         Text text = new Text("Please choose the intelligence for the ants");
-        Label label_chooseAnts = new Label(text.getText());
         text.setId("menuTitle");
         text.applyCss();
         text.setLayoutY(40);
@@ -137,11 +132,10 @@ public class ColonyDisplay extends Application{
             ObservableList selections = FXCollections.observableArrayList();
             if(mapFolder.exists())
             {
-                for(int i=0; i<listOfMaps.length; i++)
-                {
-                    if(listOfMaps[i].isFile())
-                    {
-                        selections.add(listOfMaps[i].getName());
+                assert listOfMaps != null;
+                for (File listOfMap : listOfMaps) {
+                    if (listOfMap.isFile()) {
+                        selections.add(listOfMap.getName());
                     }
                 }
             }
@@ -187,7 +181,7 @@ public class ColonyDisplay extends Application{
                 text_mapSelect.setId("text_mapSelect");
                 text_mapSelect.applyCss();
 
-                ChoiceBox cb_mapSelect = new ChoiceBox<String>(selections);
+                ChoiceBox<String> cb_mapSelect = new ChoiceBox<>(selections);
 
                 cb_mapSelect.getSelectionModel().selectedIndexProperty()
                         .addListener(new ChangeListener<Number>() {
@@ -236,11 +230,11 @@ public class ColonyDisplay extends Application{
 
     }
 
-    public void setMapName(String mapName)
+    private void setMapName(String mapName)
     {
         this.mapName = mapName;
     }
-    public void startSimulation(int AILevel)
+    private void startSimulation(int AILevel)
     {
         startNewColony();
 
@@ -258,7 +252,7 @@ public class ColonyDisplay extends Application{
     }
 
 
-    public void startNewColony() {
+    private void startNewColony() {
         text_mapReader.setVisible(true);
         text_mapReader.setText("Loading map...");
         text_mapReader.setId("text_mapReader");
@@ -286,7 +280,7 @@ public class ColonyDisplay extends Application{
         button_brainyAnts.setDisable(false);
     }
 
-    public void initializeSimulationDisplay()
+    private void initializeSimulationDisplay()
     {
         heightRectangle = 750/map.getSizeY();
         widthRectangle =  750/map.getSizeX();
@@ -327,8 +321,9 @@ public class ColonyDisplay extends Application{
             button_decreaseSpeed.setId("button_decreaseSpeed");
             button_decreaseSpeed.applyCss();
 
-            colonyTimer.setRate(simulationSpeed);
-            TextField text_speed = new TextField(Integer.toString((int)(simulationSpeed*100)));
+        double simulationSpeed = 0.5;
+        colonyTimer.setRate(simulationSpeed);
+            TextField text_speed = new TextField(Integer.toString((int)(simulationSpeed *100)));
             text_speed.setId("text_speed");
             text_speed.applyCss();
 

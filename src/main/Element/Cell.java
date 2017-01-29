@@ -12,11 +12,9 @@ public class Cell {
         return isWalkable;
     }
 
-    public char getChar(){ //TODO:remove this function
+    public char getChar(){
         if (!isWalkable) return '#';
         else return ' ';
     }
-    public void setWalkable(boolean walkable) {
-        isWalkable = walkable;
-    }
+
 }

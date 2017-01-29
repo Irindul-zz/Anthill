@@ -3,10 +3,9 @@ import main.Anthill.Anthill;
 import main.Collections.FoodSupplyCol;
 import main.Element.Cell;
 import main.Element.FoodSupply;
-import main.Graph.Dijkstra;
+import main.Graph.Pathfinding;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class Map {
     private File fileMap;
@@ -73,7 +72,7 @@ public class Map {
         boolean MapValid =true;
         if (checkMapNextCell(new Position(0, 0), 0) == (sizeX*2) + (sizeY-2)*2) {
             for (FoodSupply foodSupply : foodSupplyCol.getSupplies()) {
-                if (!Dijkstra.isThereAPath(anthill.getPosition(),foodSupply.getPosition())) {
+                if (!Pathfinding.isThereAPath(anthill.getPosition(),foodSupply.getPosition())) {
                     MapValid =false;
                     break;
                 }

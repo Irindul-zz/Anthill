@@ -8,11 +8,8 @@ import main.Element.FoodSupply;
 import java.io.*;
 import java.util.Scanner;
 
-/**
- * Created by Eriwyr on 27/01/2017.
- */
 public class ReadFiles {
-    File fileMap;
+    private File fileMap;
 
 
     public ReadFiles(String fileName) throws IOException {
@@ -82,7 +79,7 @@ public class ReadFiles {
             }
             catch(IOException|NumberFormatException e){
 
-                if(e.getClass().getName() == "java.lang.NumberFormatException")
+                if(e.getClass().getName().equals("java.lang.NumberFormatException"))
                 {
                     System.out.println("The map file does not only contain integers: " + e.getMessage());
                 }
