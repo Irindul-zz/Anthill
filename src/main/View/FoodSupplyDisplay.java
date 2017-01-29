@@ -2,18 +2,13 @@ package main.View;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import main.Mapping.Position;
+import main.Model.Mapping.Position;
 
-/**
- * Created by Eriwyr on 27/01/2017.
- */
 public class FoodSupplyDisplay extends Parent{
 
     private Position position;
-    private int id;
 
-    public FoodSupplyDisplay(Position position, int id ){
-        this.id=id;
+    public FoodSupplyDisplay(Position position){
         this.position = position;
         Rectangle foodSupply = new Rectangle();
         foodSupply.setHeight(ColonyDisplay.heightRectangle/1.5);
