@@ -21,75 +21,82 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
+// ===================================
+// ==== Controller of our project ====
+// ===================================
 public class Colony {
 
     private FoodSupplyCol foodSupplies;
     private PheromoneCol pheromones;
     private Anthill anthill;
     private Map map;
-    //AntDisplay[] antsDisplay;
-    private ColonyDisplay colonyDisplay;
     private ReadFiles reader;
-    private boolean mapHealth;
-    private double iterations = 0;
+    private boolean mapHealth; //Attribute about the validity of the map
+    private double iterations = 0; //counter for  iterations number
 
     public static boolean end; //Stop the simulation
 
 
 
-    public Colony() throws FileNotFoundException {
+    public Colony() throws FileNotFoundException { //Default constructor with a default map
         initialize("map1.txt", 500);
     }
 
-    public Colony(String mapName) throws FileNotFoundException {
+    public Colony(String mapName) throws FileNotFoundException { //Constructor with the map name in parameter
         initialize(mapName, 500);
     }
 
-    public Colony(String mapName, int antAmount) throws FileNotFoundException {
+    public Colony(String mapName, int antAmount) throws FileNotFoundException { // Constructor the map name and ants number
         initialize(mapName, antAmount);
     }
 
 
-    public void initialize(String mapName, int antAmount) throws FileNotFoundException {
-        end=false;
+    public void initialize(String mapName, int antAmount) throws FileNotFoundException { //The controller initialize all elements for the simulation and in particular displayElements
+        end=false; // Boolean for the simulation end. end = true => end of simulation
         map = new Map();
-        // map = new Map("src" + File.separator + "main/map" + File.separator + "map1.txt");
         foodSupplies = new FoodSupplyCol();
         pheromones = new PheromoneCol();
 
-        anthill = new Anthill(antAmount);
+        anthill = new Anthill(antAmount); //Declaration of our anthill with a special amount of ants, select by the user in the interface
 
+        //We try to open the map
         try {
             reader = new ReadFiles("src" + File.separator + "main/map" + File.separator + mapName);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //If there is a problem in the map's reading
         if(!reader.readFile(this.map, this.foodSupplies, this.anthill))
         {
             System.out.println("Something went wrong when reading the map file");
             return;
         }
+
+
         pheromones = new PheromoneCol();
         Dijkstra.graph = new Graph(map); //We initialise our graph with the map, as graph is static, no need to re initialize it later
 
 
-        //checking map
+        //checking map, If mapHealth = true the map pass the test and it is valid. If it's mapHealt=false, the map is invalid
         this.mapHealth = true;
         if (!map.checkMap(foodSupplies, anthill)) {
             this.mapHealth = false;
         }
 
-        //Ants only stay in map if they start at (1, 1) Position
-        //anthill.setPosition(new Position(13, 1));
-        //anthill.declareAnts();
-        ColonyDisplay.map = map;
-        colonyDisplay = new ColonyDisplay();
+        ColonyDisplay.map = map; //We give the map to our display to display it
+        ColonyDisplay colonyDisplay = new ColonyDisplay(); //We declare our display
+        //We define the reference size of a map rectangle.
         ColonyDisplay.heightRectangle = 750/map.getSizeY();
         ColonyDisplay.widthRectangle =  750/map.getSizeX();
+
+        //We declare the collection which contains the display of each ant
         ColonyDisplay.antsDisplay = new AntDisplay[anthill.getAnts().size()];
 
+        //We declare the display of our anthill
         ColonyDisplay.anthillDisplay = new AnthillDisplay(anthill.getPosition());
+
+        //For each ant, we declare one shape in the display
         int i;
         for (i =0 ; i < anthill.getAnts().size() ; i++){
             ColonyDisplay.antsDisplay[i] = new AntDisplay(new Position(anthill.getAntIndcex(i).getPosition().getX(), anthill.getAntIndcex(i).getPosition().getY()), i);
@@ -97,10 +104,12 @@ public class Colony {
 
     }
 
+    //The most important function, is function that realizes all checks and changes in the simulation. It control all of our program
     public void update()
     {
+        //We check if this is the end of simulation, in this case we stopped them
         if(!end) {
-            incIterations();
+            incIterations(); //We increment the iteration counter
             int i = 0;
             for (Ant ant : anthill.ants) {
                 pheromones.updatePheromone();
