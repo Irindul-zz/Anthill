@@ -53,10 +53,14 @@ public class BasicSensor implements Sense {
         results[Direction.NORTHWEST.ordinal()] = p.getPheromoneQuantityAt(northwest);
 
         Pheromone ph = p.get(pos);
-        if( ph != null)
+        if( ph != null) {
             direction = ph.getDirection();
-        else
+            System.out.println("Direction du phéro : " + direction);
+
+        }
+        else {
             direction = null;
+        }
 
 
     }

@@ -62,16 +62,16 @@ public class BasicAI implements Brain {
         for (int i = 0; i < 8; i++) {
             sumPhero += (int)sensor.getResults(i);
         }
-        System.out.println("Direction de base : " + ant.getDirection());
+
 
         int start = Direction.reverse(ant.getDirection()).ordinal();
         proba.setProba(start, 0); //We can't go back.
 
         start = (start + 1) % 8;
-        System.out.println("Start : " + Direction.values()[start]);
+
 
         int stop = (start +7) % 8 ;
-        System.out.println("Stop : " + Direction.values()[stop]);
+
         //We use modulo here because of the cycle of the cardinal points.
         int i = start;
         int j = 1;
@@ -104,10 +104,6 @@ public class BasicAI implements Brain {
             }
         }
 
-        for (double d: proba.getProbas()) {
-            System.out.println("Proba : " + d);
-
-        }
 
     }
 
@@ -119,15 +115,16 @@ public class BasicAI implements Brain {
     public Direction executeProba(Ant ant) {
         proba.computesFrequencies(); // We calculate the cumulated frequencies
         int dir = proba.randomWithProba();
-
+        Direction direction;
 
         if(dir != -1) {
-            Direction direction = Direction.values()[dir];  //We deduce a direction from the int value.
-            return direction;
+             direction = Direction.values()[dir];  //We deduce a direction from the int value.
+        } else {
+            direction =ant.getDirection();
         }
 
-        return ant.getDirection();
 
+        return direction;
         //System.out.println(direction);
 
 

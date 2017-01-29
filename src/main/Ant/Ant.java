@@ -74,7 +74,7 @@ public class Ant{
     }
 
     public Pheromone dropPheromone(){
-        Pheromone pheromone = new Pheromone(position, 800, direction); //TODO : add position in paramater when kriss have changed is constructor
+        Pheromone pheromone = new Pheromone(position, 10000, Direction.reverse(direction)); //TODO : add position in paramater when kriss have changed is constructor
         return pheromone;
     }
 
